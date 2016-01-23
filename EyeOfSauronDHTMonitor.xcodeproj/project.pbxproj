@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D96739DB1C5370CD001BBBCE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EyeOfSauronDHTMonitor; sourceTree = BUILT_PRODUCTS_DIR; };
+		D96739F01C537A5E001BBBCE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D96739FB1C537B96001BBBCE /* libuv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libuv.1.dylib; sourceTree = "<group>"; };
+		D96739FD1C537CE2001BBBCE /* uv-darwin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-darwin.h"; sourceTree = "<group>"; };
+		D96739FE1C537CE2001BBBCE /* uv-errno.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-errno.h"; sourceTree = "<group>"; };
+		D96739FF1C537CE2001BBBCE /* uv-threadpool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-threadpool.h"; sourceTree = "<group>"; };
+		D9673A001C537CE2001BBBCE /* uv-unix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-unix.h"; sourceTree = "<group>"; };
+		D9673A011C537CE2001BBBCE /* uv-version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-version.h"; sourceTree = "<group>"; };
+		D9673A021C537CE2001BBBCE /* uv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uv.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D96739DA1C5370CD001BBBCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D96739D41C5370CD001BBBCE = {
+			isa = PBXGroup;
+			children = (
+				D96739DF1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */,
+				D96739DE1C5370CD001BBBCE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D96739DE1C5370CD001BBBCE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D96739DF1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				D96739EF1C537983001BBBCE /* sample */,
+				D96739EE1C53794B001BBBCE /* tests */,
+				D96739EA1C537920001BBBCE /* lib */,
+				D96739EC1C537920001BBBCE /* src */,
+			);
+			path = EyeOfSauronDHTMonitor;
+			sourceTree = "<group>";
+		};
+		D96739EA1C537920001BBBCE /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D96739F21C537A75001BBBCE /* libuv */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		D96739EC1C537920001BBBCE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D96739F01C537A5E001BBBCE /* main.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D96739EE1C53794B001BBBCE /* tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		D96739EF1C537983001BBBCE /* sample */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = sample;
+			sourceTree = "<group>";
+		};
+		D96739F21C537A75001BBBCE /* libuv */ = {
+			isa = PBXGroup;
+			children = (
+				D96739FC1C537CE2001BBBCE /* include */,
+				D96739FA1C537B96001BBBCE /* lib */,
+			);
+			path = libuv;
+			sourceTree = "<group>";
+		};
+		D96739FA1C537B96001BBBCE /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D96739FB1C537B96001BBBCE /* libuv.1.dylib */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		D96739FC1C537CE2001BBBCE /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D96739FD1C537CE2001BBBCE /* uv-darwin.h */,
+				D96739FE1C537CE2001BBBCE /* uv-errno.h */,
+				D96739FF1C537CE2001BBBCE /* uv-threadpool.h */,
+				D9673A001C537CE2001BBBCE /* uv-unix.h */,
+				D9673A011C537CE2001BBBCE /* uv-version.h */,
+				D9673A021C537CE2001BBBCE /* uv.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D96739DC1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D96739E41C5370CD001BBBCE /* Build configuration list for PBXNativeTarget "EyeOfSauronDHTMonitor" */;
+			buildPhases = (
+				D96739D91C5370CD001BBBCE /* Sources */,
+				D96739DA1C5370CD001BBBCE /* Frameworks */,
+				D96739DB1C5370CD001BBBCE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EyeOfSauronDHTMonitor;
+			productName = EyeOfSauronDHTMonitor;
+			productReference = D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D96739D51C5370CD001BBBCE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = com.dhtMonitor.www;
+				TargetAttributes = {
+					D96739DC1C5370CD001BBBCE = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = D96739D81C5370CD001BBBCE /* Build configuration list for PBXProject "EyeOfSauronDHTMonitor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D96739D41C5370CD001BBBCE;
+			productRefGroup = D96739DE1C5370CD001BBBCE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D96739DC1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D96739D91C5370CD001BBBCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D96739F11C537A5E001BBBCE /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D96739E21C5370CD001BBBCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D96739E31C5370CD001BBBCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D96739E51C5370CD001BBBCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/include";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/lib";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D96739E61C5370CD001BBBCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/include";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/lib";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D96739D81C5370CD001BBBCE /* Build configuration list for PBXProject "EyeOfSauronDHTMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D96739E21C5370CD001BBBCE /* Debug */,
+				D96739E31C5370CD001BBBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D96739E41C5370CD001BBBCE /* Build configuration list for PBXNativeTarget "EyeOfSauronDHTMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D96739E51C5370CD001BBBCE /* Debug */,
+				D96739E61C5370CD001BBBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D96739D51C5370CD001BBBCE /* Project object */;
+}
