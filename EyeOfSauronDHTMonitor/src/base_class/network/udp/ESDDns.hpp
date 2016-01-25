@@ -12,6 +12,15 @@
 #include <stdio.h>
 
 namespace esdht {
+    
+    /**
+     * @brief 当DNS解析出现错误的时候抛出异常
+     */
+    class ESDDnsError: public std::runtime_error {
+    public:
+        explicit ESDDnsError(const std:: string &what);
+    };
+    
     /**
      * @brief DNS解析，获取给定域名的ip地址
      */
@@ -34,9 +43,6 @@ namespace esdht {
     private:
         
     protected:
-        /**
-         * @brief libuv的回调函数，res中包含解析后的域名ip地址。
-         */
         
     public:
         /**
@@ -49,7 +55,6 @@ namespace esdht {
         /**
          * @brief 获取给定地址的ip
          */
-//        void (*callback)(int status, std::string address);
         void getIpOfURL(std::string url,std::string port, std::function<void(int status, std::string address)> callback);
     };
     
