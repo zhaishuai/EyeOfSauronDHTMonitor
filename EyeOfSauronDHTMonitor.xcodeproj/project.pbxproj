@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
+		D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A041C537FF1001BBBCE /* ESDObject.cpp */; };
+		D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
+		D9673A531C548072001BBBCE /* ESDUdpClientUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */; };
+		D9673A5B1C54850D001BBBCE /* ESDUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A591C54850D001BBBCE /* ESDUdp.cpp */; };
+		D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A5C1C5486B4001BBBCE /* ESDDns.cpp */; };
+		D9673A5F1C54CCFA001BBBCE /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D96739FB1C537B96001BBBCE /* libuv.1.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +38,47 @@
 		D9673A001C537CE2001BBBCE /* uv-unix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-unix.h"; sourceTree = "<group>"; };
 		D9673A011C537CE2001BBBCE /* uv-version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uv-version.h"; sourceTree = "<group>"; };
 		D9673A021C537CE2001BBBCE /* uv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uv.h; sourceTree = "<group>"; };
+		D9673A041C537FF1001BBBCE /* ESDObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDObject.cpp; sourceTree = "<group>"; };
+		D9673A051C537FF1001BBBCE /* ESDObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDObject.hpp; sourceTree = "<group>"; };
+		D9673A271C538338001BBBCE /* ESDPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDPrefixHeader.pch; sourceTree = "<group>"; };
+		D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDUdpClient.cpp; sourceTree = "<group>"; };
+		D9673A2B1C539071001BBBCE /* ESDUdpClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDUdpClient.hpp; sourceTree = "<group>"; };
+		D9673A2F1C53C3DB001BBBCE /* allocators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = allocators.h; sourceTree = "<group>"; };
+		D9673A301C53C3DB001BBBCE /* document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = document.h; sourceTree = "<group>"; };
+		D9673A311C53C3DB001BBBCE /* encodedstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encodedstream.h; sourceTree = "<group>"; };
+		D9673A321C53C3DB001BBBCE /* encodings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encodings.h; sourceTree = "<group>"; };
+		D9673A341C53C3DB001BBBCE /* en.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = en.h; sourceTree = "<group>"; };
+		D9673A351C53C3DB001BBBCE /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		D9673A361C53C3DB001BBBCE /* filereadstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filereadstream.h; sourceTree = "<group>"; };
+		D9673A371C53C3DB001BBBCE /* filewritestream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filewritestream.h; sourceTree = "<group>"; };
+		D9673A391C53C3DB001BBBCE /* biginteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = biginteger.h; sourceTree = "<group>"; };
+		D9673A3A1C53C3DB001BBBCE /* diyfp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diyfp.h; sourceTree = "<group>"; };
+		D9673A3B1C53C3DB001BBBCE /* dtoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtoa.h; sourceTree = "<group>"; };
+		D9673A3C1C53C3DB001BBBCE /* ieee754.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ieee754.h; sourceTree = "<group>"; };
+		D9673A3D1C53C3DB001BBBCE /* itoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itoa.h; sourceTree = "<group>"; };
+		D9673A3E1C53C3DB001BBBCE /* meta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meta.h; sourceTree = "<group>"; };
+		D9673A3F1C53C3DB001BBBCE /* pow10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pow10.h; sourceTree = "<group>"; };
+		D9673A401C53C3DB001BBBCE /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		D9673A411C53C3DB001BBBCE /* strfunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strfunc.h; sourceTree = "<group>"; };
+		D9673A421C53C3DB001BBBCE /* strtod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strtod.h; sourceTree = "<group>"; };
+		D9673A431C53C3DB001BBBCE /* swap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swap.h; sourceTree = "<group>"; };
+		D9673A441C53C3DB001BBBCE /* memorybuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memorybuffer.h; sourceTree = "<group>"; };
+		D9673A451C53C3DB001BBBCE /* memorystream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memorystream.h; sourceTree = "<group>"; };
+		D9673A471C53C3DB001BBBCE /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
+		D9673A481C53C3DB001BBBCE /* stdint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
+		D9673A491C53C3DB001BBBCE /* pointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pointer.h; sourceTree = "<group>"; };
+		D9673A4A1C53C3DB001BBBCE /* prettywriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prettywriter.h; sourceTree = "<group>"; };
+		D9673A4B1C53C3DB001BBBCE /* rapidjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rapidjson.h; sourceTree = "<group>"; };
+		D9673A4C1C53C3DB001BBBCE /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		D9673A4D1C53C3DB001BBBCE /* stringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringbuffer.h; sourceTree = "<group>"; };
+		D9673A4E1C53C3DB001BBBCE /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDUdpClientUtility.cpp; sourceTree = "<group>"; };
+		D9673A521C548072001BBBCE /* ESDUdpClientUtility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDUdpClientUtility.hpp; sourceTree = "<group>"; };
+		D9673A571C548456001BBBCE /* ESDAbstractUdp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDAbstractUdp.h; sourceTree = "<group>"; };
+		D9673A591C54850D001BBBCE /* ESDUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDUdp.cpp; sourceTree = "<group>"; };
+		D9673A5A1C54850D001BBBCE /* ESDUdp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDUdp.hpp; sourceTree = "<group>"; };
+		D9673A5C1C5486B4001BBBCE /* ESDDns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDDns.cpp; sourceTree = "<group>"; };
+		D9673A5D1C5486B4001BBBCE /* ESDDns.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDDns.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9673A5F1C54CCFA001BBBCE /* libuv.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +123,7 @@
 		D96739EA1C537920001BBBCE /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D9673A2E1C53C3DB001BBBCE /* rapidjson */,
 				D96739F21C537A75001BBBCE /* libuv */,
 			);
 			path = lib;
@@ -83,7 +132,10 @@
 		D96739EC1C537920001BBBCE /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D9673A281C53901D001BBBCE /* network */,
+				D9673A031C537FBD001BBBCE /* base_class */,
 				D96739F01C537A5E001BBBCE /* main.cpp */,
+				D9673A271C538338001BBBCE /* ESDPrefixHeader.pch */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -130,6 +182,115 @@
 				D9673A021C537CE2001BBBCE /* uv.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		D9673A031C537FBD001BBBCE /* base_class */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A541C54842E001BBBCE /* network */,
+				D9673A051C537FF1001BBBCE /* ESDObject.hpp */,
+				D9673A041C537FF1001BBBCE /* ESDObject.cpp */,
+			);
+			path = base_class;
+			sourceTree = "<group>";
+		};
+		D9673A281C53901D001BBBCE /* network */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A291C53901D001BBBCE /* udp */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		D9673A291C53901D001BBBCE /* udp */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */,
+				D9673A2B1C539071001BBBCE /* ESDUdpClient.hpp */,
+				D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */,
+				D9673A521C548072001BBBCE /* ESDUdpClientUtility.hpp */,
+			);
+			path = udp;
+			sourceTree = "<group>";
+		};
+		D9673A2E1C53C3DB001BBBCE /* rapidjson */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A2F1C53C3DB001BBBCE /* allocators.h */,
+				D9673A301C53C3DB001BBBCE /* document.h */,
+				D9673A311C53C3DB001BBBCE /* encodedstream.h */,
+				D9673A321C53C3DB001BBBCE /* encodings.h */,
+				D9673A331C53C3DB001BBBCE /* error */,
+				D9673A361C53C3DB001BBBCE /* filereadstream.h */,
+				D9673A371C53C3DB001BBBCE /* filewritestream.h */,
+				D9673A381C53C3DB001BBBCE /* internal */,
+				D9673A441C53C3DB001BBBCE /* memorybuffer.h */,
+				D9673A451C53C3DB001BBBCE /* memorystream.h */,
+				D9673A461C53C3DB001BBBCE /* msinttypes */,
+				D9673A491C53C3DB001BBBCE /* pointer.h */,
+				D9673A4A1C53C3DB001BBBCE /* prettywriter.h */,
+				D9673A4B1C53C3DB001BBBCE /* rapidjson.h */,
+				D9673A4C1C53C3DB001BBBCE /* reader.h */,
+				D9673A4D1C53C3DB001BBBCE /* stringbuffer.h */,
+				D9673A4E1C53C3DB001BBBCE /* writer.h */,
+			);
+			path = rapidjson;
+			sourceTree = "<group>";
+		};
+		D9673A331C53C3DB001BBBCE /* error */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A341C53C3DB001BBBCE /* en.h */,
+				D9673A351C53C3DB001BBBCE /* error.h */,
+			);
+			path = error;
+			sourceTree = "<group>";
+		};
+		D9673A381C53C3DB001BBBCE /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A391C53C3DB001BBBCE /* biginteger.h */,
+				D9673A3A1C53C3DB001BBBCE /* diyfp.h */,
+				D9673A3B1C53C3DB001BBBCE /* dtoa.h */,
+				D9673A3C1C53C3DB001BBBCE /* ieee754.h */,
+				D9673A3D1C53C3DB001BBBCE /* itoa.h */,
+				D9673A3E1C53C3DB001BBBCE /* meta.h */,
+				D9673A3F1C53C3DB001BBBCE /* pow10.h */,
+				D9673A401C53C3DB001BBBCE /* stack.h */,
+				D9673A411C53C3DB001BBBCE /* strfunc.h */,
+				D9673A421C53C3DB001BBBCE /* strtod.h */,
+				D9673A431C53C3DB001BBBCE /* swap.h */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		D9673A461C53C3DB001BBBCE /* msinttypes */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A471C53C3DB001BBBCE /* inttypes.h */,
+				D9673A481C53C3DB001BBBCE /* stdint.h */,
+			);
+			path = msinttypes;
+			sourceTree = "<group>";
+		};
+		D9673A541C54842E001BBBCE /* network */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A551C54842E001BBBCE /* udp */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		D9673A551C54842E001BBBCE /* udp */ = {
+			isa = PBXGroup;
+			children = (
+				D9673A571C548456001BBBCE /* ESDAbstractUdp.h */,
+				D9673A591C54850D001BBBCE /* ESDUdp.cpp */,
+				D9673A5A1C54850D001BBBCE /* ESDUdp.hpp */,
+				D9673A5C1C5486B4001BBBCE /* ESDDns.cpp */,
+				D9673A5D1C5486B4001BBBCE /* ESDDns.hpp */,
+			);
+			path = udp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +350,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D96739F11C537A5E001BBBCE /* main.cpp in Sources */,
+				D9673A531C548072001BBBCE /* ESDUdpClientUtility.cpp in Sources */,
+				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
+				D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */,
+				D9673A5B1C54850D001BBBCE /* ESDUdp.cpp in Sources */,
+				D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,8 +443,12 @@
 		D96739E51C5370CD001BBBCE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "$(SRCROOT)/EyeOfSauronDHTMonitor/src/ESDPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/include";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/lib",
+					"$(PROJECT_DIR)/EyeOfSauronDHTMonitor/lib/libuv/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -286,8 +456,12 @@
 		D96739E61C5370CD001BBBCE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "$(SRCROOT)/EyeOfSauronDHTMonitor/src/ESDPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/include";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/EyeOfSauronDHTMonitor/lib/libuv/lib",
+					"$(PROJECT_DIR)/EyeOfSauronDHTMonitor/lib/libuv/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
