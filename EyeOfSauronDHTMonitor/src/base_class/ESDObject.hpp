@@ -13,6 +13,7 @@
 
 
 namespace esdht{
+    
     /**
      * @brief 该类是ESD为前缀的类的基类
      */
@@ -52,7 +53,7 @@ namespace esdht{
             return std::dynamic_pointer_cast<T>(shared_from_this());
         }
     };
-    
+
     
 }//namespace esdobject
 

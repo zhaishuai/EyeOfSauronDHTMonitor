@@ -30,12 +30,13 @@ namespace esdht {
     private:
         
     protected:
-        uv_loop_t *loop;
-        struct addrinfo hints;
+        
+        uv_loop_t*       loop;
+        struct addrinfo  hints;
         uv_getaddrinfo_t resolver;
         
     public:
-//        void(*handleIPCallback)(int status, std::string address);
+        
         std::function<void(int status, std::string address)> handleIPCallback;
         
     // 成员函数

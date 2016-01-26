@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D943689C1C57457600BD1DC7 /* testUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D943689A1C57457600BD1DC7 /* testUdp.cpp */; };
 		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
 		D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A041C537FF1001BBBCE /* ESDObject.cpp */; };
 		D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
@@ -29,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D943689A1C57457600BD1DC7 /* testUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testUdp.cpp; sourceTree = "<group>"; };
+		D943689B1C57457600BD1DC7 /* testUdp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = testUdp.hpp; sourceTree = "<group>"; };
 		D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EyeOfSauronDHTMonitor; sourceTree = BUILT_PRODUCTS_DIR; };
 		D96739F01C537A5E001BBBCE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D96739FB1C537B96001BBBCE /* libuv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libuv.1.dylib; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 		D96739EE1C53794B001BBBCE /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				D943689A1C57457600BD1DC7 /* testUdp.cpp */,
+				D943689B1C57457600BD1DC7 /* testUdp.hpp */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */,
 				D9673A5B1C54850D001BBBCE /* ESDUdp.cpp in Sources */,
 				D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */,
+				D943689C1C57457600BD1DC7 /* testUdp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

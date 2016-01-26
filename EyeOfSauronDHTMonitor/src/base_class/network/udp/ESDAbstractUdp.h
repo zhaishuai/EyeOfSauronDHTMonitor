@@ -21,22 +21,48 @@ namespace esdht {
     class ESDAbstractUdp : ESDObject{
     public:
         /**
+         * @brief 绑定socket的接收地址
+         */
+        virtual void bindReciveAddress(std::string ipv4, int port, uv_udp_flags flag = UV_UDP_PARTIAL) = 0;
+        
+        /**
          * @brief 接收UDP请求
          * ipv4 ip地址；port 端口；callback 回调。
+         * 在调用之前需要先调用bindReciveAddress
          */
-        virtual void receive(std::string ipv4, int port, std::function<void(char *msg, int length)> callback) = 0;
+        virtual void receive(std::function<void(std::string)> callback) = 0;
         
         /**
          * @brief 接收UDP请求并且可以设置超时时间
          * ipv4 ip地址；port 端口；timeOut 超时时间；callback 回调。
          */
-        virtual void receive(std::string ipv4, int port, double timeOut, std::function<void(char *msg, int length)> callback) = 0;
+        virtual void receive(double timeOut, std::function<void(std::string)> callback) = 0;
+        
+        /**
+         * @brief 接收UDP请求
+         * ipv4 ip地址；port 端口；callback 回调。
+         * send以后调用该方法接收服务端的响应
+         */
+        virtual void receiveResponse(std::function<void(std::string)> callback) = 0;
+        
+        /**
+         * @brief 接收UDP请求并且可以设置超时时间
+         * ipv4 ip地址；port 端口；timeOut 超时时间；callback 回调。
+         * send以后调用该方法接收服务端的响应
+         */
+        virtual void receiveResponse(double timeOut, std::function<void(std::string)> callback) = 0;
+        
+        /**
+         * @brief 绑定socket的发送地址
+         */
+        virtual void bindSendAddress(std::string ipv4, int port, uv_udp_flags flag = UV_UDP_PARTIAL) = 0;
         
         /**
          * @brief 发送UDP请求
          * ipv4 ip地址；port 端口；callback 回调。
+         * 在调用之前需要先调用bindSendAddress
          */
-        virtual void send(std::string ipv4, int port, std::function<void(int status)> callback) = 0;
+        virtual void send(std::string, std::function<void(int status)> callback) = 0;
         
         /**
          * @brief 响应UDP请求

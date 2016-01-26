@@ -17,7 +17,8 @@ namespace esdht {
     ESDDnsError::ESDDnsError(const std::string &what):std::runtime_error(what){};
     
     ESDDns::ESDDns(){
-        loop = uv_loop_new();
+        
+        loop = uv_default_loop();
         uv_loop_init(loop);
         hints.ai_family = PF_INET;
         hints.ai_socktype = SOCK_STREAM;
@@ -30,9 +31,9 @@ namespace esdht {
     
     
     ESDDns::~ESDDns(){
-        if(uv_loop_close(loop) == UV_EBUSY){
-            throw ESDDnsError(std::string("uv_close 失败"));
-        }
+//        if(uv_loop_close(loop) == UV_EBUSY){
+//            throw ESDDnsError(std::string("uv_close 失败"));
+//        }
         
     }//~ESDDns()
     
@@ -40,17 +41,19 @@ namespace esdht {
     void on_resolved(uv_getaddrinfo_t *resolver, int status, struct addrinfo *res) {
         ESDDns *object = static_cast<ESDDns *>(resolver->data);
         if (status < 0) {
+            
             if(object->handleIPCallback != nullptr)
                 object->handleIPCallback(status, nullptr);
             fprintf(stderr, "getaddrinfo callback error %s\n", uv_err_name(status));
             return;
+            
         }
         
         char addr[ADDRESS_LENGHT] = {'\0'};
         uv_ip4_name((struct sockaddr_in*) res->ai_addr, addr, sizeof(addr) - 1);
         uv_freeaddrinfo(res);
         
-        if(object->handleIPCallback != nullptr)
+        if(object != NULL && object->handleIPCallback != nullptr)
             object->handleIPCallback(status, std::string(addr));
         
     }//on_resolved
