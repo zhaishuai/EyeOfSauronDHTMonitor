@@ -32,13 +32,15 @@ namespace esdht {
     protected:
         
         uv_loop_t*                       loop;
-        uv_udp_t                         socket;
+        uv_udp_t                         sendSocket;
+        uv_udp_t                         receiveSocket;
         uv_udp_send_t                    sendRequest;
+        uv_udp_send_t                    responseRequest;
         struct sockaddr_in               sendAddr;
         struct sockaddr_in               recvAddr;
         
     public:
-        
+        struct sockaddr*                 responseAddr;
         std::function<void(std::string)> receiveCallback = nullptr;
         std::function<void(std::string)> receiveWithTimeOutCallback = nullptr;
         std::function<void(std::string)> receiveResponseCallback = nullptr;
@@ -55,6 +57,8 @@ namespace esdht {
     public:
         
         ESDUdp();
+        
+        ESDUdp(uv_loop_t *loop);
         
         ~ESDUdp();
         
@@ -103,14 +107,26 @@ namespace esdht {
          */
         virtual void send(std::string, std::function<void(int status)> callback) override;
         
+        
+        
+        
+        //重新定义API
+        /**
+         * @brief 向给定的地址发送UDP请求
+         * @param ipv4:ip地址 port:端口 sendcb:发送的回调 revcb:接收到响应的回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
+         */
+        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) override;
+        /**
+         * @brief 给定地址监听UDP请求
+         * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
+         */
+        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) override;
+        
         /**
          * @brief 响应UDP请求
          * callback 回调。
          */
-        virtual void response(std::function<void(int status)> callback) override;
-        
-        
-        
+        virtual void response(std::string msg, std::function<void(int status)> callback) override;
     };
     
 }

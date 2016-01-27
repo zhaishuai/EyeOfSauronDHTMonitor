@@ -64,12 +64,28 @@ namespace esdht {
          */
         virtual void send(std::string, std::function<void(int status)> callback) = 0;
         
+        
+        
+        
+        //重新定义API
+        /**
+         * @brief 向给定的地址发送UDP请求
+         * @param ipv4:ip地址 port:端口 msg:要发送的消息 sendcb:发送的回调 revcb:接收到响应的回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
+         */
+        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) = 0;
+        
+        
+        /**
+         * @brief 给定地址监听UDP请求
+         * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
+         */
+        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) = 0;
+        
         /**
          * @brief 响应UDP请求
          * callback 回调。
          */
-        virtual void response(std::function<void(int status)> callback) = 0;
-        
+        virtual void response(std::string msg, std::function<void(int status)> callback) = 0;
     };
     
 }

@@ -16,24 +16,54 @@ using namespace std;
 namespace test_udp{
     
     void start_test(){
-        
-        ESDUdp udp;
-        udp.bindSendAddress("127.0.0.1", 6882);
-//            printf("sucess %d\n", i);
-        for(int i = 0 ; i < 100000 ; i++){
-            udp.send("hello word ni hao shi jie\n", [i](int status){
+        uv_loop_t *loop = uv_default_loop();
+        uv_loop_init(loop);
+        ESDUdp udp(loop);
+//        for(int i = 0 ; i < 100000 ; i++){
+            try {
                 
-                if(status == -1){
-                    fprintf(stderr, "Send error!\n");
-                }
-                printf("sucess %d\n", i);
-            });
+//                udp.bindSendAddress("127.0.0.1", 6882);
+//                udp.send("hello word ni hao shi jie\n", [i](int status){
+//                    
+//                    if(status == -1){
+//                        fprintf(stderr, "Send error!\n");
+//                    }
+//                    printf("sucess %d\n", i);
+//                });
+//                
+//                udp.receiveResponse([i](std::string msg){
+//                    printf("msg:%s i:%d", msg.c_str(), i);
+//                });
+                
+//                udp.send("127.0.0.1", 6882, "hola hello nihao", [i](int status){
+//                    if(status == -1){
+//                        fprintf(stderr, "Send error!\n");
+//                    }
+//                    printf("sucess %d\n", i);
+//
+//                }, [i](std::string msg){
+//                    printf("msg:%s i:%d", msg.c_str(), i);
+//                });
+                string str;
+                udp.receive("0.0.0.0", 6882, [&udp,&str](std::string msg){
+                    printf("%s\n",msg.c_str());
+                    str = msg;
+                    udp.response(str, [](int status){
+                        
+                    });
+                });
+                
+                
+            } catch (const ESDUdpError &error) {
+                printf("\n%s\n",error.what());
+//                break;
+//                sleep (1);
+                
+            }
+
             
-            udp.receiveResponse([i](std::string msg){
-                printf("msg:%s i:%d", msg.c_str(), i);
-            });
-            
-        }//for
+//        }//for
+        
         
         printf("dddd");
     }

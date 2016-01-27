@@ -38,6 +38,8 @@ namespace esdht {
     }//~ESDDns()
     
     
+   
+    
     void on_resolved(uv_getaddrinfo_t *resolver, int status, struct addrinfo *res) {
         ESDDns *object = static_cast<ESDDns *>(resolver->data);
         if (status < 0) {
