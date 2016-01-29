@@ -49,9 +49,9 @@ namespace test_udp{
                 udp.receive("0.0.0.0", 6882, [&udp,&str,&i](std::string msg){
                     printf("%s\n",msg.c_str());
                     str = msg;
-//                    udp.response(str, [&i](int status){
-//                        printf("%d\n",i++);
-//                    });
+                    udp.response(str, [&i](int status){
+                        printf("%d\n",i++);
+                    });
                 });
                 
                 

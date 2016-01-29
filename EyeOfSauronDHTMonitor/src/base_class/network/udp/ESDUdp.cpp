@@ -155,7 +155,7 @@ namespace esdht {
         if(error < 0){
             throw ESDUdpError(uv_strerror(error));
         }
-        uv_run(loop, UV_RUN_ONCE);
+        uv_run(loop, UV_RUN_DEFAULT);
         
     }
     
@@ -177,9 +177,6 @@ namespace esdht {
             udp->receiveCallback(std::string{buf->base, static_cast<size_t>(nread)});
         }
         
-        uv_buf_t buffer = uv_buf_init(buf->base, (unsigned int)nread);
-        int error = uv_udp_send(&udp->responseRequest, &udp->receiveSocket, &buffer, 1, (const struct sockaddr *)addr, response_callback);
-        uv_run(udp->loop, UV_RUN_ONCE);
         free(buf->base);
 
         
@@ -188,12 +185,17 @@ namespace esdht {
     void ESDUdp::response(std::string msg, std::function<void(int status)> callback){
         
         this->responseCallback = callback;
+        static uv_loop_t *temp = uv_loop_new();
+        uv_udp_t socket;
+        uv_udp_init(temp, &socket);
         uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
-        int error = uv_udp_send(&responseRequest, &receiveSocket, &buffer, 1, (const struct sockaddr *)responseAddr, response_callback);
+        int error = uv_udp_send(&responseRequest, &socket, &buffer, 1, (const struct sockaddr *)responseAddr, response_callback);
         if(error < 0){
             throw ESDUdpError(uv_strerror(error));
         }
-//        uv_run(loop, UV_RUN_ONCE);
+        //        if(!uv_loop_alive(loop))
+        uv_run(temp, UV_RUN_ONCE);
+        
         
     }//reponse
     
@@ -204,9 +206,8 @@ namespace esdht {
             udp->responseCallback(status);
             udp->responseCallback = nullptr;
         }
-//        if(udp->receiveResponseCallback == nullptr){
-//            uv_close((uv_handle_t*)req->handle, NULL);
-//        }
+
+        uv_close((uv_handle_t*)req->handle, NULL);
         
     }//response_callback
     
