@@ -31,6 +31,10 @@ namespace esdht {
         
     protected:
         
+        
+        
+    public:
+        
         uv_loop_t*                       loop;
         uv_udp_t                         sendSocket;
         uv_udp_t                         receiveSocket;
@@ -39,7 +43,6 @@ namespace esdht {
         struct sockaddr_in               sendAddr;
         struct sockaddr_in               recvAddr;
         
-    public:
         struct sockaddr*                 responseAddr;
         std::function<void(std::string)> receiveCallback = nullptr;
         std::function<void(std::string)> receiveWithTimeOutCallback = nullptr;
@@ -63,49 +66,49 @@ namespace esdht {
         ~ESDUdp();
         
         
-        /**
-         * @brief 绑定socket的接收地址
-         */
-        virtual void bindReciveAddress(std::string ipv4, int port, uv_udp_flags flag = UV_UDP_PARTIAL) override;
-        
-        /**
-         * @brief 接收UDP请求
-         * ipv4 ip地址；port 端口；callback 回调。
-         * 在调用之前需要先调用bindReciveAddress
-         */
-        virtual void receive(std::function<void(std::string)> callback) override;
-        
-        /**
-         * @brief 接收UDP请求并且可以设置超时时间
-         * ipv4 ip地址；port 端口；timeOut 超时时间；callback 回调。
-         */
-        virtual void receive(double timeOut, std::function<void(std::string)> callback) override;
-        
-        /**
-         * @brief 接收UDP请求
-         * ipv4 ip地址；port 端口；callback 回调。
-         * send以后调用该方法接收服务端的响应
-         */
-        virtual void receiveResponse(std::function<void(std::string)> callback) override;
-        
-        /**
-         * @brief 接收UDP请求并且可以设置超时时间
-         * ipv4 ip地址；port 端口；timeOut 超时时间；callback 回调。
-         * send以后调用该方法接收服务端的响应
-         */
-        virtual void receiveResponse(double timeOut, std::function<void(std::string)> callback) override;
-        
-        /**
-         * @brief 绑定socket的发送地址
-         */
-        virtual void bindSendAddress(std::string ipv4, int port, uv_udp_flags flag = UV_UDP_PARTIAL) override;
-        
-        /**
-         * @brief 发送UDP请求
-         * ipv4 ip地址；port 端口；callback 回调。
-         * 在调用之前需要先调用bindSendAddress
-         */
-        virtual void send(std::string, std::function<void(int status)> callback) override;
+//        /**
+//         * @brief 绑定socket的接收地址
+//         */
+//        virtual void bindReciveAddress(std::string ipv4, int port, uv_udp_flags flag = UV_UDP_PARTIAL) override;
+//        
+//        /**
+//         * @brief 接收UDP请求
+//         * ipv4 ip地址；port 端口；callback 回调。
+//         * 在调用之前需要先调用bindReciveAddress
+//         */
+//        virtual void receive(std::function<void(std::string)> callback) override;
+//        
+//        /**
+//         * @brief 接收UDP请求并且可以设置超时时间
+//         * ipv4 ip地址；port 端口；timeOut 超时时间；callback 回调。
+//         */
+//        virtual void receive(double timeOut, std::function<void(std::string)> callback) override;
+//        
+//        /**
+//         * @brief 接收UDP请求
+//         * ipv4 ip地址；port 端口；callback 回调。
+//         * send以后调用该方法接收服务端的响应
+//         */
+//        virtual void receiveResponse(std::function<void(std::string)> callback) override;
+//        
+//        /**
+//         * @brief 接收UDP请求并且可以设置超时时间
+//         * ipv4 ip地址；port 端口；timeOut 超时时间；callback 回调。
+//         * send以后调用该方法接收服务端的响应
+//         */
+//        virtual void receiveResponse(double timeOut, std::function<void(std::string)> callback) override;
+//        
+//        /**
+//         * @brief 绑定socket的发送地址
+//         */
+//        virtual void bindSendAddress(std::string ipv4, int port, uv_udp_flags flag = UV_UDP_PARTIAL) override;
+//        
+//        /**
+//         * @brief 发送UDP请求
+//         * ipv4 ip地址；port 端口；callback 回调。
+//         * 在调用之前需要先调用bindSendAddress
+//         */
+//        virtual void send(std::string, std::function<void(int status)> callback) override;
         
         
         

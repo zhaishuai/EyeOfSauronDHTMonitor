@@ -63,87 +63,17 @@ namespace esdht {
         
     }
     
-    void ESDUdp::bindReciveAddress(std::string ipv4, int port, uv_udp_flags flag){
-        
-        
-    }//bindReciveAddress
+
+
     
-    void ESDUdp::receive(std::function<void(std::string)> callback){
-        
-        
-        
-    };//receive
+
     
-    void ESDUdp::receive(double timeOut, std::function<void(std::string)> callback){
     
-    }//receive with timeout
+
     
-    void ESDUdp::receiveResponse(std::function<void(std::string)> callback){
-        
-        this->receiveResponseCallback = callback;
-        int error = uv_udp_recv_start(&sendSocket, alloc_buffer_callback, receiveResponse_callback);
-        if(error < 0){
-            throw ESDUdpError(uv_strerror(error));
-        }
-        
-        uv_run(loop, UV_RUN_DEFAULT);
-        
-        
-    };//receiveResponse
+
     
-    void ESDUdp::receiveResponse(double timeOut, std::function<void(std::string)> callback){
-        
-    }//receiveResponse with timeout
-    
-    void ESDUdp::bindSendAddress(std::string ipv4, int port, uv_udp_flags flag){
-        
-        uv_ip4_addr(ipv4.c_str(), port, &sendAddr);
-//        int error = uv_udp_bind(&sendSocket, (const struct sockaddr *)&sendAddr, 0);
-        
-//        if(error < 0){
-//            throw ESDUdpError(uv_strerror(error));
-//        }
-        
-    }//bindSendAddress
-    
-    void ESDUdp::send(std::string msg, std::function<void (int status)> callback){
-        
-        this->sendCallback = callback;
-        uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
-        
-        int error = uv_udp_send(&sendRequest, &sendSocket, &buffer, 1, (const struct sockaddr *)&sendAddr, send_callback);
-        if(error < 0){
-            throw ESDUdpError(uv_strerror(error));
-        }
-        uv_run(loop, UV_RUN_ONCE);
-        
-    }//send
-    
-    void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout, int flag){
-        
-        this->receiveCallback = revcb;
-        uv_udp_init(loop, &receiveSocket);
-        uv_ip4_addr(ipv4.c_str(), port, &recvAddr);
-        uv_udp_bind(&receiveSocket, (const struct sockaddr*) &recvAddr, 0);
-        int error = uv_udp_recv_start(&receiveSocket, alloc_buffer_callback, receive_callback);
-        if(error < 0){
-            throw ESDUdpError(uv_strerror(error));
-        }
-        uv_run(loop, UV_RUN_DEFAULT);
-        
-    }
-    
-    void ESDUdp::response(std::string msg, std::function<void(int status)> callback){
-        
-        this->responseCallback = callback;
-        uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
-        int error = uv_udp_send(&responseRequest, &receiveSocket, &buffer, 1, (const struct sockaddr *)responseAddr, response_callback);
-        if(error < 0){
-            throw ESDUdpError(uv_strerror(error));
-        }
-        uv_run(loop, UV_RUN_DEFAULT);
-        
-    }//reponse
+
     
     
     void ESDUdp::send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
@@ -173,21 +103,6 @@ namespace esdht {
         
     }//send
     
-    
-    
-    void response_callback(uv_udp_send_t *req, int status){
-        
-        ESDUdp *udp = (ESDUdp *)req->data;
-        if(udp != NULL && udp->responseCallback != nullptr){
-            udp->responseCallback(status);
-            udp->responseCallback = nullptr;
-        }
-//        if(udp->receiveResponseCallback == nullptr){
-//            uv_close((uv_handle_t*)req->handle, NULL);
-//        }
-        
-    }//response_callback
-    
     void send_callback(uv_udp_send_t *req, int status){
         
         ESDUdp *udp = (ESDUdp *)req->data;
@@ -202,9 +117,9 @@ namespace esdht {
     }//send_callback
     
     void receiveResponse_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf,
-                          const struct sockaddr *addr, unsigned flags){
+                                  const struct sockaddr *addr, unsigned flags){
         ESDUdp *udp = (ESDUdp *)req->data;
-
+        
         if(nread == 0 || nread == -1){
             free(buf->base);
             if(udp != NULL && udp->receiveResponseCallback != nullptr){
@@ -224,10 +139,31 @@ namespace esdht {
         
     }//receiveResponse_callback
     
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //
+    
+    void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout, int flag){
+        
+        this->receiveCallback = revcb;
+        uv_udp_init(loop, &receiveSocket);
+        uv_ip4_addr(ipv4.c_str(), port, &recvAddr);
+        uv_udp_bind(&receiveSocket, (const struct sockaddr*) &recvAddr, 0);
+        int error = uv_udp_recv_start(&receiveSocket, alloc_buffer_callback, receive_callback);
+        
+        if(error < 0){
+            throw ESDUdpError(uv_strerror(error));
+        }
+        uv_run(loop, UV_RUN_ONCE);
+        
+    }
+    
+    
     void receive_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf,
-                                  const struct sockaddr *addr, unsigned flags){
+                          const struct sockaddr *addr, unsigned flags){
         ESDUdp *udp = (ESDUdp *)req->data;
-        udp->responseAddr = (struct sockaddr *)addr;
+        
         if(nread == 0 || nread == -1){
             free(buf->base);
             if(udp != NULL && udp->receiveCallback != nullptr){
@@ -237,13 +173,48 @@ namespace esdht {
         }
         
         if(udp != NULL && udp->receiveCallback != nullptr){
+            udp->responseAddr = (struct sockaddr *)addr;
             udp->receiveCallback(std::string{buf->base, static_cast<size_t>(nread)});
         }
+        
+        uv_buf_t buffer = uv_buf_init(buf->base, (unsigned int)nread);
+        int error = uv_udp_send(&udp->responseRequest, &udp->receiveSocket, &buffer, 1, (const struct sockaddr *)addr, response_callback);
+        uv_run(udp->loop, UV_RUN_ONCE);
         free(buf->base);
-//        uv_udp_recv_stop(req);
-//        uv_close((uv_handle_t*) req, nullptr);
+
         
     }//receive_callback
+    
+    void ESDUdp::response(std::string msg, std::function<void(int status)> callback){
+        
+        this->responseCallback = callback;
+        uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
+        int error = uv_udp_send(&responseRequest, &receiveSocket, &buffer, 1, (const struct sockaddr *)responseAddr, response_callback);
+        if(error < 0){
+            throw ESDUdpError(uv_strerror(error));
+        }
+//        uv_run(loop, UV_RUN_ONCE);
+        
+    }//reponse
+    
+    void response_callback(uv_udp_send_t *req, int status){
+        
+        ESDUdp *udp = (ESDUdp *)req->data;
+        if(udp != NULL && udp->responseCallback != nullptr){
+            udp->responseCallback(status);
+            udp->responseCallback = nullptr;
+        }
+//        if(udp->receiveResponseCallback == nullptr){
+//            uv_close((uv_handle_t*)req->handle, NULL);
+//        }
+        
+    }//response_callback
+    
+
+    
+
+    
+    
     
     void alloc_buffer_callback(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf){
         

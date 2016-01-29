@@ -45,12 +45,13 @@ namespace test_udp{
 //                    printf("msg:%s i:%d", msg.c_str(), i);
 //                });
                 string str;
-                udp.receive("0.0.0.0", 6882, [&udp,&str](std::string msg){
+                int i = 0;
+                udp.receive("0.0.0.0", 6882, [&udp,&str,&i](std::string msg){
                     printf("%s\n",msg.c_str());
                     str = msg;
-                    udp.response(str, [](int status){
-                        
-                    });
+//                    udp.response(str, [&i](int status){
+//                        printf("%d\n",i++);
+//                    });
                 });
                 
                 

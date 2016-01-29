@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D774EFB4C9E7385C651A7B5BB1A448B9A4422942",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BC09C09DC2853BA9B3A84860F78F2E9FD790D8C3" : 0,
+    "D774EFB4C9E7385C651A7B5BB1A448B9A4422942" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E9FDE15C-F954-405F-A7C1-D344264431CC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BC09C09DC2853BA9B3A84860F78F2E9FD790D8C3" : "..\/..\/github\/libuv",
+    "D774EFB4C9E7385C651A7B5BB1A448B9A4422942" : "EyeOfSauronDHTMonitor\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "EyeOfSauronDHTMonitor",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "EyeOfSauronDHTMonitor.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/libuv\/libuv.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BC09C09DC2853BA9B3A84860F78F2E9FD790D8C3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:zhaishuai\/EyeOfSauronDHTMonitor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D774EFB4C9E7385C651A7B5BB1A448B9A4422942"
+    }
+  ]
+}
