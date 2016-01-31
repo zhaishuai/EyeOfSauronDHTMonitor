@@ -26,8 +26,6 @@ namespace esdht {
                           const struct sockaddr *addr, unsigned flags);
     void response_callback(uv_udp_send_t *req, int status);
     
-//    void walk_callback(uv_handle_t* handle, void* arg);
-    
     ESDUdp::ESDUdp(){
         
         loop = uv_default_loop();
@@ -72,7 +70,6 @@ namespace esdht {
         
         this->sendCallback = sendcb;
         this->receiveResponseCallback = revcb;
-//        uv_close((uv_handle_t *)&sendSocket, nullptr);
         uv_udp_init(loop, &sendSocket);
         uv_ip4_addr(ipv4.c_str(), port, &sendAddr);
         uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
@@ -135,12 +132,11 @@ namespace esdht {
     
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //
+    // 一下是服务端代码
     //
     
     void ESDUdp::stopReceive(){
         uv_udp_recv_stop(&receiveSocket);
-//        uv_stop(receiveLoop);
     }
     
     void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout, int flag){
@@ -215,10 +211,6 @@ namespace esdht {
         
     }//alloc_buffer_callback
     
-//    void walk_callback(uv_handle_t* handle, void* arg){
-//        if(!uv_is_closing(handle))
-//            uv_close(handle, NULL);
-//    }
     
     
 }
