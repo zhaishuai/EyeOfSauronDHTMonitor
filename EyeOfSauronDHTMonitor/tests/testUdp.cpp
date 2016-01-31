@@ -17,7 +17,7 @@ namespace test_udp{
     
     void run_send_and_receive(){
         
-        for(int i = 0; i < 100000; i++){
+        for(int i = 0; i < 50000; i++){
             try {
                 ESDUdp udp;
                 udp.send("127.0.0.1", 6882, "hola hello nihao", [i](int status){
@@ -38,6 +38,23 @@ namespace test_udp{
             
         }//for
         
+        
+        for(int i = 0; i < 50000; i++){
+            try {
+                ESDUdp udp;
+                udp.send("127.0.0.1", 6882, "hola hello nihao", [i](int status){
+                    if(status == -1){
+                        fprintf(stderr, "Send error!\n");
+                    }
+                    printf("send sucess %d\n", i);
+                    
+                }, nullptr);
+
+            } catch (const ESDUdpError &error) {
+                printf("\n%s\n",error.what());
+            }
+            
+        }//for
         
     }//
     
@@ -67,25 +84,27 @@ namespace test_udp{
         
         uv_loop_t *loop = uv_loop_new();
         ESDUdp udp(loop);
-        try {
-            string str;
-            int i = 0;
-            udp.receive("0.0.0.0", 6882, [&udp,&str,&i](std::string msg){
-                printf("%s\n",msg.c_str());
-                str = msg;
-                if(i == 10000){
-                    udp.stopReceive();
-                }
-                udp.response(str, [&i,&udp](int status){
-//                    if(i == 10000){
+        for(int i = 0 ; i < 10000; i++){
+            try {
+                string str;
+                int i = 0;
+                udp.receive("0.0.0.0", 6882, [&udp,&str,&i](std::string msg){
+                    printf("%s\n",msg.c_str());
+                    str = msg;
+//                    if(i == 1){
 //                        udp.stopReceive();
 //                    }
-                    printf("%d\n",i++);
+                    udp.response(str, [&i,&udp](int status){
+                     if(i == 1){
+                          udp.stopReceive();
+                     }
+                        printf("%d\n",i++);
+                    });
                 });
-            });
-            
-        } catch (const ESDUdpError &error) {
-            printf("\n%s\n",error.what());
+                
+            } catch (const ESDUdpError &error) {
+                printf("\n%s\n",error.what());
+            }
         }
         free(loop);
     }
@@ -93,7 +112,8 @@ namespace test_udp{
     
     void run_test_udp(){
         
-        run_send_and_receive();
+//        run_send_and_receive();
+        
         run_receive_and_response();
         
     }

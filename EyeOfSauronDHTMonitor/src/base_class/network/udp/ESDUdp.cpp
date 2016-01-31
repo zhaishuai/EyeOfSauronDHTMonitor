@@ -66,6 +66,8 @@ namespace esdht {
 
     }//~EDUdp
     
+#pragma mark - 以下是客户端代码
+    
     void ESDUdp::send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
         
         this->sendCallback = sendcb;
@@ -131,12 +133,16 @@ namespace esdht {
     }//receiveResponse_callback
     
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // 一下是服务端代码
-    //
+#pragma mark - 以下是服务端代码
     
     void ESDUdp::stopReceive(){
         uv_udp_recv_stop(&receiveSocket);
+        
+        uv_close((uv_handle_t*)&receiveSocket, NULL);
+//        stopLoop(receiveLoop);
+//        free(receiveLoop);
+//        receiveLoop = uv_loop_new();
+//        receiveSocket = uv_udp_t();
     }
     
     void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout, int flag){
