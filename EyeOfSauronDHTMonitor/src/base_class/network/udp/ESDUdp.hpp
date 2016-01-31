@@ -36,6 +36,7 @@ namespace esdht {
     public:
         
         uv_loop_t*                       loop;
+        uv_loop_t*                       receiveLoop;
         uv_udp_t                         sendSocket;
         uv_udp_t                         receiveSocket;
         uv_udp_send_t                    sendRequest;
@@ -124,6 +125,11 @@ namespace esdht {
          * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
         virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) override;
+        
+        /**
+         * @brief 停止receive
+         */
+        virtual void stopReceive() override;
         
         /**
          * @brief 响应UDP请求

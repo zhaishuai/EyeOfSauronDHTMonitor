@@ -31,9 +31,8 @@ namespace esdht {
     
     
     ESDDns::~ESDDns(){
-//        if(uv_loop_close(loop) == UV_EBUSY){
-//            throw ESDDnsError(std::string("uv_close 失败"));
-//        }
+        
+        stopLoop(loop);
         
     }//~ESDDns()
     

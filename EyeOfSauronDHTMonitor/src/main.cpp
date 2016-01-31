@@ -8,15 +8,7 @@
 
 #include <iostream>
 #include <uv.h>
-#include "document.h"
 
-#include "ESDDns.hpp"
-
-#include "testUdp.hpp"
-
-
-using namespace rapidjson;
-using namespace esdht;
 
 char *json = (char *)"{\"hello\": \"world\",\"t\": true ,\"f\": false,\"n\": null,\"i\": 123,\"pi\": 3.1416,\"a\": [1, 2, 3, 4]}";
 
@@ -25,15 +17,15 @@ int main(int argc, const char * argv[]) {
 //    std::cout << "Hello, World!\n";
 //    clock_t one, two;
 //    one = clock();   // 开始计时
-    //    Document document;
-    //    document.Parse(json);
-    
-    //    printf("%s\n",document["hello"].GetString());
-    
+//        Document document;
+//        document.Parse(json);
+//    
+//        printf("%s\n",document["hello"].GetString());
+//    
 //    {
 //        ESDDns dns2;
 //    }
-    
+//    
 //    try {
 //        
 //        ESDDns dns;

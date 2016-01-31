@@ -12,6 +12,9 @@
 #include <stdio.h>
 namespace test_udp{
     void start_test();
+    
+    void run_test_udp();
+    
 }
 
 

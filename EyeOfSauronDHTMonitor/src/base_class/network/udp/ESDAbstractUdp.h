@@ -18,7 +18,7 @@ namespace esdht {
      * 在编写UDP服务端时，只需要使用receive()和response()方法。
      * 在编写UDP客户端时，只需要使用send()和receive()方法。
      */
-    class ESDAbstractUdp : ESDObject{
+    class ESDAbstractUdp : public ESDObject{
     public:
 //        /**
 //         * @brief 绑定socket的接收地址
@@ -80,6 +80,11 @@ namespace esdht {
          * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
         virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) = 0;
+        
+        /**
+         * @brief 停止receive
+         */
+        virtual void stopReceive() = 0;
         
         /**
          * @brief 响应UDP请求
