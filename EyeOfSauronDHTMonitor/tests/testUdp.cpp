@@ -16,10 +16,10 @@ using namespace std;
 namespace test_udp{
     
     void run_send_and_receive(){
-        
-        for(int i = 0; i < 50000; i++){
+        ESDUdp udp;
+        for(int i = 0; i < 5000; i++){
             try {
-                ESDUdp udp;
+                
                 udp.send("127.0.0.1", 6882, "hola hello nihao", [i](int status){
                     if(status == -1){
                         fprintf(stderr, "Send error!\n");
@@ -39,22 +39,22 @@ namespace test_udp{
         }//for
         
         
-        for(int i = 0; i < 50000; i++){
-            try {
-                ESDUdp udp;
-                udp.send("127.0.0.1", 6882, "hola hello nihao", [i](int status){
-                    if(status == -1){
-                        fprintf(stderr, "Send error!\n");
-                    }
-                    printf("send sucess %d\n", i);
-                    
-                }, nullptr);
-
-            } catch (const ESDUdpError &error) {
-                printf("\n%s\n",error.what());
-            }
-            
-        }//for
+//        for(int i = 0; i < 50000; i++){
+//            try {
+//                ESDUdp udp;
+//                udp.send("127.0.0.1", 6882, "hola hello nihao", [i](int status){
+//                    if(status == -1){
+//                        fprintf(stderr, "Send error!\n");
+//                    }
+//                    printf("send sucess %d\n", i);
+//                    
+//                }, nullptr);
+//
+//            } catch (const ESDUdpError &error) {
+//                printf("\n%s\n",error.what());
+//            }
+//            
+//        }//for
         
     }//
     
@@ -112,9 +112,9 @@ namespace test_udp{
     
     void run_test_udp(){
         
-//        run_send_and_receive();
+        run_send_and_receive();
         
-        run_receive_and_response();
+//        run_receive_and_response();
         
     }
     

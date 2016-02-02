@@ -32,7 +32,7 @@ namespace esdht {
          * @brief 给定地址监听UDP请求
          * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
-        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout = 0, int flag = 0) = 0;
+        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag = 0) = 0;
         
         /**
          * @brief 停止receive

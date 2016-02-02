@@ -19,12 +19,11 @@ namespace esdht {
     
     void send_callback(uv_udp_send_t *req, int status);
     void alloc_buffer_callback(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf);
-    void receiveResponse_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf,
-                          const struct sockaddr *addr, unsigned flags);
+    void receiveResponse_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf, const struct sockaddr *addr, unsigned flags);
     void uvCloseCallback(uv_handle_t* handle);
-    void receive_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf,
-                          const struct sockaddr *addr, unsigned flags);
+    void receive_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf, const struct sockaddr *addr, unsigned flags);
     void response_callback(uv_udp_send_t *req, int status);
+    void receive_respond_timeout_cb(uv_timer_t* h);
     
     ESDUdp::ESDUdp(){
         
@@ -37,6 +36,9 @@ namespace esdht {
         receiveLoop->data = this;
         loop->data = this;
         
+        timer.data = this;
+        uv_timer_init( loop, &timer );
+        
     }//ESDUdp
     
     ESDUdp::ESDUdp(uv_loop_t *loop){
@@ -48,6 +50,9 @@ namespace esdht {
         receiveLoop = uv_loop_new();
         receiveLoop->data = this;
         loop->data = this;
+        
+        timer.data = this;
+        uv_timer_init( loop, &timer );
         
     }//ESDUdp
     
@@ -70,6 +75,8 @@ namespace esdht {
     
     void ESDUdp::send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
         
+        
+        
         this->sendCallback = sendcb;
         this->receiveResponseCallback = revcb;
         uv_udp_init(loop, &sendSocket);
@@ -86,13 +93,13 @@ namespace esdht {
             return;
         }
         
-
         error = uv_udp_recv_start(&sendSocket, alloc_buffer_callback, receiveResponse_callback);
+        
         if(error < 0){
             throw ESDUdpError(uv_strerror(error));
         }
+            uv_timer_start( &timer, receive_respond_timeout_cb, timeout, 0 );
         uv_run(loop, UV_RUN_DEFAULT);
-        
         
     }//send
     
@@ -112,7 +119,7 @@ namespace esdht {
     void receiveResponse_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf,
                                   const struct sockaddr *addr, unsigned flags){
         ESDUdp *udp = (ESDUdp *)req->data;
-        
+        uv_timer_stop(&udp->timer);
         if(nread == 0 || nread == -1){
             free(buf->base);
             if(udp != NULL && udp->receiveResponseCallback != nullptr){
@@ -128,10 +135,24 @@ namespace esdht {
         }
         free(buf->base);
         uv_udp_recv_stop(req);
-        uv_close((uv_handle_t*) req, nullptr);
+        if(!uv_is_closing((uv_handle_t*) req))
+            uv_close((uv_handle_t*) req, nullptr);
         
     }//receiveResponse_callback
     
+    void receive_respond_timeout_cb(uv_timer_t* timer) {
+        ESDUdp *udp = (ESDUdp *)timer->data;
+        
+        if(udp!=nullptr){
+            uv_udp_recv_stop(&udp->sendSocket);
+
+            if(!uv_is_closing((uv_handle_t*)&udp->sendSocket)){
+                uv_close((uv_handle_t*)&udp->sendSocket, NULL);
+            }
+            uv_timer_stop(&udp->timer);
+        }
+        
+    }//receive_respond_timeout_cb
     
 #pragma mark - 以下是服务端代码
     
@@ -139,13 +160,10 @@ namespace esdht {
         uv_udp_recv_stop(&receiveSocket);
         
         uv_close((uv_handle_t*)&receiveSocket, NULL);
-//        stopLoop(receiveLoop);
-//        free(receiveLoop);
-//        receiveLoop = uv_loop_new();
-//        receiveSocket = uv_udp_t();
-    }
+
+    }//stopReceive
     
-    void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, double timeout, int flag){
+    void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag){
         
         this->receiveCallback = revcb;
         uv_udp_init(receiveLoop, &receiveSocket);
@@ -159,7 +177,7 @@ namespace esdht {
         uv_run(receiveLoop, UV_RUN_DEFAULT);
 
         
-    }
+    }//receive
     
     
     void receive_callback(uv_udp_t *req, ssize_t nread, const uv_buf_t* buf,
@@ -216,6 +234,7 @@ namespace esdht {
         (*buf) = uv_buf_init((char*) malloc(suggested_size), (unsigned int)suggested_size);
         
     }//alloc_buffer_callback
+    
     
     
     
