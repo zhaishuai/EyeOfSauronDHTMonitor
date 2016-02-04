@@ -20,7 +20,13 @@ namespace esdht {
      */
     class ESDAbstractUdp : public ESDObject{
     public:
-
+        
+        /**
+         * @brief 设置发送端口号
+         * @param port 端口号
+         */
+        virtual void setSendPort(int port) = 0;
+        
         /**
          * @brief 向给定的地址发送UDP请求
          * @param ipv4:ip地址 port:端口 msg:要发送的消息 sendcb:发送的回调 revcb:接收到响应的回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
