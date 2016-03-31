@@ -17,6 +17,8 @@
 		D917A1121C5DFE3500010EB2 /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
 		D917A1131C5DFE3700010EB2 /* ESDUdpClientUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */; };
 		D9246A2E1C5B15A8000ED12A /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9246A2D1C5B15A8000ED12A /* libuv.1.dylib */; };
+		D9539B081CAD5856007B42F2 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9539B061CAD5856007B42F2 /* ThreadPool.cpp */; };
+		D9539B091CAD5856007B42F2 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9539B061CAD5856007B42F2 /* ThreadPool.cpp */; };
 		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
 		D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A041C537FF1001BBBCE /* ESDObject.cpp */; };
 		D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
@@ -61,6 +63,8 @@
 		D9246A2D1C5B15A8000ED12A /* libuv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libuv.1.dylib; sourceTree = "<group>"; };
 		D943689A1C57457600BD1DC7 /* testUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testUdp.cpp; sourceTree = "<group>"; };
 		D943689B1C57457600BD1DC7 /* testUdp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = testUdp.hpp; sourceTree = "<group>"; };
+		D9539B061CAD5856007B42F2 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
+		D9539B071CAD5856007B42F2 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
 		D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EyeOfSauronDHTMonitor; sourceTree = BUILT_PRODUCTS_DIR; };
 		D96739F01C537A5E001BBBCE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D9673A041C537FF1001BBBCE /* ESDObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDObject.cpp; sourceTree = "<group>"; };
@@ -164,6 +168,15 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		D9539B051CAD5836007B42F2 /* threadPool */ = {
+			isa = PBXGroup;
+			children = (
+				D9539B061CAD5856007B42F2 /* ThreadPool.cpp */,
+				D9539B071CAD5856007B42F2 /* ThreadPool.hpp */,
+			);
+			path = threadPool;
+			sourceTree = "<group>";
+		};
 		D96739D41C5370CD001BBBCE = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +209,7 @@
 		D96739EA1C537920001BBBCE /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D9539B051CAD5836007B42F2 /* threadPool */,
 				D9246A241C5B15A8000ED12A /* libuv */,
 				D9673A2E1C53C3DB001BBBCE /* rapidjson */,
 			);
@@ -419,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D917A10C1C5DFC5C00010EB2 /* testUdp.cpp in Sources */,
+				D9539B091CAD5856007B42F2 /* ThreadPool.cpp in Sources */,
 				D917A1091C5DFB5200010EB2 /* test_dns.cpp in Sources */,
 				D917A1121C5DFE3500010EB2 /* ESDUdpClient.cpp in Sources */,
 				D917A10E1C5DFE2200010EB2 /* ESDObject.cpp in Sources */,
@@ -437,6 +452,7 @@
 				D9673A531C548072001BBBCE /* ESDUdpClientUtility.cpp in Sources */,
 				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
 				D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */,
+				D9539B081CAD5856007B42F2 /* ThreadPool.cpp in Sources */,
 				D9673A5B1C54850D001BBBCE /* ESDUdp.cpp in Sources */,
 				D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */,
 			);
@@ -586,6 +602,7 @@
 				D917A1051C5DFB3800010EB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D96739D81C5370CD001BBBCE /* Build configuration list for PBXProject "EyeOfSauronDHTMonitor" */ = {
 			isa = XCConfigurationList;
