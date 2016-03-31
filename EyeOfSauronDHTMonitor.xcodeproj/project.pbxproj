@@ -10,15 +10,15 @@
 		D917A1091C5DFB5200010EB2 /* test_dns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D917A1071C5DFB5200010EB2 /* test_dns.cpp */; };
 		D917A10B1C5DFB6800010EB2 /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D917A10A1C5DFB6800010EB2 /* test_main.cpp */; };
 		D917A10C1C5DFC5C00010EB2 /* testUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D943689A1C57457600BD1DC7 /* testUdp.cpp */; };
-		D917A10D1C5DFDCB00010EB2 /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9246A2D1C5B15A8000ED12A /* libuv.1.dylib */; };
 		D917A10E1C5DFE2200010EB2 /* ESDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A041C537FF1001BBBCE /* ESDObject.cpp */; };
 		D917A1101C5DFE3100010EB2 /* ESDDns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A5C1C5486B4001BBBCE /* ESDDns.cpp */; };
 		D917A1111C5DFE3300010EB2 /* ESDUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A591C54850D001BBBCE /* ESDUdp.cpp */; };
 		D917A1121C5DFE3500010EB2 /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
 		D917A1131C5DFE3700010EB2 /* ESDUdpClientUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */; };
-		D9246A2E1C5B15A8000ED12A /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9246A2D1C5B15A8000ED12A /* libuv.1.dylib */; };
 		D9539B081CAD5856007B42F2 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9539B061CAD5856007B42F2 /* ThreadPool.cpp */; };
 		D9539B091CAD5856007B42F2 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9539B061CAD5856007B42F2 /* ThreadPool.cpp */; };
+		D9539B1B1CAD77AF007B42F2 /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */; };
+		D9539B1C1CAD77B4007B42F2 /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */; };
 		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
 		D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A041C537FF1001BBBCE /* ESDObject.cpp */; };
 		D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
@@ -60,11 +60,11 @@
 		D9246A291C5B15A8000ED12A /* uv-unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "uv-unix.h"; sourceTree = "<group>"; };
 		D9246A2A1C5B15A8000ED12A /* uv-version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "uv-version.h"; sourceTree = "<group>"; };
 		D9246A2B1C5B15A8000ED12A /* uv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uv.h; sourceTree = "<group>"; };
-		D9246A2D1C5B15A8000ED12A /* libuv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libuv.1.dylib; sourceTree = "<group>"; };
 		D943689A1C57457600BD1DC7 /* testUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testUdp.cpp; sourceTree = "<group>"; };
 		D943689B1C57457600BD1DC7 /* testUdp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = testUdp.hpp; sourceTree = "<group>"; };
 		D9539B061CAD5856007B42F2 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
 		D9539B071CAD5856007B42F2 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
+		D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libuv.1.dylib; sourceTree = "<group>"; };
 		D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EyeOfSauronDHTMonitor; sourceTree = BUILT_PRODUCTS_DIR; };
 		D96739F01C537A5E001BBBCE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D9673A041C537FF1001BBBCE /* ESDObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDObject.cpp; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D917A10D1C5DFDCB00010EB2 /* libuv.1.dylib in Frameworks */,
+				D9539B1B1CAD77AF007B42F2 /* libuv.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9246A2E1C5B15A8000ED12A /* libuv.1.dylib in Frameworks */,
+				D9539B1C1CAD77B4007B42F2 /* libuv.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +141,8 @@
 		D9246A241C5B15A8000ED12A /* libuv */ = {
 			isa = PBXGroup;
 			children = (
+				D9539B191CAD7796007B42F2 /* lib */,
 				D9246A251C5B15A8000ED12A /* include */,
-				D9246A2C1C5B15A8000ED12A /* lib */,
 			);
 			path = libuv;
 			sourceTree = "<group>";
@@ -160,14 +160,6 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		D9246A2C1C5B15A8000ED12A /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				D9246A2D1C5B15A8000ED12A /* libuv.1.dylib */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
 		D9539B051CAD5836007B42F2 /* threadPool */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +167,14 @@
 				D9539B071CAD5856007B42F2 /* ThreadPool.hpp */,
 			);
 			path = threadPool;
+			sourceTree = "<group>";
+		};
+		D9539B191CAD7796007B42F2 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		D96739D41C5370CD001BBBCE = {
