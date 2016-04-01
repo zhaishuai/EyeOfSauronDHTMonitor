@@ -35,9 +35,9 @@ namespace esdht {
         receiveLoop = uv_loop_new();
         receiveLoop->data = this;
         loop->data = this;
-        
         timer.data = this;
         uv_timer_init( loop, &timer );
+        uv_udp_init(loop, &sendSocket);
         
     }//ESDUdp
     
@@ -50,40 +50,54 @@ namespace esdht {
         receiveLoop = uv_loop_new();
         receiveLoop->data = this;
         loop->data = this;
-        
         timer.data = this;
         uv_timer_init( loop, &timer );
+        uv_udp_init(loop, &sendSocket);
         
     }//ESDUdp
     
     ESDUdp::~ESDUdp(){
-        int error = ESDObject::stopLoop(this->receiveLoop);
-        if(error < 0){
-            throw ESDUdpError(uv_strerror(error));
+        
+        if(receiveResponseCallback == nullptr){
+            if(!uv_is_closing((uv_handle_t*)&sendSocket))
+                uv_close((uv_handle_t*)&sendSocket, NULL);
         }
         
-        
-        error = ESDObject::stopLoop(loop);;
-        if(error < 0){
-            throw ESDUdpError(uv_strerror(error));
-        }
+//        int error = ESDObject::stopLoop(this->receiveLoop);
+        uv_stop(receiveLoop);
+//        if(error < 0){
+//            throw ESDUdpError(uv_strerror(error));
+//        }
+//        
+//        
+//        error = ESDObject::stopLoop(loop);;
+//        if(error < 0){
+//            throw ESDUdpError(uv_strerror(error));
+//        }
         free(receiveLoop);
 
     }//~EDUdp
     
 #pragma mark - 以下是客户端代码
     
+    void ESDUdp::setSendPort(int port){
+//        uv_udp_init(loop, &sendSocket);
+        struct sockaddr_in temp;
+        uv_ip4_addr("", port, &temp);
+        uv_udp_bind(&sendSocket, (const struct sockaddr*)&temp, UV_UDP_REUSEADDR);
+        
+    }//setSendPort
+    
+    
     void ESDUdp::send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
-        
-        
         
         this->sendCallback = sendcb;
         this->receiveResponseCallback = revcb;
-        uv_udp_init(loop, &sendSocket);
         uv_ip4_addr(ipv4.c_str(), port, &sendAddr);
         uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
 
         int error = uv_udp_send(&sendRequest, &sendSocket, &buffer, 1, (const struct sockaddr *)&sendAddr, send_callback);
+        
         if(error < 0){
             throw ESDUdpError(uv_strerror(error));
         }
@@ -98,7 +112,7 @@ namespace esdht {
         if(error < 0){
             throw ESDUdpError(uv_strerror(error));
         }
-            uv_timer_start( &timer, receive_respond_timeout_cb, timeout, 0 );
+        uv_timer_start( &timer, receive_respond_timeout_cb, timeout, 0 );
         uv_run(loop, UV_RUN_DEFAULT);
         
     }//send
@@ -110,8 +124,10 @@ namespace esdht {
             udp->sendCallback(status);
             udp->sendCallback = nullptr;
         }
+        
         if(udp->receiveResponseCallback == nullptr){
-            uv_close((uv_handle_t*)req->handle, NULL);
+            //                uv_close((uv_handle_t*)req->handle, NULL);
+//            uv_close((uv_handle_t*)&udp->sendSocket, NULL);
         }
         
     }//send_callback
@@ -157,8 +173,8 @@ namespace esdht {
 #pragma mark - 以下是服务端代码
     
     void ESDUdp::stopReceive(){
+        uv_stop(receiveLoop);
         uv_udp_recv_stop(&receiveSocket);
-        
         uv_close((uv_handle_t*)&receiveSocket, NULL);
 
     }//stopReceive
