@@ -114,14 +114,9 @@ namespace test_udp{
     }
     
     void run_sending_and_receiving(){
-        
-        
-        
         threadPool::Thread thread;
         
         ESDAsync as;
-        
-        
         
         thread.startThread([&as]{
             uv_loop_t loop;
@@ -136,7 +131,6 @@ namespace test_udp{
             });
         });
 
-        
         clock_t one, two;
         one = clock();   // 开始计时
         
@@ -156,8 +150,6 @@ namespace test_udp{
                     printf("send sucess %d\n", i);
                     
                 }, nullptr);
-                
-//                sleep(0.5);
                 
             } catch (const ESDUdpError &error) {
                 printf("\n%s\n",error.what());
