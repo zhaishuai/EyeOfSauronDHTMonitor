@@ -13,7 +13,7 @@
 
 
 namespace esdht{
-    
+    class ESDAsync;
     /**
      * @brief 该类是ESD为前缀的类的基类
      */
@@ -25,7 +25,7 @@ namespace esdht{
     protected:
         
     public:
-    
+
         
     // 成员方法
     //
@@ -43,6 +43,9 @@ namespace esdht{
         static int stopLoop(uv_loop_t *loop);
         
     public:
+        
+        void addAsync(ESDAsync *async, uv_loop_t *loop, std::function<void (void *data)> func);
+        
         virtual ~ESDObject() = 0;
         
         /**
@@ -57,8 +60,20 @@ namespace esdht{
             
             return std::dynamic_pointer_cast<T>(shared_from_this());
         }
+        
+        
+        
     };
 
+    class ESDAsync{
+    public:
+        uv_async_t async;
+        void *data;
+        std::function<void (void *data) > func;
+        void sendAsync(void *data);
+       
+        
+    };
     
 }//namespace esdobject
 

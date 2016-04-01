@@ -24,7 +24,7 @@ namespace esdht {
     /**
      * 实现ESDAbstractUdp中的方法
      */
-    class ESDUdp : ESDAbstractUdp{
+    class ESDUdp : public ESDAbstractUdp{
     // 成员变量
     //
     private:

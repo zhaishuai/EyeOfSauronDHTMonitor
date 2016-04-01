@@ -113,27 +113,24 @@ namespace test_udp{
         free(loop);
     }
     
-    void testClose(uv_async_t* handle){
-        
-        printf("ni hao wowoeoeoeoeo\n");
-        ESDUdp *udp = (ESDUdp *)handle->data;
-        printf("num:%ld\n", pthread_self()->__sig);
-        udp->stopReceive();
-        
-    }
-    
     void run_sending_and_receiving(){
+        
+        
         
         threadPool::Thread thread;
         
-        uv_async_t as;
+        ESDAsync as;
+        
+        
         
         thread.startThread([&as]{
             uv_loop_t loop;
             uv_loop_init(&loop);
             ESDUdp udp(&loop);
-            as.data = &udp;
-            uv_async_init(udp.receiveLoop, &as, testClose);
+            udp.addAsync(&as, udp.receiveLoop, [&udp](void *data){
+                udp.stopReceive();
+                printf("%s", (char *)data);
+            });
             udp.receive("0.0.0.0", 6882, [&udp](std::string msg){
                 printf("%s\n",msg.c_str());
             });
@@ -169,9 +166,10 @@ namespace test_udp{
         }//for
         
         two= clock();   // 结束计时
-        std::cout << "Runtime： " << (double)(two- one ) * 1000.0 / CLOCKS_PER_SEC << " ms!" << std::endl;
         
-        uv_async_send(&as);
+        string str ="ni hao shi jie \n";
+        as.sendAsync(&str);
+        std::cout << "Runtime： " << (double)(two- one ) * 1000.0 / CLOCKS_PER_SEC << " ms!" << std::endl;
     }
     
     void run_test_udp(){
