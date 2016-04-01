@@ -39,6 +39,7 @@ namespace threadPool{
     protected:
         std::unique_ptr<ThreadData> threadData;
         pthread_mutex_t quitMutex;
+        
     public:
         bool shouldQuit = false;
         ThreadInfo threadInfo;
@@ -88,7 +89,7 @@ namespace threadPool{
     protected:
         
         int currentThreads = minThreads;
-        bool finishInit = false;
+//        bool finishInit = false;
         std::unique_ptr<Timer> addThreadTimer;
         std::unique_ptr<Timer> removeThreadTimer;
         

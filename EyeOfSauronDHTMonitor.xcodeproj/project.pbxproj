@@ -15,8 +15,6 @@
 		D917A1111C5DFE3300010EB2 /* ESDUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A591C54850D001BBBCE /* ESDUdp.cpp */; };
 		D917A1121C5DFE3500010EB2 /* ESDUdpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A2A1C539071001BBBCE /* ESDUdpClient.cpp */; };
 		D917A1131C5DFE3700010EB2 /* ESDUdpClientUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */; };
-		D9539B081CAD5856007B42F2 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9539B061CAD5856007B42F2 /* ThreadPool.cpp */; };
-		D9539B091CAD5856007B42F2 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9539B061CAD5856007B42F2 /* ThreadPool.cpp */; };
 		D9539B1B1CAD77AF007B42F2 /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */; };
 		D9539B1C1CAD77B4007B42F2 /* libuv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */; };
 		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
@@ -25,6 +23,8 @@
 		D9673A531C548072001BBBCE /* ESDUdpClientUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A511C548072001BBBCE /* ESDUdpClientUtility.cpp */; };
 		D9673A5B1C54850D001BBBCE /* ESDUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A591C54850D001BBBCE /* ESDUdp.cpp */; };
 		D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9673A5C1C5486B4001BBBCE /* ESDDns.cpp */; };
+		D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */; };
+		D9F89C4D1CAE1F57003A3465 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,8 +62,6 @@
 		D9246A2B1C5B15A8000ED12A /* uv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uv.h; sourceTree = "<group>"; };
 		D943689A1C57457600BD1DC7 /* testUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testUdp.cpp; sourceTree = "<group>"; };
 		D943689B1C57457600BD1DC7 /* testUdp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = testUdp.hpp; sourceTree = "<group>"; };
-		D9539B061CAD5856007B42F2 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
-		D9539B071CAD5856007B42F2 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
 		D9539B1A1CAD7796007B42F2 /* libuv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libuv.1.dylib; sourceTree = "<group>"; };
 		D96739DD1C5370CD001BBBCE /* EyeOfSauronDHTMonitor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EyeOfSauronDHTMonitor; sourceTree = BUILT_PRODUCTS_DIR; };
 		D96739F01C537A5E001BBBCE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -108,6 +106,8 @@
 		D9673A5C1C5486B4001BBBCE /* ESDDns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDDns.cpp; sourceTree = "<group>"; };
 		D9673A5D1C5486B4001BBBCE /* ESDDns.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDDns.hpp; sourceTree = "<group>"; };
 		D9F89C421CAE045C003A3465 /* ESDPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDPrefixHeader.pch; sourceTree = "<group>"; };
+		D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
+		D9F89C4B1CAE1F57003A3465 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +163,8 @@
 		D9539B051CAD5836007B42F2 /* threadPool */ = {
 			isa = PBXGroup;
 			children = (
-				D9539B061CAD5856007B42F2 /* ThreadPool.cpp */,
-				D9539B071CAD5856007B42F2 /* ThreadPool.hpp */,
+				D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */,
+				D9F89C4B1CAE1F57003A3465 /* ThreadPool.hpp */,
 			);
 			path = threadPool;
 			sourceTree = "<group>";
@@ -433,7 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D917A10C1C5DFC5C00010EB2 /* testUdp.cpp in Sources */,
-				D9539B091CAD5856007B42F2 /* ThreadPool.cpp in Sources */,
+				D9F89C4D1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,
 				D917A1091C5DFB5200010EB2 /* test_dns.cpp in Sources */,
 				D917A1121C5DFE3500010EB2 /* ESDUdpClient.cpp in Sources */,
 				D917A10E1C5DFE2200010EB2 /* ESDObject.cpp in Sources */,
@@ -452,7 +452,7 @@
 				D9673A531C548072001BBBCE /* ESDUdpClientUtility.cpp in Sources */,
 				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
 				D9673A2C1C539071001BBBCE /* ESDUdpClient.cpp in Sources */,
-				D9539B081CAD5856007B42F2 /* ThreadPool.cpp in Sources */,
+				D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,
 				D9673A5B1C54850D001BBBCE /* ESDUdp.cpp in Sources */,
 				D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */,
 			);

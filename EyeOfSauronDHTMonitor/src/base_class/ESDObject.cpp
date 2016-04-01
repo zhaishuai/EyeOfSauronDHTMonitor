@@ -26,8 +26,8 @@ namespace esdht {
         while (error) {
             uv_run(loop, UV_RUN_DEFAULT);
             uv_stop(loop);
-            uv_walk(loop, walk_callback, NULL);
-            uv_run(loop, UV_RUN_DEFAULT);
+//            uv_walk(loop, walk_callback, NULL);
+//            uv_run(loop, UV_RUN_DEFAULT);
             error = uv_loop_close(loop);
         }
         return error;
