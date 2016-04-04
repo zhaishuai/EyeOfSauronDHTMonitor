@@ -24,8 +24,8 @@ namespace test_dns {
             
             ESDDns dns;
             
-            for(int i = 0 ; i < 10000 ; i++){
-                dns.getIpOfURL("baidu.com","80", [&i](int state, std::string result){
+            for(int i = 0 ; i < 1; i++){
+                dns.getIpOfURL("router.bittorrent.com","80", [&i](int state, std::string result){
                     printf("i:%d   %s", i, result.c_str());
                 });
             }
