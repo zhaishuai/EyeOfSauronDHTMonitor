@@ -61,7 +61,7 @@ namespace esdht {
     }
     
     ESDAsync::~ESDAsync(){
-//        uv_close((uv_handle_t *)&async, nullptr);
+        
     }
     
 }//namespace esobject

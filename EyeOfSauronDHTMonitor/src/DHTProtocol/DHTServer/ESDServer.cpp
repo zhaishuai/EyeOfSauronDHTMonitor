@@ -32,14 +32,13 @@ namespace esdht {
         uv_loop_close(&(*loop));
     }
     
-    int count = 0;
     void ESDServer::startServer(){
         
         thread->startThread([this]{
             printf("server startup!\n");
             udp->receive(ip, port, [](std::string msg){
-                printf("count:%d  msg: %s", count, msg.c_str());
-                count++;
+//                fprintf(stderr ,"msg: %s", msg.c_str());
+                std::cout<<"msg:"<<msg<<std::endl;
             });
         });
         

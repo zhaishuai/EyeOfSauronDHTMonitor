@@ -8,29 +8,38 @@
 
 #include "test_esd_server.hpp"
 #include "ESDServer.hpp"
+#include "ESDDht.hpp"
+#include "bencoding.h"
+#include "ESDDns.hpp"
 
+using namespace bencoding;
 using namespace esdht;
 
 namespace test_esd_server {
     
     void test_server_start_up(){
-        for(int j = 0; j < 100000; j++){
         
-            
-            
-        ESDServer server("0.0.0.0", 8221);
+
+        ESDServer server("0.0.0.0", 6882);
         server.startServer();
+        ESDDns dns;
+        dns.getIpOfURL("router.bittorrent.com", "554", [](int status, std::string address){
+            printf("ip:%s   status:%d\n", address.c_str(), status);
+            
+            ESDDht client("aa", "abcdefghij0123456789");
+            
+            for(int i = 0 ; i < 1000 ; i++){
+                
+                client.ping(address, 6882);
+                usleep(1000*500);
+            }
+            
+        });
         
-        ESDUdp clinet;
-//        clinet.setSendPort(8222);
-        for(int i = 0 ; i < 1 ; i++){
-            clinet.send("10.12.112.55", 8221, "hello world\n", nullptr, nullptr);
-//          usleep(1000*10);
-            printf("j:%d\n",j);
-        }
         
         server.stopServer();
-        }
+
+        
     }
     
 }

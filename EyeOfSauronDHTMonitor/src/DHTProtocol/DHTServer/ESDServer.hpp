@@ -32,6 +32,9 @@ namespace esdht {
         
         void startServer();
         
+        /**
+         * 调用stopServer()后不能够再次调用startServer()；
+         */
         void stopServer();
     
     

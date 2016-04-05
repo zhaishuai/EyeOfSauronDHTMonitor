@@ -33,8 +33,8 @@ namespace esdht {
         sendSocket.data = this;
         receiveSocket.data = this;
         
-        uv_loop_init(&temp);
-        receiveLoop = &temp;
+        uv_loop_init(&defaultLoop);
+        receiveLoop = &defaultLoop;
         receiveLoop->data = this;
         loop->data = this;
         timer.data = this;
@@ -50,8 +50,8 @@ namespace esdht {
         sendSocket.data = this;
         receiveSocket.data = this;
         
-        uv_loop_init(&temp);
-        receiveLoop = &temp;
+        uv_loop_init(&defaultLoop);
+        receiveLoop = &defaultLoop;
         receiveLoop->data = this;
         loop->data = this;
         timer.data = this;
@@ -61,17 +61,6 @@ namespace esdht {
     }//ESDUdp
     
     ESDUdp::~ESDUdp(){
-        
-//        uv_timer_stop((uv_timer_t *) &timer);
-//        uv_close((uv_handle_t *)&timer, nullptr);
-//        uv_close((uv_handle_t*)&sendSocket, NULL);
-//        uv_run(loop, UV_RUN_DEFAULT);
-//        
-//        uv_stop(loop);
-//        uv_run(loop, UV_RUN_DEFAULT);
-//        
-//        uv_loop_close(loop);
-//        uv_stop(loop);
         
         stopLoop(loop);
         stopLoop(receiveLoop);
@@ -155,10 +144,6 @@ namespace esdht {
         
         if(udp!=nullptr){
             uv_udp_recv_stop(&udp->sendSocket);
-
-            if(!uv_is_closing((uv_handle_t*)&udp->sendSocket)){
-                uv_close((uv_handle_t*)&udp->sendSocket, NULL);
-            }
             uv_timer_stop(&udp->timer);
         }
         
@@ -169,10 +154,6 @@ namespace esdht {
     void ESDUdp::stopReceive(){
         uv_stop(receiveLoop);
         uv_udp_recv_stop(&receiveSocket);
-        if(!uv_is_closing((uv_handle_t*)&receiveSocket)){
-            uv_close((uv_handle_t*)&receiveSocket, NULL);
-        }
-
     }//stopReceive
     
     void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag){
@@ -198,9 +179,6 @@ namespace esdht {
         
         if(nread == 0 || nread == -1){
             free(buf->base);
-            if(udp != NULL && udp->receiveCallback != nullptr){
-//                udp->receiveCallback(""); 
-            }
             return;
         }
         

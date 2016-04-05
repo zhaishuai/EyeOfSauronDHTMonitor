@@ -29,7 +29,7 @@ namespace esdht {
     //
     private:
         
-        uv_loop_t temp;
+        uv_loop_t                        defaultLoop;
         
     protected:
         
@@ -57,7 +57,7 @@ namespace esdht {
     // 成员函数
     //
     private:
-        uv_loop_t        defaultLoop;
+
     protected:
         
     public:

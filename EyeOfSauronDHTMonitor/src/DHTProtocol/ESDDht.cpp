@@ -36,20 +36,8 @@ namespace esdht {
         (*subDictionary)[BString::create("id")] = BString::create("abcdefghij0123456789");
         (*bDictionary)[BString::create("a")] = subDictionary;
         std::string dic = encoder->encode(bDictionary);
-        printf("%s\n", dic.c_str());
-        
-        
-        udp->send(ip, port, dic.c_str(), nullptr, [](std::string pong){
-            printf("response:%s\n  size:%ld\n", pong.c_str(), pong.size());
-            
-            std::unique_ptr<Decoder> decoder;
-            std::shared_ptr<BItem> bItem(decoder->decode(pong));
-            auto dict = bItem->as<BDictionary>();
-            std::shared_ptr<BDictionary> sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
-            std::shared_ptr<BString> id = (*sDictionary)[BString::create("id")]->as<BString>();
-            std::string ipAndPortStr = id->value().substr(20, 6);
-            printf("id: %s   size:%ld\n", id->value().c_str(), id->value().size());
-        });
+        printf("ping: %s\n", dic.c_str());
+        udp->send(ip, port, dic, nullptr, nullptr);
     }
     
 }
