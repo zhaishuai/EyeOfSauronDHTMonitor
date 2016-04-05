@@ -161,6 +161,10 @@ namespace test_udp{
         
         string str ="ni hao shi jie \n";
         as.sendAsync(&str);
+        for(int i = 0 ; i < 10 ; i++){
+            as.sendAsync(&str);
+            usleep(1000*500);
+        }
         std::cout << "Runtime： " << (double)(two- one ) * 1000.0 / CLOCKS_PER_SEC << " ms!" << std::endl;
     }
     

@@ -14,7 +14,7 @@ namespace test_esdudp {
     
     void run_test_esdudp(){
         esdht::ESDDns dns;
-        dns.getIpOfURL("router.bittorrent.com", "80", [](int status, std::string address){
+        dns.getIpOfURL("router.bitcomet.net", "554", [](int status, std::string address){
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
             esdht::ESDDht dht("aa","abcdefghij0123456789");

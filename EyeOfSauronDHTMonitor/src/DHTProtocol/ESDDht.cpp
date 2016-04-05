@@ -49,8 +49,6 @@ namespace esdht {
             std::shared_ptr<BString> id = (*sDictionary)[BString::create("id")]->as<BString>();
             std::string ipAndPortStr = id->value().substr(20, 6);
             printf("id: %s   size:%ld\n", id->value().c_str(), id->value().size());
-            
-            printf("ipAndPortStr %s\n", ipAndPortStr.c_str());
         });
     }
     

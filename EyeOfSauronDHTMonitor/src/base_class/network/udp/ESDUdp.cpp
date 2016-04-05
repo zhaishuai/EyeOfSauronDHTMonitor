@@ -27,7 +27,8 @@ namespace esdht {
     
     ESDUdp::ESDUdp(){
         
-        loop = uv_default_loop();
+        loop = &defaultLoop;
+        uv_loop_init(loop);
         sendRequest.data = this;
         responseRequest.data = this;
         sendSocket.data = this;
@@ -57,31 +58,39 @@ namespace esdht {
     }//ESDUdp
     
     ESDUdp::~ESDUdp(){
-        
-        if(receiveResponseCallback == nullptr){
-            if(!uv_is_closing((uv_handle_t*)&sendSocket))
-                uv_close((uv_handle_t*)&sendSocket, NULL);
-        }
-        
-//        int error = ESDObject::stopLoop(this->receiveLoop);
-        uv_stop(receiveLoop);
-//        if(error < 0){
-//            throw ESDUdpError(uv_strerror(error));
-//        }
-//        
-//        
-//        error = ESDObject::stopLoop(loop);;
-//        if(error < 0){
-//            throw ESDUdpError(uv_strerror(error));
-//        }
-        free(receiveLoop);
 
+        
+//        if(receiveResponseCallback == nullptr){
+//            if(!uv_is_closing((uv_handle_t*)&sendSocket)){
+//                uv_stop(loop);
+//                uv_loop_close(loop);
+//                
+////                uv_close((uv_handle_t*)&sendSocket, NULL);
+//
+//                
+//                
+//                
+//                
+//            }
+//        }
+        uv_timer_stop((uv_timer_t *) &timer);
+        uv_close((uv_handle_t *)&timer, nullptr);
+        uv_close((uv_handle_t*)&sendSocket, NULL);
+        uv_run(loop, UV_RUN_DEFAULT);
+        
+        uv_stop(loop);
+        uv_run(loop, UV_RUN_DEFAULT);
+        
+        uv_loop_close(loop);
+        
+        uv_stop(receiveLoop);
+        uv_loop_close(receiveLoop);
+        free(receiveLoop);
     }//~EDUdp
     
 #pragma mark - 以下是客户端代码
     
     void ESDUdp::setSendPort(int port){
-//        uv_udp_init(loop, &sendSocket);
         struct sockaddr_in temp;
         uv_ip4_addr("", port, &temp);
         uv_udp_bind(&sendSocket, (const struct sockaddr*)&temp, UV_UDP_REUSEADDR);
@@ -102,7 +111,7 @@ namespace esdht {
             throw ESDUdpError(uv_strerror(error));
         }
         
-        if(revcb == nullptr){
+        if(revcb == nullptr ){
             uv_run(loop, UV_RUN_DEFAULT);
             return;
         }
@@ -123,11 +132,6 @@ namespace esdht {
         if(udp != NULL && udp->sendCallback != nullptr){
             udp->sendCallback(status);
             udp->sendCallback = nullptr;
-        }
-        
-        if(udp->receiveResponseCallback == nullptr){
-            //                uv_close((uv_handle_t*)req->handle, NULL);
-//            uv_close((uv_handle_t*)&udp->sendSocket, NULL);
         }
         
     }//send_callback
@@ -175,7 +179,9 @@ namespace esdht {
     void ESDUdp::stopReceive(){
         uv_stop(receiveLoop);
         uv_udp_recv_stop(&receiveSocket);
-        uv_close((uv_handle_t*)&receiveSocket, NULL);
+        if(!uv_is_closing((uv_handle_t*)&receiveSocket)){
+            uv_close((uv_handle_t*)&receiveSocket, NULL);
+        }
 
     }//stopReceive
     
@@ -203,7 +209,7 @@ namespace esdht {
         if(nread == 0 || nread == -1){
             free(buf->base);
             if(udp != NULL && udp->receiveCallback != nullptr){
-                udp->receiveCallback("");
+//                udp->receiveCallback(""); 
             }
             return;
         }
