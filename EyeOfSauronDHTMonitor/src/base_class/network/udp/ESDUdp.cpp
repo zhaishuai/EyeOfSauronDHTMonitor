@@ -32,7 +32,9 @@ namespace esdht {
         responseRequest.data = this;
         sendSocket.data = this;
         receiveSocket.data = this;
-        receiveLoop = uv_loop_new();
+        
+        uv_loop_init(&temp);
+        receiveLoop = &temp;
         receiveLoop->data = this;
         loop->data = this;
         timer.data = this;
@@ -47,7 +49,9 @@ namespace esdht {
         responseRequest.data = this;
         sendSocket.data = this;
         receiveSocket.data = this;
-        receiveLoop = uv_default_loop();
+        
+        uv_loop_init(&temp);
+        receiveLoop = &temp;
         receiveLoop->data = this;
         loop->data = this;
         timer.data = this;
@@ -58,21 +62,19 @@ namespace esdht {
     
     ESDUdp::~ESDUdp(){
         
-        uv_timer_stop((uv_timer_t *) &timer);
-        uv_close((uv_handle_t *)&timer, nullptr);
-        uv_close((uv_handle_t*)&sendSocket, NULL);
-        uv_run(loop, UV_RUN_DEFAULT);
+//        uv_timer_stop((uv_timer_t *) &timer);
+//        uv_close((uv_handle_t *)&timer, nullptr);
+//        uv_close((uv_handle_t*)&sendSocket, NULL);
+//        uv_run(loop, UV_RUN_DEFAULT);
+//        
+//        uv_stop(loop);
+//        uv_run(loop, UV_RUN_DEFAULT);
+//        
+//        uv_loop_close(loop);
+//        uv_stop(loop);
         
-        uv_stop(loop);
-        uv_run(loop, UV_RUN_DEFAULT);
-        
-        uv_loop_close(loop);
-        uv_stop(loop);
-        
-        uv_stop(receiveLoop);
-        uv_loop_close(receiveLoop);
-        uv_run(loop, UV_RUN_DEFAULT);
-        uv_stop(receiveLoop);
+        stopLoop(loop);
+        stopLoop(receiveLoop);
 
     }//~EDUdp
     

@@ -21,12 +21,13 @@ namespace test_esd_server {
         ESDServer server("0.0.0.0", 8221);
         server.startServer();
         
-//        ESDUdp clinet;
+        ESDUdp clinet;
 //        clinet.setSendPort(8222);
-//        for(int i = 0 ; i < 1 ; i++){
-//            clinet.send("10.12.112.55", 8221, "hello world\n", nullptr, nullptr);
+        for(int i = 0 ; i < 1 ; i++){
+            clinet.send("10.12.112.55", 8221, "hello world\n", nullptr, nullptr);
 //          usleep(1000*10);
-//        }
+            printf("j:%d\n",j);
+        }
         
         server.stopServer();
         }

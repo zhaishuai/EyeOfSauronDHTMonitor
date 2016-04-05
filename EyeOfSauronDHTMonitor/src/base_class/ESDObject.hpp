@@ -65,14 +65,14 @@ namespace esdht{
         
     };
 
-    class ESDAsync{
+    class ESDAsync : ESDObject{
     public:
         uv_async_t async;
         void *data;
         std::function<void (void *data) > func;
         void sendAsync(void *data);
        
-        
+        ~ESDAsync();
     };
     
 }//namespace esdobject

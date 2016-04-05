@@ -21,7 +21,8 @@ namespace esdht {
         udp    = std::unique_ptr<ESDUdp>(new ESDUdp(&(*loop)));
         thread = std::unique_ptr<threadPool::Thread>(new threadPool::Thread);
         async  = std::unique_ptr<ESDAsync>(new ESDAsync);
-        udp->addAsync(async.get(), udp->receiveLoop, [this](void *data){
+        
+        udp->addAsync(&(*async), udp->receiveLoop, [this](void *data){
             udp->stopReceive();
         });
         

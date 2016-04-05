@@ -29,7 +29,7 @@ namespace esdht {
     //
     private:
         
-        
+        uv_loop_t temp;
         
     protected:
         
