@@ -20,11 +20,11 @@ namespace esdht {
         
         bool checkKeyExist(std::shared_ptr<BDictionary> dict, std::string key){
             if(dict == nullptr){
-                printf("Bencode error\n");
+                fprintf(stderr, "Bencode error\n");
                 return false;
             }
             if(dict->find(BString::create(key)) == dict->end()){
-                printf("Bencode error\n");
+                fprintf(stderr, "Bencode error\n");
                 return false;
             }else{
                 return true;
@@ -33,11 +33,10 @@ namespace esdht {
         
         bool bencodeIsErrorPackets(std::shared_ptr<BDictionary> dict){
             if(dict == nullptr){
-                printf("Bencode error\n");
+                fprintf(stderr, "Bencode error\n");
                 return true;
             }
             if(!checkKeyExist(dict, "y")){
-                printf("Bencode error\n");
                 return true;
             }
             auto y    = (*dict)[BString::create("y")]->as<BString>();
@@ -45,22 +44,21 @@ namespace esdht {
             //
             if(y->value() == "e"){
                 if(!checkKeyExist(dict, "e")){
-                    printf("Bencode error\n");
                     return true;
                 }
                 auto errorList = (*dict)[BString::create("e")]->as<BList>();
                 if(errorList->empty()){
-                    printf("Bencode error\n");
+                    fprintf(stderr, "Bencode error\n");
                     return true;
                 }
                 auto errorCode = errorList->front()->as<BInteger>();
                 errorList->pop_front();
                 if(errorList->empty()){
-                    printf("Bencode error errorCode:%lld\n", errorCode->value());
+                    fprintf(stderr, "Bencode error errorCode:%lld\n", errorCode->value());
                     return true;
                 }
                 auto errorInfo = errorList->front()->as<BString>();
-                printf("Bencode error! errorCode:%lld errorInfo:%s\n", errorCode->value(), errorInfo->value().c_str());
+                fprintf(stderr, "Bencode error! errorCode:%lld errorInfo:%s\n", errorCode->value(), errorInfo->value().c_str());
                 return true;
             }
             return false;

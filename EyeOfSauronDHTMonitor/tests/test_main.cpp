@@ -29,10 +29,10 @@ int main(int argc, const char * argv[]) {
 //    test_dns::run_encode_test();
 //    test_esdudp::run_test_esdudp();
     
-    threadPool::Thread thread;
-    thread.startThread([]{
-        test_esd_server::test_server_start_up();
-    });
+//    threadPool::Thread thread;
+//    thread.startThread([]{
+//        test_esd_server::test_server_start_up();
+//    });
     
     test_esd_client::test_esd_client();
     

@@ -26,7 +26,6 @@ namespace esdht {
     
     void ESDClient::ping(std::string ip, int port){
         
-        
         std::unique_ptr<Encoder> encoder = Encoder::create();
         std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
         (*bDictionary)[BString::create("t")] = BString::create("aa");
@@ -36,14 +35,11 @@ namespace esdht {
         (*subDictionary)[BString::create("id")] = BString::create("abcdefghij0123456789");
         (*bDictionary)[BString::create("a")] = subDictionary;
         std::string dic = encoder->encode(bDictionary);
-        printf("%s\n", dic.c_str());
         
         //处理time out
         //
         try {
             udp->send(ip, port, dic.c_str(), nullptr, [this](std::string pong){
-                printf("response:%s\n", pong.c_str());
-                
                 //处理非bencode得数据
                 //
                 try {
@@ -58,17 +54,21 @@ namespace esdht {
                     auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
                     if(!checkKeyExist(sDictionary, "id"))  return;
                     auto id = (*sDictionary)[BString::create("id")]->as<BString>();
-                    printf("id: %s   size:%ld\n", id->value().c_str(), id->value().size());
+                    pingCallback(id->value());
+                    
                 } catch (DecodingError error) {
-                     printf("%s", error.what());
+                     fprintf(stderr ,"%s\n", error.what());
                 }
  
             });
         } catch (ESDUdpError error) {
-            printf("%s", error.what());
+            fprintf(stderr ,"%s", error.what());
         }
-        
-        
+    }
+    
+    void ESDClient::pingCallback(std::string nodeId){
+        //TODO:在此处处理ping的响应
+        printf("id: %s\n", nodeId.c_str());
     }
     
 }

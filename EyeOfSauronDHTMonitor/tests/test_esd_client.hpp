@@ -15,6 +15,7 @@ namespace test_esd_client {
     
     void test_esd_client();
     
+    void test_esd_client_ping();
 }
 
 #endif /* test_esd_client_hpp */
