@@ -145,6 +145,7 @@ namespace esdht {
         if(udp!=nullptr){
             uv_udp_recv_stop(&udp->sendSocket);
             uv_timer_stop(&udp->timer);
+            throw ESDUdpError("request time out!\n");
         }
         
     }//receive_respond_timeout_cb

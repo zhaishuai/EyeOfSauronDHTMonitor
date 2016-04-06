@@ -36,9 +36,9 @@ namespace esdht {
         
         thread->startThread([this]{
             printf("server startup!\n");
-            udp->receive(ip, port, [](std::string msg){
-//                fprintf(stderr ,"msg: %s", msg.c_str());
+            udp->receive(ip, port, [this](std::string msg){
                 std::cout<<"msg:"<<msg<<std::endl;
+                udp->response("d1:rd2:id20:mnopqrstuvwxyz123456e1:t2:aa1:y1:re", nullptr);
             });
         });
         

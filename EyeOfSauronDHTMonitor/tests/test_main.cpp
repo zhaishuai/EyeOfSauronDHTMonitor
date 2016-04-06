@@ -15,6 +15,7 @@
 #include "test_bencode.hpp"
 #include "test_esdudp.hpp"
 #include "test_esd_server.hpp"
+#include "test_esd_client.hpp"
 
 using namespace esdht;
 
@@ -28,7 +29,12 @@ int main(int argc, const char * argv[]) {
 //    test_dns::run_encode_test();
 //    test_esdudp::run_test_esdudp();
     
-    test_esd_server::test_server_start_up();
+    threadPool::Thread thread;
+    thread.startThread([]{
+        test_esd_server::test_server_start_up();
+    });
+    
+    test_esd_client::test_esd_client();
     
     return 0;
 }

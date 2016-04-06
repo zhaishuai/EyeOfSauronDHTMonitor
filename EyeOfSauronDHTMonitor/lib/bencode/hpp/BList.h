@@ -61,6 +61,7 @@ public:
 	/// @{
 	void push_back(const value_type &bItem);
 	void pop_back();
+    void pop_front();
 	/// @}
 
 	/// @name Element Access

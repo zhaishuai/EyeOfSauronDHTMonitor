@@ -7,7 +7,7 @@
 //
 
 #include "test_esdudp.hpp"
-#include "ESDDht.hpp"
+
 #include "ESDDns.hpp"
 
 namespace test_esdudp {
@@ -17,11 +17,9 @@ namespace test_esdudp {
         dns.getIpOfURL("router.bitcomet.net", "554", [](int status, std::string address){
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
-            esdht::ESDDht dht("aa","abcdefghij0123456789");
-            dht.ping(address, 6881);
-            
-            
-            
+//            esdht::ESDDht dht("aa","abcdefghij0123456789");
+//            dht.ping(address, 6881);
+
         });
     }
     

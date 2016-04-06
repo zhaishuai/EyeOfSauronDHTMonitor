@@ -34,8 +34,6 @@
 		D91909C61CB215F3008B2259 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909A71CB215F3008B2259 /* Utils.cpp */; };
 		D91909C71CB215F3008B2259 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909A71CB215F3008B2259 /* Utils.cpp */; };
 		D91909CA1CB2165B008B2259 /* test_bencode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909C81CB2165B008B2259 /* test_bencode.cpp */; };
-		D91909D31CB26499008B2259 /* ESDDht.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909D11CB26499008B2259 /* ESDDht.cpp */; };
-		D91909D41CB26499008B2259 /* ESDDht.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909D11CB26499008B2259 /* ESDDht.cpp */; };
 		D91909D71CB2A0CA008B2259 /* test_esdudp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909D51CB2A0CA008B2259 /* test_esdudp.cpp */; };
 		D91909D81CB2A0CA008B2259 /* test_esdudp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909D51CB2A0CA008B2259 /* test_esdudp.cpp */; };
 		D96739F11C537A5E001BBBCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D96739F01C537A5E001BBBCE /* main.cpp */; };
@@ -45,6 +43,10 @@
 		D96960911CB36309009E067D /* test_esd_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969608F1CB36309009E067D /* test_esd_server.cpp */; };
 		D96960941CB496A2009E067D /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D96960931CB496A2009E067D /* libuv.a */; };
 		D96960951CB496A2009E067D /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D96960931CB496A2009E067D /* libuv.a */; };
+		D969609D1CB4A662009E067D /* ESDClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609B1CB4A662009E067D /* ESDClient.cpp */; };
+		D969609E1CB4A662009E067D /* ESDClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609B1CB4A662009E067D /* ESDClient.cpp */; };
+		D96960A11CB4A726009E067D /* test_esd_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609F1CB4A726009E067D /* test_esd_client.cpp */; };
+		D96960A21CB4A726009E067D /* test_esd_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609F1CB4A726009E067D /* test_esd_client.cpp */; };
 		D985114D1CB351170045E896 /* ESDServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D985114B1CB351170045E896 /* ESDServer.cpp */; };
 		D985114E1CB351170045E896 /* ESDServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D985114B1CB351170045E896 /* ESDServer.cpp */; };
 		D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */; };
@@ -102,8 +104,6 @@
 		D91909C81CB2165B008B2259 /* test_bencode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_bencode.cpp; sourceTree = "<group>"; };
 		D91909C91CB2165B008B2259 /* test_bencode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_bencode.hpp; sourceTree = "<group>"; };
 		D91909CE1CB263C5008B2259 /* ESDDHTProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDDHTProtocol.hpp; sourceTree = "<group>"; };
-		D91909D11CB26499008B2259 /* ESDDht.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDDht.cpp; sourceTree = "<group>"; };
-		D91909D21CB26499008B2259 /* ESDDht.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDDht.hpp; sourceTree = "<group>"; };
 		D91909D51CB2A0CA008B2259 /* test_esdudp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_esdudp.cpp; sourceTree = "<group>"; };
 		D91909D61CB2A0CA008B2259 /* test_esdudp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_esdudp.hpp; sourceTree = "<group>"; };
 		D9246A261C5B15A8000ED12A /* uv-darwin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "uv-darwin.h"; sourceTree = "<group>"; };
@@ -156,6 +156,10 @@
 		D96960901CB36309009E067D /* test_esd_server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_esd_server.hpp; sourceTree = "<group>"; };
 		D96960921CB49686009E067D /* ESDPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDPrefixHeader.pch; sourceTree = "<group>"; };
 		D96960931CB496A2009E067D /* libuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libuv.a; sourceTree = "<group>"; };
+		D969609B1CB4A662009E067D /* ESDClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDClient.cpp; sourceTree = "<group>"; };
+		D969609C1CB4A662009E067D /* ESDClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDClient.hpp; sourceTree = "<group>"; };
+		D969609F1CB4A726009E067D /* test_esd_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_esd_client.cpp; sourceTree = "<group>"; };
+		D96960A01CB4A726009E067D /* test_esd_client.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_esd_client.hpp; sourceTree = "<group>"; };
 		D985114B1CB351170045E896 /* ESDServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDServer.cpp; sourceTree = "<group>"; };
 		D985114C1CB351170045E896 /* ESDServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDServer.hpp; sourceTree = "<group>"; };
 		D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
@@ -238,11 +242,9 @@
 		D91909CC1CB2638C008B2259 /* DHTProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				D98511491CB350F10045E896 /* DHTClient */,
+				D969609A1CB4A662009E067D /* DHTClient */,
 				D985114A1CB350F10045E896 /* DHTServer */,
 				D91909CE1CB263C5008B2259 /* ESDDHTProtocol.hpp */,
-				D91909D11CB26499008B2259 /* ESDDht.cpp */,
-				D91909D21CB26499008B2259 /* ESDDht.hpp */,
 			);
 			path = DHTProtocol;
 			sourceTree = "<group>";
@@ -343,6 +345,8 @@
 				D91909D61CB2A0CA008B2259 /* test_esdudp.hpp */,
 				D969608F1CB36309009E067D /* test_esd_server.cpp */,
 				D96960901CB36309009E067D /* test_esd_server.hpp */,
+				D969609F1CB4A726009E067D /* test_esd_client.cpp */,
+				D96960A01CB4A726009E067D /* test_esd_client.hpp */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -444,19 +448,21 @@
 			path = udp;
 			sourceTree = "<group>";
 		};
+		D969609A1CB4A662009E067D /* DHTClient */ = {
+			isa = PBXGroup;
+			children = (
+				D969609B1CB4A662009E067D /* ESDClient.cpp */,
+				D969609C1CB4A662009E067D /* ESDClient.hpp */,
+			);
+			path = DHTClient;
+			sourceTree = "<group>";
+		};
 		D98511451CB3495B0045E896 /* lib */ = {
 			isa = PBXGroup;
 			children = (
 				D96960931CB496A2009E067D /* libuv.a */,
 			);
 			path = lib;
-			sourceTree = "<group>";
-		};
-		D98511491CB350F10045E896 /* DHTClient */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DHTClient;
 			sourceTree = "<group>";
 		};
 		D985114A1CB350F10045E896 /* DHTServer */ = {
@@ -547,8 +553,10 @@
 			files = (
 				D91909CA1CB2165B008B2259 /* test_bencode.cpp in Sources */,
 				D91909B51CB215F3008B2259 /* BDictionary.cpp in Sources */,
+				D969609E1CB4A662009E067D /* ESDClient.cpp in Sources */,
 				D91909BF1CB215F3008B2259 /* BString.cpp in Sources */,
 				D91909C11CB215F3008B2259 /* Decoder.cpp in Sources */,
+				D96960A21CB4A726009E067D /* test_esd_client.cpp in Sources */,
 				D91909D81CB2A0CA008B2259 /* test_esdudp.cpp in Sources */,
 				D917A10C1C5DFC5C00010EB2 /* testUdp.cpp in Sources */,
 				D91909BD1CB215F3008B2259 /* BList.cpp in Sources */,
@@ -564,7 +572,6 @@
 				D91909C51CB215F3008B2259 /* PrettyPrinter.cpp in Sources */,
 				D917A10B1C5DFB6800010EB2 /* test_main.cpp in Sources */,
 				D91909BB1CB215F3008B2259 /* BItemVisitor.cpp in Sources */,
-				D91909D41CB26499008B2259 /* ESDDht.cpp in Sources */,
 				D91909B91CB215F3008B2259 /* BItem.cpp in Sources */,
 				D96960911CB36309009E067D /* test_esd_server.cpp in Sources */,
 			);
@@ -577,10 +584,10 @@
 				D91909B41CB215F3008B2259 /* BDictionary.cpp in Sources */,
 				D96739F11C537A5E001BBBCE /* main.cpp in Sources */,
 				D91909C01CB215F3008B2259 /* Decoder.cpp in Sources */,
+				D969609D1CB4A662009E067D /* ESDClient.cpp in Sources */,
 				D91909C61CB215F3008B2259 /* Utils.cpp in Sources */,
 				D91909B61CB215F3008B2259 /* BInteger.cpp in Sources */,
 				D91909BC1CB215F3008B2259 /* BList.cpp in Sources */,
-				D91909D31CB26499008B2259 /* ESDDht.cpp in Sources */,
 				D985114D1CB351170045E896 /* ESDServer.cpp in Sources */,
 				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
 				D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,
@@ -590,6 +597,7 @@
 				D9673A061C537FF1001BBBCE /* ESDObject.cpp in Sources */,
 				D91909D71CB2A0CA008B2259 /* test_esdudp.cpp in Sources */,
 				D91909BA1CB215F3008B2259 /* BItemVisitor.cpp in Sources */,
+				D96960A11CB4A726009E067D /* test_esd_client.cpp in Sources */,
 				D91909C41CB215F3008B2259 /* PrettyPrinter.cpp in Sources */,
 				D91909C21CB215F3008B2259 /* Encoder.cpp in Sources */,
 			);

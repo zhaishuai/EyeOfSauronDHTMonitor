@@ -78,7 +78,7 @@ namespace esdht {
          * @brief 向给定的地址发送UDP请求
          * @param ipv4:ip地址 port:端口 sendcb:发送的回调 revcb:接收到响应的回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
-        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 5000, int flag = 0) override;
+        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 5000, int flag = UV_UDP_REUSEADDR) override;
         /**
          * @brief 给定地址监听UDP请求
          * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags

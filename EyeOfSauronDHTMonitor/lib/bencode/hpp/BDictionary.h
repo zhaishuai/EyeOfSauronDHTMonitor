@@ -91,6 +91,7 @@ public:
 	/// @{
 	size_type size() const;
 	bool empty() const;
+    BDictionary::iterator find(const key_type &__k);
 	/// @}
 
 	/// @name Element Access and Modifiers

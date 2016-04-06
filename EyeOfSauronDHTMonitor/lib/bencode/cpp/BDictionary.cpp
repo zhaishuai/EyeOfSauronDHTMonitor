@@ -124,5 +124,9 @@ BDictionary::const_iterator BDictionary::cend() const {
 void BDictionary::accept(BItemVisitor *visitor) {
 	visitor->visit(this);
 }
+    
+BDictionary::iterator BDictionary::find(const key_type &__k){
+    return itemMap.find(__k);
+}
 
 } // namespace bencoding

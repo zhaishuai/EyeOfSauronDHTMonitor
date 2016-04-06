@@ -79,6 +79,12 @@ void BList::pop_back() {
 
 	itemList.pop_back();
 }
+    
+void BList::pop_front() {
+    assert(!empty() && "cannot call pop_front() on an empty list");
+    
+    itemList.pop_front();
+}
 
 /**
 * @brief Returns a reference to the first item in the list.
