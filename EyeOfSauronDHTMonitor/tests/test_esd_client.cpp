@@ -18,6 +18,7 @@ using namespace esdht;
 #define COUNTER 5
 
 namespace test_esd_client {
+    using namespace std;
     
     void test_start_server(std::string resposeList[COUNTER]){
         
@@ -27,6 +28,7 @@ namespace test_esd_client {
             ESDUdp udp(&loop);
             int count = 0;
             udp.receive(IP, 6881, [&udp, &count, &resposeList](std::string msg){
+                printf("dsg: %s\n", msg.c_str());
                 udp.response(resposeList[count%COUNTER], nullptr);
                 count++;
             });
@@ -49,12 +51,14 @@ namespace test_esd_client {
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
             ESDClient client("aa", "abcdefghij0123456789");
-            
-            for(int i = 0 ; i < COUNTER ; i++){
+            client.udp->liceningResponse();
+            for(int i = 0 ; i < COUNTER*20000 ; i++){
                 client.ping(address, 6881);
-                usleep(1000*500);
+                printf("send\n");
+//                usleep(1000*500);
             }
-            
+            uv_run(client.loop, UV_RUN_DEFAULT);
+            sleep(10);
         });
     }
     

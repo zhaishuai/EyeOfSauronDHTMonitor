@@ -39,28 +39,29 @@ namespace esdht {
         //处理time out
         //
         try {
-            udp->send(ip, port, dic.c_str(), nullptr, [this](std::string pong){
-                //处理非bencode得数据
-                //
-                try {
-                    std::unique_ptr<Decoder> decoder;
-                    std::shared_ptr<BItem> bItem(decoder->decode(pong));
-                    auto dict = bItem->as<BDictionary>();
-                    
-                    //在此处判断bencode是不是错误状态。
-                    //
-                    if(bencodeIsErrorPackets(dict)) return;
-                    if(!checkKeyExist(dict, "r"))   return;
-                    auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
-                    if(!checkKeyExist(sDictionary, "id"))  return;
-                    auto id = (*sDictionary)[BString::create("id")]->as<BString>();
-                    pingCallback(id->value());
-                    
-                } catch (DecodingError error) {
-                     fprintf(stderr ,"%s\n", error.what());
-                }
- 
-            });
+//            udp->send(ip, port, dic.c_str(), nullptr, [this](std::string pong){
+//                //处理非bencode得数据
+//                //
+//                try {
+//                    std::unique_ptr<Decoder> decoder;
+//                    std::shared_ptr<BItem> bItem(decoder->decode(pong));
+//                    auto dict = bItem->as<BDictionary>();
+//                    
+//                    //在此处判断bencode是不是错误状态。
+//                    //
+//                    if(bencodeIsErrorPackets(dict)) return;
+//                    if(!checkKeyExist(dict, "r"))   return;
+//                    auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
+//                    if(!checkKeyExist(sDictionary, "id"))  return;
+//                    auto id = (*sDictionary)[BString::create("id")]->as<BString>();
+//                    pingCallback(id->value());
+//                    
+//                } catch (DecodingError error) {
+//                     fprintf(stderr ,"%s\n", error.what());
+//                }
+// 
+//            });
+            udp->sendAsync(ip, port, dic.c_str(), nullptr);
         } catch (ESDUdpError error) {
             fprintf(stderr ,"%s", error.what());
         }
