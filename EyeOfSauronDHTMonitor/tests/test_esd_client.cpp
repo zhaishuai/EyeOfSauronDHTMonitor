@@ -14,7 +14,7 @@
 using namespace bencoding;
 using namespace esdht;
 
-#define IP      "10.12.112.55"
+#define IP      "192.168.1.105"
 #define COUNTER 5
 
 namespace test_esd_client {
@@ -52,7 +52,7 @@ namespace test_esd_client {
             
             ESDClient client("aa", "abcdefghij0123456789");
             client.udp->liceningResponse();
-            for(int i = 0 ; i < COUNTER*20000 ; i++){
+            for(int i = 0 ; i < COUNTER*20000   ; i++){
                 client.ping(address, 6881);
                 printf("send\n");
 //                usleep(1000*500);

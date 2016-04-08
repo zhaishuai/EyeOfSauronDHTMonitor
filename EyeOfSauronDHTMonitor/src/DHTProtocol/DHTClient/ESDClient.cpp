@@ -15,6 +15,7 @@ namespace esdht {
     ESDClient::ESDClient(std::string nodeID, std::string transactionID){
         this->nodeID        = nodeID;
         this->transactionID = transactionID;
+        this->krpc          = std::unique_ptr<ESDKrpc>(new ESDKrpc);
         loop                = new uv_loop_t;
         uv_loop_init(loop);
         this->udp           = std::unique_ptr<ESDUdp>(new ESDUdp(loop));
@@ -26,20 +27,10 @@ namespace esdht {
     
     void ESDClient::ping(std::string ip, int port){
         
-        std::unique_ptr<Encoder> encoder = Encoder::create();
-        std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
-        (*bDictionary)[BString::create("t")] = BString::create("aa");
-        (*bDictionary)[BString::create("y")] = BString::create("qq");
-        (*bDictionary)[BString::create("q")] = BString::create("ping");
-        std::shared_ptr<BDictionary> subDictionary(BDictionary::create());
-        (*subDictionary)[BString::create("id")] = BString::create("abcdefghij0123456789");
-        (*bDictionary)[BString::create("a")] = subDictionary;
-        std::string dic = encoder->encode(bDictionary);
-        
         //处理time out
         //
         try {
-//            udp->send(ip, port, dic.c_str(), nullptr, [this](std::string pong){
+//            udp->send(ip, port, krpc->ping(transactionID, nodeID), nullptr, [this](std::string pong){
 //                //处理非bencode得数据
 //                //
 //                try {
@@ -61,7 +52,7 @@ namespace esdht {
 //                }
 // 
 //            });
-            udp->sendAsync(ip, port, dic.c_str(), nullptr);
+            udp->sendAsync(ip, port, krpc->ping(transactionID, nodeID), nullptr);
         } catch (ESDUdpError error) {
             fprintf(stderr ,"%s", error.what());
         }
