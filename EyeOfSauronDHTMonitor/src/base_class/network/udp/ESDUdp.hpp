@@ -80,7 +80,7 @@ namespace esdht {
          */
         virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 5000, int flag = UV_UDP_REUSEADDR) override;
         
-        void liceningResponse();
+        void licensingResponse(std::function<void (std::string response)> func);
         
         void sendAsync(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, int flag = UV_UDP_REUSEADDR);
         

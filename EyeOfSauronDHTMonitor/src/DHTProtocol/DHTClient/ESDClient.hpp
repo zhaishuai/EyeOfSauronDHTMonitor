@@ -18,7 +18,6 @@ namespace esdht {
     class ESDClient : public ESDDHTProtocol{
         
     protected:
-        void pingCallback(std::string nodeId);
         
     public:
         std::string              nodeID;

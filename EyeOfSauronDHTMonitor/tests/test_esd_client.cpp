@@ -51,11 +51,14 @@ namespace test_esd_client {
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
             ESDClient client("aa", "abcdefghij0123456789");
-            client.udp->liceningResponse();
-            for(int i = 0 ; i < COUNTER*20000   ; i++){
+            client.udp->licensingResponse([](std::string response){
+                printf("response: %s\n", response.c_str());
+            });
+            
+            for(int i = 0 ; i < COUNTER*20   ; i++){
                 client.ping(address, 6881);
                 printf("send\n");
-//                usleep(1000*500);
+                usleep(1000*500);
             }
             uv_run(client.loop, UV_RUN_DEFAULT);
             sleep(10);
