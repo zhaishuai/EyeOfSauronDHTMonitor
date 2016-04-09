@@ -8,6 +8,7 @@
 
 #include "ESDKrpc.hpp"
 #include "bencoding.h"
+
 using namespace bencoding;
 
 namespace esdht {
@@ -50,18 +51,21 @@ namespace esdht {
     std::string ESDKrpc::findNode(const std::string transactionID, const std::string id, const std::string target){
         std::unique_ptr<Encoder> encoder = Encoder::create();
         std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
+        std::shared_ptr<BDictionary> subDictionary(BDictionary::create());
+        (*bDictionary)[BString::create("a")] = subDictionary;
+        (*subDictionary)[BString::create("id")] = BString::create(id);
+        (*subDictionary)[BString::create("target")] = BString::create(target);
+        
         (*bDictionary)[BString::create("t")] = BString::create(transactionID);
         (*bDictionary)[BString::create("y")] = BString::create("q");
         (*bDictionary)[BString::create("q")] = BString::create("find_node");
-        std::shared_ptr<BDictionary> subDictionary(BDictionary::create());
-        (*subDictionary)[BString::create("id")] = BString::create(id);
-        (*subDictionary)[BString::create("target")] = BString::create(target);
-        (*bDictionary)[BString::create("a")] = subDictionary;
+        
+        
         std::string dic = encoder->encode(bDictionary);
         return dic;
     }
     
-    void ESDKrpc::handleFindNodeResponse(const std::string response, std::string &id ,std::shared_ptr<BList> &nodes){
+    void ESDKrpc::handleFindNodeResponse(const std::string response, std::string &id ,std::string &nodes){
         
         std::unique_ptr<Decoder> decoder;
         std::shared_ptr<BItem> bItem(decoder->decode(response));
@@ -73,7 +77,22 @@ namespace esdht {
         if(!checkKeyExist(dict, "r"))   return;
         auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
         if(!checkKeyExist(sDictionary, "nodes"))  return;
-        nodes = (*sDictionary)[BString::create("nodes")]->as<BList>();
+        nodes = (*sDictionary)[BString::create("nodes")]->as<BString>()->value();
+        if(!checkKeyExist(sDictionary, "id")) return;
+        id = (*sDictionary)[BString::create("id")]->as<BString>()->value();
+    }
+    
+    const std::string ESDKrpc::generateNodeID(int length){
+        
+        std::stringstream stream;
+        SHA1 sha1;
+        for(int i = 0 ; i < length ; i++){
+            unsigned char ch = rand()%256;
+            stream<<ch;
+        }
+        sha1.addBytes(stream.str().c_str(), length);
+
+        return std::string{reinterpret_cast<char*>(sha1.getDigest()), (unsigned long)length};
     }
     
     

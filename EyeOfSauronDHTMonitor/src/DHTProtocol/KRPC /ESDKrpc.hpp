@@ -11,6 +11,9 @@
 
 #include <stdio.h>
 #include "bencoding.h"
+#include "sha1.h"
+
+#define NODE_ID_LENGTH 20
 
 namespace esdht {
     using namespace bencoding;
@@ -31,7 +34,9 @@ namespace esdht {
         void handlePingResponse(const std::string response, std::string &id);
         
         std::string findNode(const std::string transactionID, const std::string id, const std::string target);
-        void handleFindNodeResponse(const std::string response, std::string &id , std::shared_ptr<BList> &nodes);
+        void handleFindNodeResponse(const std::string response, std::string &id , std::string &nodes);
+        
+        const std::string generateNodeID(int length);
         
         bool checkKeyExist(std::shared_ptr<BDictionary> dict, std::string key);
         bool bencodeIsErrorPackets(std::shared_ptr<BDictionary> dict);

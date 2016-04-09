@@ -14,7 +14,7 @@
 using namespace bencoding;
 using namespace esdht;
 
-#define IP      "192.168.1.105"
+#define IP      "dht.transmissionbt.com"
 #define COUNTER 5
 
 namespace test_esd_client {
@@ -64,18 +64,19 @@ namespace test_esd_client {
     }
     
     void test_esd_client_findNode(){
-        threadPool::Thread thread;
-        thread.startThread([]{
-            std::string resposeList[COUNTER] = {"d1:rd2:id20:mnopqrstuvwxyz123456e1:t2:aa1:y1:re", "dfdfdffdfdfdfasdgfb", "l4:spami42ee", "d3:bar4:spam3:fooi42ee", "d1:eli201e23:A Generic Error Ocurrede1:t2:aa1:y1:ee"};
-            test_start_server(resposeList);
-        });
+//        threadPool::Thread thread;
+//        thread.startThread([]{
+//            std::string resposeList[COUNTER] = {"d1:rd2:id20:mnopqrstuvwxyz123456e1:t2:aa1:y1:re", "dfdfdffdfdfdfasdgfb", "l4:spami42ee", "d3:bar4:spam3:fooi42ee", "d1:eli201e23:A Generic Error Ocurrede1:t2:aa1:y1:ee"};
+//            test_start_server(resposeList);
+//        });
         
         ESDDns dns;
         dns.getIpOfURL(IP, "6881", [](int status, std::string address){
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
-            ESDClient client("aa", "abcdefghij0123456789");
+            ESDClient client("abcdefghij0123456789","aa");
             for(int i = 0 ; i < COUNTER   ; i++){
+//                client.ping(address, 6881);
                 client.findNode(address, 6881);
                 printf("send\n");
                 usleep(1000*500);

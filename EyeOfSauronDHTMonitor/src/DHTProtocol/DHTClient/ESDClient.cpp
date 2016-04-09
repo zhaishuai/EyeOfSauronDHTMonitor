@@ -32,7 +32,7 @@ namespace esdht {
                 try {
                     std::string id;
                     krpc->handlePingResponse(pong, id);
-                    printf("ping response id:%s\n", id.c_str());
+                    fprintf(stderr ,"ping response id:%s\n", id.c_str());
                 } catch(ESDKrpcError error){
                     fprintf(stderr ,"%s", error.what());
                 } catch(DecodingError error){
@@ -48,12 +48,13 @@ namespace esdht {
     
     void ESDClient::findNode(std::string ip, int port){
         try {
-            udp->send(ip, port, krpc->findNode(transactionID, nodeID, ""), nullptr, [this](std::string pong){
+//            fprintf(stderr ,"%s", krpc->findNode(transactionID, nodeID, "mnopqrstuvwxyz123456").c_str());
+            udp->send(ip, port, krpc->findNode(transactionID, nodeID, krpc->generateNodeID(NODE_ID_LENGTH)), nullptr, [this](std::string pong){
                 try {
-                    std::string id;
-                    std::shared_ptr<BList> nodes;
+                    std::string id = "";
+                    std::string nodes = "";
                     krpc->handleFindNodeResponse(pong, id, nodes);
-                    printf("id:%s    nodes.size:%ld\n", id.c_str(), nodes->size());
+                    printf("id:%s    nodes:%s\n", id.c_str(), nodes.c_str());
                 } catch(ESDKrpcError error){
                     fprintf(stderr ,"%s", error.what());
                 } catch(DecodingError error){
