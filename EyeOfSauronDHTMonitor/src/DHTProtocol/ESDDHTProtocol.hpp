@@ -17,7 +17,7 @@ namespace esdht {
     class ESDDHTProtocol : public ESDObject{
     public:
         virtual void ping(std::string ip, int port) = 0;
-        
+        virtual void findNode(std::string ip, int port) = 0;
     };
     
 }

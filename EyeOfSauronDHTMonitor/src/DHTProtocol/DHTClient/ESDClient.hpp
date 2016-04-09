@@ -28,6 +28,7 @@ namespace esdht {
         ESDClient(std::string nodeID, std::string transactionID);
         ~ESDClient();
         virtual void ping(std::string ip, int port);
+        virtual void findNode(std::string ip, int port);
     
     };
     

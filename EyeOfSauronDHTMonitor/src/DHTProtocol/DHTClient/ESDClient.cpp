@@ -26,22 +26,43 @@ namespace esdht {
     }
     
     void ESDClient::ping(std::string ip, int port){
-        
-        //处理time out
-        //
+
         try {
-//            udp->send(ip, port, krpc->ping(transactionID, nodeID), nullptr, [this](std::string pong){
-//                //处理非bencode得数据
-//                //
-//            std::string id;
-//            krpc->handlePingResponse(pong, &id);
-//
-//            });
-            udp->sendAsync(ip, port, krpc->ping(transactionID, nodeID), nullptr);
+            udp->send(ip, port, krpc->ping(transactionID, nodeID), nullptr, [this](std::string pong){
+                try {
+                    std::string id;
+                    krpc->handlePingResponse(pong, id);
+                    printf("ping response id:%s\n", id.c_str());
+                } catch(ESDKrpcError error){
+                    fprintf(stderr ,"%s", error.what());
+                } catch(DecodingError error){
+                    fprintf(stderr ,"%s", error.what());
+                }
+            
+            });
+//            udp->sendAsync(ip, port, krpc->ping(transactionID, nodeID), nullptr);
         } catch (ESDUdpError error) {
             fprintf(stderr ,"%s", error.what());
         }
     }
     
-    
+    void ESDClient::findNode(std::string ip, int port){
+        try {
+            udp->send(ip, port, krpc->findNode(transactionID, nodeID, ""), nullptr, [this](std::string pong){
+                try {
+                    std::string id;
+                    std::shared_ptr<BList> nodes;
+                    krpc->handleFindNodeResponse(pong, id, nodes);
+                    printf("id:%s    nodes.size:%ld\n", id.c_str(), nodes->size());
+                } catch(ESDKrpcError error){
+                    fprintf(stderr ,"%s", error.what());
+                } catch(DecodingError error){
+                    fprintf(stderr ,"%s", error.what());
+                }
+            });
+            
+        } catch (ESDUdpError error) {
+            fprintf(stderr ,"%s", error.what());
+        }
+    }
 }

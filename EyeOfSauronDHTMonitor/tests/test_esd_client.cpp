@@ -35,9 +35,7 @@ namespace test_esd_client {
         
     }
     
-    void test_esd_client(){
-        test_esd_client_ping();
-    }
+    
     
     void test_esd_client_ping(){
         threadPool::Thread thread;
@@ -51,11 +49,11 @@ namespace test_esd_client {
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
             ESDClient client("aa", "abcdefghij0123456789");
-            client.udp->licensingResponse([](std::string response){
-                printf("response: %s\n", response.c_str());
-            });
+//            client.udp->licensingResponse([](std::string response){
+//                printf("response: %s\n", response.c_str());
+//            });
             
-            for(int i = 0 ; i < COUNTER*20   ; i++){
+            for(int i = 0 ; i < COUNTER   ; i++){
                 client.ping(address, 6881);
                 printf("send\n");
                 usleep(1000*500);
@@ -65,6 +63,31 @@ namespace test_esd_client {
         });
     }
     
+    void test_esd_client_findNode(){
+        threadPool::Thread thread;
+        thread.startThread([]{
+            std::string resposeList[COUNTER] = {"d1:rd2:id20:mnopqrstuvwxyz123456e1:t2:aa1:y1:re", "dfdfdffdfdfdfasdgfb", "l4:spami42ee", "d3:bar4:spam3:fooi42ee", "d1:eli201e23:A Generic Error Ocurrede1:t2:aa1:y1:ee"};
+            test_start_server(resposeList);
+        });
+        
+        ESDDns dns;
+        dns.getIpOfURL(IP, "6881", [](int status, std::string address){
+            printf("ip:%s   status:%d\n", address.c_str(), status);
+            
+            ESDClient client("aa", "abcdefghij0123456789");
+            for(int i = 0 ; i < COUNTER   ; i++){
+                client.findNode(address, 6881);
+                printf("send\n");
+                usleep(1000*500);
+            }
+            uv_run(client.loop, UV_RUN_DEFAULT);
+            sleep(10);
+        });
+    }
     
+    void test_esd_client(){
+//        test_esd_client_ping();
+        test_esd_client_findNode();
+    }
     
 }

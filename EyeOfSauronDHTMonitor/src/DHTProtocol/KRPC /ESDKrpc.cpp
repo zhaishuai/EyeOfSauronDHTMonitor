@@ -12,6 +12,8 @@ using namespace bencoding;
 
 namespace esdht {
     
+    ESDKrpcError::ESDKrpcError(const std::string &what):std::runtime_error(what){};
+    
     std::string ESDKrpc::ping(const std::string transactionID, const std::string id){
         std::unique_ptr<Encoder> encoder = Encoder::create();
         std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
@@ -45,15 +47,15 @@ namespace esdht {
         }
     }
     
-    std::string ESDKrpc::findNode(std::shared_ptr<BDictionary> dict, std::string key, std::string target){
+    std::string ESDKrpc::findNode(const std::string transactionID, const std::string id, const std::string target){
         std::unique_ptr<Encoder> encoder = Encoder::create();
         std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
-        (*bDictionary)[BString::create("t")] = BString::create("aa");
+        (*bDictionary)[BString::create("t")] = BString::create(transactionID);
         (*bDictionary)[BString::create("y")] = BString::create("q");
         (*bDictionary)[BString::create("q")] = BString::create("find_node");
         std::shared_ptr<BDictionary> subDictionary(BDictionary::create());
-        (*subDictionary)[BString::create("id")] = BString::create("abcdefghij0123456789");
-        (*subDictionary)[BString::create("target")] = BString::create("mnorrrstuvwxyz123476");
+        (*subDictionary)[BString::create("id")] = BString::create(id);
+        (*subDictionary)[BString::create("target")] = BString::create(target);
         (*bDictionary)[BString::create("a")] = subDictionary;
         std::string dic = encoder->encode(bDictionary);
         return dic;
@@ -72,6 +74,57 @@ namespace esdht {
         auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
         if(!checkKeyExist(sDictionary, "nodes"))  return;
         nodes = (*sDictionary)[BString::create("nodes")]->as<BList>();
+    }
+    
+    
+    bool ESDKrpc::checkKeyExist(std::shared_ptr<BDictionary> dict, std::string key){
+        if(dict == nullptr){
+            throw ESDKrpcError("Bencode error\n");
+            return false;
+        }
+        if(dict->find(BString::create(key)) == dict->end()){
+            throw ESDKrpcError("Bencode error\n");
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    bool ESDKrpc::bencodeIsErrorPackets(std::shared_ptr<BDictionary> dict){
+        if(dict == nullptr){
+            throw ESDKrpcError("Bencode error\n");
+            return true;
+        }
+        if(!checkKeyExist(dict, "y")){
+            return true;
+        }
+        auto y    = (*dict)[BString::create("y")]->as<BString>();
+        //在此处判断bencode是不是错误状态。
+        //
+        if(y->value() == "e"){
+            if(!checkKeyExist(dict, "e")){
+                return true;
+            }
+            auto errorList = (*dict)[BString::create("e")]->as<BList>();
+            if(errorList->empty()){
+                throw ESDKrpcError("Bencode error\n");
+                return true;
+            }
+            auto errorCode = errorList->front()->as<BInteger>();
+            errorList->pop_front();
+            if(errorList->empty()){
+                std::stringstream stream;
+                stream<<"Bencode error! errorCode:"<<errorCode->value()<<std::endl;
+                throw ESDKrpcError(stream.str());
+                return true;
+            }
+            auto errorInfo = errorList->front()->as<BString>();
+            std::stringstream stream;
+            stream<<"Bencode error! errorCode:"<<errorCode->value()<<"  "<<"errorInfo:"<<errorInfo->value().c_str()<<std::endl;
+            throw ESDKrpcError(stream.str());
+            return true;
+        }
+        return false;
     }
     
 }
