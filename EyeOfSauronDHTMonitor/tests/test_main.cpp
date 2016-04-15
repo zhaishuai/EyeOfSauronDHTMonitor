@@ -16,6 +16,7 @@
 #include "test_esdudp.hpp"
 #include "test_esd_server.hpp"
 #include "test_esd_client.hpp"
+#include "test_thread_pool.hpp"
 
 using namespace esdht;
 
@@ -34,7 +35,8 @@ int main(int argc, const char * argv[]) {
 //        test_esd_server::test_server_start_up();
 //    });
     
-    test_esd_client::test_esd_client();
+//    test_esd_client::test_esd_client();
+    test_thread_pool::test_thread_pool();
     
     return 0;
 }

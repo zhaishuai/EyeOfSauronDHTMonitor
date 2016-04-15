@@ -107,6 +107,26 @@ namespace threadPool{
     };
     
     
+    struct MutextArray{
+        pthread_mutex_t *array;
+        unsigned long    size;
+    };
+    
+    struct TaskContainer{
+        std::deque<std::function<void ()>> *deque;
+        unsigned long    size;
+    };
+    
+    class WorkQueue{
+      
+    public:
+        WorkQueue(int product, int consumer);
+        ~WorkQueue();
+        TaskContainer taskContainer;
+        MutextArray   mutexArray;
+    };
+    
+    
 }
 
 #endif /* ThreadPool_hpp */

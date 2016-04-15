@@ -51,6 +51,8 @@
 		D969609E1CB4A662009E067D /* ESDClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609B1CB4A662009E067D /* ESDClient.cpp */; };
 		D96960A11CB4A726009E067D /* test_esd_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609F1CB4A726009E067D /* test_esd_client.cpp */; };
 		D96960A21CB4A726009E067D /* test_esd_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D969609F1CB4A726009E067D /* test_esd_client.cpp */; };
+		D97E06DB1CC0EBD90097B5D3 /* test_thread_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D97E06D91CC0EBD90097B5D3 /* test_thread_pool.cpp */; };
+		D97E06DC1CC0ECA50097B5D3 /* test_thread_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D97E06D91CC0EBD90097B5D3 /* test_thread_pool.cpp */; };
 		D985114D1CB351170045E896 /* ESDServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D985114B1CB351170045E896 /* ESDServer.cpp */; };
 		D985114E1CB351170045E896 /* ESDServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D985114B1CB351170045E896 /* ESDServer.cpp */; };
 		D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */; };
@@ -168,6 +170,8 @@
 		D969609C1CB4A662009E067D /* ESDClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDClient.hpp; sourceTree = "<group>"; };
 		D969609F1CB4A726009E067D /* test_esd_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_esd_client.cpp; sourceTree = "<group>"; };
 		D96960A01CB4A726009E067D /* test_esd_client.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_esd_client.hpp; sourceTree = "<group>"; };
+		D97E06D91CC0EBD90097B5D3 /* test_thread_pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_thread_pool.cpp; sourceTree = "<group>"; };
+		D97E06DA1CC0EBD90097B5D3 /* test_thread_pool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_thread_pool.hpp; sourceTree = "<group>"; };
 		D985114B1CB351170045E896 /* ESDServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDServer.cpp; sourceTree = "<group>"; };
 		D985114C1CB351170045E896 /* ESDServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDServer.hpp; sourceTree = "<group>"; };
 		D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 				D96960901CB36309009E067D /* test_esd_server.hpp */,
 				D969609F1CB4A726009E067D /* test_esd_client.cpp */,
 				D96960A01CB4A726009E067D /* test_esd_client.hpp */,
+				D97E06D91CC0EBD90097B5D3 /* test_thread_pool.cpp */,
+				D97E06DA1CC0EBD90097B5D3 /* test_thread_pool.hpp */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -588,6 +594,7 @@
 				D91909D81CB2A0CA008B2259 /* test_esdudp.cpp in Sources */,
 				D95D2B321CB8F52500BD6C32 /* sha1.cpp in Sources */,
 				D917A10C1C5DFC5C00010EB2 /* testUdp.cpp in Sources */,
+				D97E06DC1CC0ECA50097B5D3 /* test_thread_pool.cpp in Sources */,
 				D95D2A8D1CB7FCA000BD6C32 /* ESDKrpc.cpp in Sources */,
 				D91909BD1CB215F3008B2259 /* BList.cpp in Sources */,
 				D9F89C4D1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,
@@ -620,6 +627,7 @@
 				D91909B61CB215F3008B2259 /* BInteger.cpp in Sources */,
 				D91909BC1CB215F3008B2259 /* BList.cpp in Sources */,
 				D985114D1CB351170045E896 /* ESDServer.cpp in Sources */,
+				D97E06DB1CC0EBD90097B5D3 /* test_thread_pool.cpp in Sources */,
 				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
 				D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,
 				D91909B81CB215F3008B2259 /* BItem.cpp in Sources */,

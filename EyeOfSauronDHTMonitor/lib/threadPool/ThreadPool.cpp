@@ -277,4 +277,24 @@ namespace threadPool{
         pthread_mutex_unlock(&threadQueueMutex);
     }
     
+#pragma mark - WorkQUeue
+    
+    WorkQueue::WorkQueue(int product, int consumer){
+        taskContainer.deque = new std::deque<std::function<void ()>>[product + consumer];
+        taskContainer.size = product + consumer;
+        mutexArray.array = new pthread_mutex_t[product + consumer];
+        mutexArray.size  = product + consumer;
+        for (int i = 0; i < product + consumer; i++) {
+            pthread_mutex_init(&(mutexArray.array[i]), nullptr);
+        }
+    }
+    
+    WorkQueue::~WorkQueue(){
+        delete []taskContainer.deque;
+        
+        for (int i = 0; i < mutexArray.size; i++) {
+            pthread_mutex_destroy(&mutexArray.array[i]);
+        }
+        delete mutexArray.array;
+    }
 }
