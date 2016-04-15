@@ -92,7 +92,8 @@ namespace esdht {
         uv_run(loop, UV_RUN_NOWAIT);
     }
     
-    void ESDUdp::liceningResponse(){
+    void ESDUdp::licensingResponse(std::function<void (std::string response)> func){
+        receiveResponseCallback = func;
         int error = uv_udp_recv_start(&sendSocket, alloc_buffer_callback, receiveResponse_callback_async);
         
         if(error < 0){
@@ -146,10 +147,6 @@ namespace esdht {
         uv_timer_stop(&udp->timer);
         if(nread == 0 || nread == -1){
             free(buf->base);
-            if(udp != NULL && udp->receiveResponseCallback != nullptr){
-                udp->receiveResponseCallback("");
-                udp->receiveResponseCallback = nullptr;
-            }
             return;
         }
         
@@ -159,8 +156,6 @@ namespace esdht {
         }
         free(buf->base);
         uv_udp_recv_stop(req);
-        //        if(!uv_is_closing((uv_handle_t*) req))
-        //            uv_close((uv_handle_t*) req, nullptr);
         
     }//receiveResponse_callback
     
@@ -170,20 +165,13 @@ namespace esdht {
         uv_timer_stop(&udp->timer);
         if(nread == 0 || nread == -1){
             free(buf->base);
-            if(udp != NULL && udp->receiveResponseCallback != nullptr){
-                udp->receiveResponseCallback("");
-                udp->receiveResponseCallback = nullptr;
-            }
             return;
         }
-        printf("buf: %s\n", buf->base);
-//        if(udp != NULL && udp->receiveResponseCallback != nullptr){
-//            udp->receiveResponseCallback(std::string{buf->base, static_cast<size_t>(nread)});
-//            udp->receiveResponseCallback = nullptr;
-//        }
+        
+        if(udp != NULL && udp->receiveResponseCallback != nullptr){
+            udp->receiveResponseCallback(std::string{buf->base, static_cast<size_t>(nread)});
+        }
         free(buf->base);
-//        uv_udp_recv_stop(req);
-
         
     }//receiveResponse_callback
     
@@ -218,7 +206,6 @@ namespace esdht {
         }
         uv_run(receiveLoop, UV_RUN_DEFAULT);
 
-        
     }//receive
     
     
@@ -261,8 +248,6 @@ namespace esdht {
             udp->responseCallback(status);
             udp->responseCallback = nullptr;
         }
-
-//        uv_close((uv_handle_t*)req->handle, NULL);
         
     }//response_callback
     

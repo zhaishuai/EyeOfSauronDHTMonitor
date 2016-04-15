@@ -15,6 +15,7 @@ namespace esdht {
     ESDClient::ESDClient(std::string nodeID, std::string transactionID){
         this->nodeID        = nodeID;
         this->transactionID = transactionID;
+        this->krpc          = std::unique_ptr<ESDKrpc>(new ESDKrpc);
         loop                = new uv_loop_t;
         uv_loop_init(loop);
         this->udp           = std::unique_ptr<ESDUdp>(new ESDUdp(loop));
@@ -25,51 +26,44 @@ namespace esdht {
     }
     
     void ESDClient::ping(std::string ip, int port){
-        
-        std::unique_ptr<Encoder> encoder = Encoder::create();
-        std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
-        (*bDictionary)[BString::create("t")] = BString::create("aa");
-        (*bDictionary)[BString::create("y")] = BString::create("qq");
-        (*bDictionary)[BString::create("q")] = BString::create("ping");
-        std::shared_ptr<BDictionary> subDictionary(BDictionary::create());
-        (*subDictionary)[BString::create("id")] = BString::create("abcdefghij0123456789");
-        (*bDictionary)[BString::create("a")] = subDictionary;
-        std::string dic = encoder->encode(bDictionary);
-        
-        //处理time out
-        //
+
         try {
-//            udp->send(ip, port, dic.c_str(), nullptr, [this](std::string pong){
-//                //处理非bencode得数据
-//                //
-//                try {
-//                    std::unique_ptr<Decoder> decoder;
-//                    std::shared_ptr<BItem> bItem(decoder->decode(pong));
-//                    auto dict = bItem->as<BDictionary>();
-//                    
-//                    //在此处判断bencode是不是错误状态。
-//                    //
-//                    if(bencodeIsErrorPackets(dict)) return;
-//                    if(!checkKeyExist(dict, "r"))   return;
-//                    auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
-//                    if(!checkKeyExist(sDictionary, "id"))  return;
-//                    auto id = (*sDictionary)[BString::create("id")]->as<BString>();
-//                    pingCallback(id->value());
-//                    
-//                } catch (DecodingError error) {
-//                     fprintf(stderr ,"%s\n", error.what());
-//                }
-// 
-//            });
-            udp->sendAsync(ip, port, dic.c_str(), nullptr);
+            udp->send(ip, port, krpc->ping(transactionID, nodeID), nullptr, [this](std::string pong){
+                try {
+                    std::string id;
+                    krpc->handlePingResponse(pong, id);
+                    fprintf(stderr ,"ping response id:%s\n", id.c_str());
+                } catch(ESDKrpcError error){
+                    fprintf(stderr ,"%s", error.what());
+                } catch(DecodingError error){
+                    fprintf(stderr ,"%s", error.what());
+                }
+            
+            });
+//            udp->sendAsync(ip, port, krpc->ping(transactionID, nodeID), nullptr);
         } catch (ESDUdpError error) {
             fprintf(stderr ,"%s", error.what());
         }
     }
     
-    void ESDClient::pingCallback(std::string nodeId){
-        //TODO:在此处处理ping的响应
-        printf("id: %s\n", nodeId.c_str());
+    void ESDClient::findNode(std::string ip, int port){
+        try {
+//            fprintf(stderr ,"%s", krpc->findNode(transactionID, nodeID, "mnopqrstuvwxyz123456").c_str());
+            udp->send(ip, port, krpc->findNode(transactionID, nodeID, krpc->generateNodeID(NODE_ID_LENGTH)), nullptr, [this](std::string pong){
+                try {
+                    std::string id = "";
+                    std::string nodes = "";
+                    krpc->handleFindNodeResponse(pong, id, nodes);
+                    printf("id:%s    nodes:%s\n", id.c_str(), nodes.c_str());
+                } catch(ESDKrpcError error){
+                    fprintf(stderr ,"%s", error.what());
+                } catch(DecodingError error){
+                    fprintf(stderr ,"%s", error.what());
+                }
+            });
+            
+        } catch (ESDUdpError error) {
+            fprintf(stderr ,"%s", error.what());
+        }
     }
-    
 }

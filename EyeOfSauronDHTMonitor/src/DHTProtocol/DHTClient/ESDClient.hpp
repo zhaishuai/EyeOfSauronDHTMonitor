@@ -11,22 +11,24 @@
 
 #include <stdio.h>
 #include "ESDDHTProtocol.hpp"
+#include "ESDKrpc.hpp"
 
 namespace esdht {
     
     class ESDClient : public ESDDHTProtocol{
         
     protected:
-        void pingCallback(std::string nodeId);
         
     public:
-        std::string             nodeID;
-        std::string             transactionID;
-        std::unique_ptr<ESDUdp> udp;
-        uv_loop_t               *loop;
+        std::string              nodeID;
+        std::string              transactionID;
+        std::unique_ptr<ESDUdp>  udp;
+        std::unique_ptr<ESDKrpc> krpc;
+        uv_loop_t                *loop;
         ESDClient(std::string nodeID, std::string transactionID);
         ~ESDClient();
         virtual void ping(std::string ip, int port);
+        virtual void findNode(std::string ip, int port);
     
     };
     
