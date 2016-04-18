@@ -14,7 +14,7 @@
 using namespace bencoding;
 using namespace esdht;
 
-#define IP      "dht.transmissionbt.com"
+#define IP      "router.utorrent.com"
 #define COUNTER 5
 
 namespace test_esd_client {
@@ -64,25 +64,45 @@ namespace test_esd_client {
     }
     
     void test_esd_client_findNode(){
-//        threadPool::Thread thread;
-//        thread.startThread([]{
-//            std::string resposeList[COUNTER] = {"d1:rd2:id20:mnopqrstuvwxyz123456e1:t2:aa1:y1:re", "dfdfdffdfdfdfasdgfb", "l4:spami42ee", "d3:bar4:spam3:fooi42ee", "d1:eli201e23:A Generic Error Ocurrede1:t2:aa1:y1:ee"};
-//            test_start_server(resposeList);
-//        });
-        
+
         ESDDns dns;
         dns.getIpOfURL(IP, "6881", [](int status, std::string address){
             printf("ip:%s   status:%d\n", address.c_str(), status);
             
             ESDClient client("abcdefghij0123456789","aa");
+            
+            client.udp->licensingResponse([&client](std::string pong){
+                
+                try {
+                    std::string id = "";
+                    std::string nodes = "";
+                    std::string myPong = pong;
+                    client.krpc->handleFindNodeResponse(myPong, id, nodes);
+                    PeerInfo info;
+                    for(int i = 0 ; i < nodes.size()/26 ; i++){
+                        
+                        info = client.krpc->getPeerInfoFromNodeStr(nodes.substr(i*26, 26));
+                        printf("info:%s   port:%d\n", info.ip.c_str(), info.port);
+                        client.findNode(info.ip, info.port);
+                        usleep(1000*100);
+                        printf("findNode!\n");
+                    }
+                    
+                } catch(ESDKrpcError error){
+                    fprintf(stderr ,"%s", error.what());
+                } catch(DecodingError error){
+                    fprintf(stderr ,"%s", error.what());
+                }
+                
+            });
+            
             for(int i = 0 ; i < COUNTER   ; i++){
-//                client.ping(address, 6881);
                 client.findNode(address, 6881);
                 printf("send\n");
                 usleep(1000*500);
             }
             uv_run(client.loop, UV_RUN_DEFAULT);
-            sleep(10);
+//            sleep(10);
         });
     }
     

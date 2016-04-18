@@ -38,9 +38,7 @@ namespace esdht {
                 } catch(DecodingError error){
                     fprintf(stderr ,"%s", error.what());
                 }
-            
             });
-//            udp->sendAsync(ip, port, krpc->ping(transactionID, nodeID), nullptr);
         } catch (ESDUdpError error) {
             fprintf(stderr ,"%s", error.what());
         }
@@ -48,19 +46,27 @@ namespace esdht {
     
     void ESDClient::findNode(std::string ip, int port){
         try {
-//            fprintf(stderr ,"%s", krpc->findNode(transactionID, nodeID, "mnopqrstuvwxyz123456").c_str());
-            udp->send(ip, port, krpc->findNode(transactionID, nodeID, krpc->generateNodeID(NODE_ID_LENGTH)), nullptr, [this](std::string pong){
-                try {
-                    std::string id = "";
-                    std::string nodes = "";
-                    krpc->handleFindNodeResponse(pong, id, nodes);
-                    printf("id:%s    nodes:%s\n", id.c_str(), nodes.c_str());
-                } catch(ESDKrpcError error){
-                    fprintf(stderr ,"%s", error.what());
-                } catch(DecodingError error){
-                    fprintf(stderr ,"%s", error.what());
-                }
-            });
+//            udp->send(ip, port, krpc->findNode(transactionID, nodeID, krpc->generateNodeID(NODE_ID_LENGTH)), nullptr, [this](std::string pong){
+//                try {
+//                        std::string id = "";
+//                        std::string nodes = "";
+//                        krpc->handleFindNodeResponse(pong, id, nodes);
+//                        PeerInfo info;
+//                        if(nodes.size()>=26){
+//                            info = krpc->getPeerInfoFromNodeStr(nodes.substr(0, 26));
+//                            printf("info:%s   port:%d\n", info.ip.c_str(), info.port);
+//                        }
+//
+//                } catch(ESDKrpcError error){
+//                    fprintf(stderr ,"%s", error.what());
+//                } catch(DecodingError error){
+//                    fprintf(stderr ,"%s", error.what());
+//                }
+//            });
+            
+            
+            udp->sendAsync(ip, port, krpc->findNode(transactionID, nodeID, krpc->generateNodeID(NODE_ID_LENGTH)), nullptr);
+            
             
         } catch (ESDUdpError error) {
             fprintf(stderr ,"%s", error.what());
