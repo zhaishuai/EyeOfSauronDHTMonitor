@@ -1,46 +1,34 @@
 //
-//  ESDUdp.hpp
+//  ESDTCP.hpp
 //  EyeOfSauronDHTMonitor
 //
-//  Created by shuaizhai on 1/24/16.
+//  Created by shuaizhai on 4/19/16.
 //  Copyright © 2016 com.dhtMonitor.www. All rights reserved.
 //
 
-#ifndef ESDUdp_hpp
-#define ESDUdp_hpp
+#ifndef ESDTCP_hpp
+#define ESDTCP_hpp
 
 #include <stdio.h>
-#include "ESDAbstractUdp.h"
-namespace esdht {
-    
-    /**
-     * @brief 当UDP出现错误的时候抛出异常
-     */
 
-    CREATE_ERROR_CLASS(ESDUdpError)
-    
+namespace esdht {
     /**
-     * 实现ESDAbstractUdp中的方法
+     * @brief 当TCP出现错误的时候抛出异常
      */
-    class ESDUdp : public ESDAbstractUdp{
-    // 成员变量
-    //
-    private:
-        
-        uv_loop_t                        defaultLoop;
-        
+    CREATE_ERROR_CLASS(ESDTcpError)
+    
+    class ESDTcp : public ESDObject{
     protected:
         
-        uv_udp_t                         socket;
+        uv_tcp_t clientSocket;
+        uv_tcp_t serverSocket;
         
     public:
-        uv_timer_t                       timer;
-        uv_loop_t*                       loop;
-        uv_loop_t*                       receiveLoop;
-        uv_udp_t                         sendSocket;
-        uv_udp_t                         receiveSocket;
-        uv_udp_send_t                    sendRequest;
-        uv_udp_send_t                    responseRequest;
+        
+        uv_loop_t clinetLoop;
+        uv_loop_t serverLoop;
+        
+        
         struct sockaddr_in               sendAddr;
         struct sockaddr_in               recvAddr;
         
@@ -52,31 +40,22 @@ namespace esdht {
         std::function<void(int status)>  sendCallback = nullptr;
         std::function<void(int status)>  responseCallback = nullptr;
         
-    // 成员函数
-    //
-    private:
-
-    protected:
         
-    public:
-        
-        ESDUdp();
-        
-        ESDUdp(uv_loop_t *loop);
-        
-        ~ESDUdp();
+        ESDTcp();
+        ESDTcp(uv_loop_t *loop);
+        ~ESDTcp();
         
         /**
          * @brief 设置发送端口号
          * @param port 端口号
          */
-        virtual void setSendPort(int port) override;
+        virtual void setSendPort(int port);
         
         /**
          * @brief 向给定的地址发送UDP请求
          * @param ipv4:ip地址 port:端口 sendcb:发送的回调 revcb:接收到响应的回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
-        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 5000, int flag = UV_UDP_REUSEADDR) override;
+        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 5000, int flag = UV_UDP_REUSEADDR);
         
         void licensingResponse(std::function<void (std::string response)> func);
         
@@ -86,21 +65,25 @@ namespace esdht {
          * @brief 给定地址监听UDP请求
          * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
-        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag = 0) override;
+        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag = 0);
         
         /**
          * @brief 停止receive
          */
-        virtual void stopReceive() override;
+        virtual void stopReceive() ;
         
         /**
          * @brief 响应UDP请求
          * callback 回调。
          */
-        virtual void response(std::string msg, std::function<void(int status)> callback) override;
+        virtual void response(std::string msg, std::function<void(int status)> callback) ;
+        
     };
     
 }
 
 
-#endif /* ESDUdp_hpp */
+
+
+
+#endif /* ESDTCP_hpp */

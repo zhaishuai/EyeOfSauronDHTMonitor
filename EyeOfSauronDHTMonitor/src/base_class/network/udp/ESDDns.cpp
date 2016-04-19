@@ -14,7 +14,6 @@ namespace esdht {
     /**
      * @brief 构建DNS错误信息
      */
-    ESDDnsError::ESDDnsError(const std::string &what):std::runtime_error(what){};
     
     ESDDns::ESDDns(){
         

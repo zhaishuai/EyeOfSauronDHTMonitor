@@ -15,7 +15,7 @@ namespace esdht {
     /**
      * @brief 构建UDP错误信息
      */
-    ESDUdpError::ESDUdpError(const std::string &what):std::runtime_error(what){};
+//    ESDUdpError::ESDUdpError(const std::string &what):std::runtime_error(what){};
     
     void send_callback(uv_udp_send_t *req, int status);
     void alloc_buffer_callback(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf);

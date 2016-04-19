@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D907F5131CC5C1AF00D76CC1 /* ESDTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D907F5111CC5C1AF00D76CC1 /* ESDTCP.cpp */; };
+		D907F5141CC5C1B400D76CC1 /* ESDTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D907F5111CC5C1AF00D76CC1 /* ESDTCP.cpp */; };
+		D907F5171CC5C1CE00D76CC1 /* test_esdtcp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D907F5151CC5C1CE00D76CC1 /* test_esdtcp.cpp */; };
 		D917A1091C5DFB5200010EB2 /* test_dns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D917A1071C5DFB5200010EB2 /* test_dns.cpp */; };
 		D917A10B1C5DFB6800010EB2 /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D917A10A1C5DFB6800010EB2 /* test_main.cpp */; };
 		D917A10C1C5DFC5C00010EB2 /* testUdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D943689A1C57457600BD1DC7 /* testUdp.cpp */; };
@@ -81,6 +84,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D907F5111CC5C1AF00D76CC1 /* ESDTCP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDTCP.cpp; sourceTree = "<group>"; };
+		D907F5121CC5C1AF00D76CC1 /* ESDTCP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDTCP.hpp; sourceTree = "<group>"; };
+		D907F5151CC5C1CE00D76CC1 /* test_esdtcp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_esdtcp.cpp; sourceTree = "<group>"; };
+		D907F5161CC5C1CE00D76CC1 /* test_esdtcp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_esdtcp.hpp; sourceTree = "<group>"; };
 		D917A1001C5DFB3800010EB2 /* test_main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test_main; sourceTree = BUILT_PRODUCTS_DIR; };
 		D917A1021C5DFB3800010EB2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D917A1071C5DFB5200010EB2 /* test_dns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_dns.cpp; sourceTree = "<group>"; };
@@ -198,6 +205,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D907F5101CC5C19100D76CC1 /* tcp */ = {
+			isa = PBXGroup;
+			children = (
+				D907F5111CC5C1AF00D76CC1 /* ESDTCP.cpp */,
+				D907F5121CC5C1AF00D76CC1 /* ESDTCP.hpp */,
+			);
+			path = tcp;
+			sourceTree = "<group>";
+		};
 		D917A1011C5DFB3800010EB2 /* main */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +397,8 @@
 				D96960A01CB4A726009E067D /* test_esd_client.hpp */,
 				D97E06D91CC0EBD90097B5D3 /* test_thread_pool.cpp */,
 				D97E06DA1CC0EBD90097B5D3 /* test_thread_pool.hpp */,
+				D907F5151CC5C1CE00D76CC1 /* test_esdtcp.cpp */,
+				D907F5161CC5C1CE00D76CC1 /* test_esdtcp.hpp */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -465,6 +483,7 @@
 		D9673A541C54842E001BBBCE /* network */ = {
 			isa = PBXGroup;
 			children = (
+				D907F5101CC5C19100D76CC1 /* tcp */,
 				D9673A551C54842E001BBBCE /* udp */,
 			);
 			path = network;
@@ -603,7 +622,9 @@
 				D985114E1CB351170045E896 /* ESDServer.cpp in Sources */,
 				D917A10E1C5DFE2200010EB2 /* ESDObject.cpp in Sources */,
 				D91909B71CB215F3008B2259 /* BInteger.cpp in Sources */,
+				D907F5171CC5C1CE00D76CC1 /* test_esdtcp.cpp in Sources */,
 				D91909C31CB215F3008B2259 /* Encoder.cpp in Sources */,
+				D907F5141CC5C1B400D76CC1 /* ESDTCP.cpp in Sources */,
 				D917A1111C5DFE3300010EB2 /* ESDUdp.cpp in Sources */,
 				D917A1101C5DFE3100010EB2 /* ESDDns.cpp in Sources */,
 				D91909C51CB215F3008B2259 /* PrettyPrinter.cpp in Sources */,
@@ -628,6 +649,7 @@
 				D91909BC1CB215F3008B2259 /* BList.cpp in Sources */,
 				D985114D1CB351170045E896 /* ESDServer.cpp in Sources */,
 				D97E06DB1CC0EBD90097B5D3 /* test_thread_pool.cpp in Sources */,
+				D907F5131CC5C1AF00D76CC1 /* ESDTCP.cpp in Sources */,
 				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
 				D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,
 				D91909B81CB215F3008B2259 /* BItem.cpp in Sources */,

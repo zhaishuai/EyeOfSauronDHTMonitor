@@ -16,10 +16,7 @@ namespace esdht {
     /**
      * @brief 当DNS解析出现错误的时候抛出异常
      */
-    class ESDDnsError: public std::runtime_error {
-    public:
-        explicit ESDDnsError(const std:: string &what);
-    };
+    CREATE_ERROR_CLASS(ESDDnsError)
     
     /**
      * @brief DNS解析，获取给定域名的ip地址
