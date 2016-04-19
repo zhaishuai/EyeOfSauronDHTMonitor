@@ -18,7 +18,7 @@ namespace esdht {
     class ESDClient : public ESDDHTProtocol{
         
     protected:
-        
+        std::string key;
     public:
         std::string              nodeID;
         std::string              transactionID;

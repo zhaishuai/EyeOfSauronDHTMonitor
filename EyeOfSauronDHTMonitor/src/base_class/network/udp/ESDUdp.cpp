@@ -156,6 +156,8 @@ namespace esdht {
         }
         free(buf->base);
         uv_udp_recv_stop(req);
+        if(!uv_is_closing((uv_handle_t*) req))
+            uv_close((uv_handle_t*) req, nullptr);
         
     }//receiveResponse_callback
     
@@ -180,6 +182,10 @@ namespace esdht {
         
         if(udp!=nullptr){
             uv_udp_recv_stop(&udp->sendSocket);
+
+            if(!uv_is_closing((uv_handle_t*)&udp->sendSocket)){
+                uv_close((uv_handle_t*)&udp->sendSocket, NULL);
+            }
             uv_timer_stop(&udp->timer);
             throw ESDUdpError("request time out!\n");
         }
@@ -191,6 +197,10 @@ namespace esdht {
     void ESDUdp::stopReceive(){
         uv_stop(receiveLoop);
         uv_udp_recv_stop(&receiveSocket);
+        if(!uv_is_closing((uv_handle_t*)&receiveSocket)){
+            uv_close((uv_handle_t*)&receiveSocket, NULL);
+        }
+
     }//stopReceive
     
     void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag){
@@ -248,6 +258,8 @@ namespace esdht {
             udp->responseCallback(status);
             udp->responseCallback = nullptr;
         }
+
+        uv_close((uv_handle_t*)req->handle, NULL);
         
     }//response_callback
     

@@ -19,6 +19,8 @@ namespace esdht {
         loop                = new uv_loop_t;
         uv_loop_init(loop);
         this->udp           = std::unique_ptr<ESDUdp>(new ESDUdp(loop));
+        
+        key = krpc->generateNodeID(NODE_ID_LENGTH);
     }
     
     ESDClient::~ESDClient(){
@@ -65,7 +67,7 @@ namespace esdht {
 //            });
             
             
-            udp->sendAsync(ip, port, krpc->findNode(transactionID, nodeID, krpc->generateNodeID(NODE_ID_LENGTH)), nullptr);
+            udp->sendAsync(ip, port, krpc->findNode(transactionID, nodeID, "aaaaaaaaaaaaaaaaaaaa"), nullptr);
             
             
         } catch (ESDUdpError error) {

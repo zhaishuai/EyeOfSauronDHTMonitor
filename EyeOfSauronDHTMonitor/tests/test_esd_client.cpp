@@ -13,8 +13,8 @@
 
 using namespace bencoding;
 using namespace esdht;
-
-#define IP      "router.utorrent.com"
+//"router.utorrent.com"
+#define IP "router.utorrent.com"
 #define COUNTER 5
 
 namespace test_esd_client {
@@ -75,16 +75,15 @@ namespace test_esd_client {
                 
                 try {
                     std::string id = "";
-                    std::string nodes = "";
-                    std::string myPong = pong;
-                    client.krpc->handleFindNodeResponse(myPong, id, nodes);
+                    std::string nodes = "dddddddddddddddddddddddddd";
+//                    client.krpc->handleFindNodeResponse(pong, id, nodes);//泄露
                     PeerInfo info;
-                    for(int i = 0 ; i < nodes.size()/26 ; i++){
+                    for(int i = 0 ; i < 8 ; i++){
                         
-                        info = client.krpc->getPeerInfoFromNodeStr(nodes.substr(i*26, 26));
+//                        info = client.krpc->getPeerInfoFromNodeStr(nodes.substr(i*26, 26));
                         printf("info:%s   port:%d\n", info.ip.c_str(), info.port);
-                        client.findNode(info.ip, info.port);
-                        usleep(1000*100);
+//                        client.findNode(IP, info.port);//放开后会导致crash 存在泄露 只在该位置
+//                        usleep(1000*100);
                         printf("findNode!\n");
                     }
                     
@@ -96,10 +95,10 @@ namespace test_esd_client {
                 
             });
             
-            for(int i = 0 ; i < COUNTER   ; i++){
+            for(int i = 0 ; i < COUNTER*100000000   ; i++){
                 client.findNode(address, 6881);
                 printf("send\n");
-                usleep(1000*500);
+//                usleep(1000*100);
             }
             uv_run(client.loop, UV_RUN_DEFAULT);
 //            sleep(10);
