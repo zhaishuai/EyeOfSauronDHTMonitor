@@ -67,7 +67,7 @@ namespace esdht {
 //            });
             
             
-            udp->sendAsync(ip, port, krpc->findNode(transactionID, nodeID, "aaaaaaaaaaaaaaaaaaaa"), nullptr);
+            udp->sendAsync(ip, port, krpc->findNode(transactionID, nodeID, key), nullptr);
             
             
         } catch (ESDUdpError error) {

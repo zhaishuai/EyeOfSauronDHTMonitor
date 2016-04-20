@@ -64,27 +64,30 @@ namespace test_esd_client {
     }
     
     void test_esd_client_findNode(){
-
+        std::deque<PeerInfo> queue;
+        
         ESDDns dns;
-        dns.getIpOfURL(IP, "6881", [](int status, std::string address){
+        dns.getIpOfURL(IP, "6881", [&queue](int status, std::string address){
             printf("ip:%s   status:%d\n", address.c_str(), status);
+            PeerInfo peerInfo{.ip = address,.port = 6881};
+            queue.push_back(peerInfo);
             
             ESDClient client("abcdefghij0123456789","aa");
             
-            client.udp->licensingResponse([&client](std::string pong){
+            client.udp->licensingResponse([&client, &queue](std::string pong){
                 
                 try {
                     std::string id = "";
-                    std::string nodes = "dddddddddddddddddddddddddd";
-//                    client.krpc->handleFindNodeResponse(pong, id, nodes);//泄露
+                    std::string nodes = "";
+                    client.krpc->handleFindNodeResponse(pong, id, nodes);//泄露
                     PeerInfo info;
-                    for(int i = 0 ; i < 8 ; i++){
+                    queue.pop_front();
+                    for(int i = 0 ; i < nodes.size()/26 && queue.size() < 1000 ; i++){
                         
-//                        info = client.krpc->getPeerInfoFromNodeStr(nodes.substr(i*26, 26));
-                        printf("info:%s   port:%d\n", info.ip.c_str(), info.port);
-//                        client.findNode(IP, info.port);//放开后会导致crash 存在泄露 只在该位置
-//                        usleep(1000*100);
-                        printf("findNode!\n");
+                        info = client.krpc->getPeerInfoFromNodeStr(nodes.substr(i*26, 26));
+                        printf("info:%s   port:%d    ", info.ip.c_str(), info.port);
+                        queue.push_back(info);
+                        printf("findNode!    queueSize:%ld\n", (long)queue.size());
                     }
                     
                 } catch(ESDKrpcError error){
@@ -95,13 +98,17 @@ namespace test_esd_client {
                 
             });
             
-            for(int i = 0 ; i < COUNTER*100000000   ; i++){
-                client.findNode(address, 6881);
-                printf("send\n");
+            for(int i = 0 ; true ; i++){
+                if(i >= queue.size()){
+                    i = 0;
+                }
+                client.findNode(queue[i].ip, queue[i].port);
+                printf("send  i:%d   ip:%s    port:%d\n", i, queue[i].ip.c_str(), queue[i].port);
 //                usleep(1000*100);
+                
+                uv_run(client.loop, UV_RUN_NOWAIT);
             }
             uv_run(client.loop, UV_RUN_DEFAULT);
-//            sleep(10);
         });
     }
     
