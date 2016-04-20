@@ -42,9 +42,7 @@ namespace esdht {
     
     void ESDTcp::send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
         
-        uv_ip4_addr(ipv4.c_str(), port, &sendAddr);
-        uv_connect_t connect_req;
-//        uv_tcp_connect(&connect_req, &clientSocket, sendAddr, on_connect);
+
         
     }
     
@@ -56,7 +54,7 @@ namespace esdht {
     
     }
     
-    void ESDTcp::receive(std::string ipv4, int port, std::function<void (std::string)> revcb, int flag){
+    void ESDTcp::receive(std::string ipv4, int port, std::function<void (std::string, uv_stream_t* stream)> revcb, int flag){
         this->receiveCallback = revcb;
         
         uv_ip4_addr(ipv4.c_str(), port, &recvAddr);
@@ -71,8 +69,19 @@ namespace esdht {
     
     }
     
-    void ESDTcp::response(std::string msg, std::function<void (int)> callback){
+    void ESDTcp::response(std::string msg, uv_stream_t* stream, std::function<void (int state)> callback){
+        uv_buf_t buffer[] = {
+            {.base = (char *)"hello", .len = 5},
+            {.base = (char *)"world", .len = 5}
+        };
         
+        uv_write_t request;
+        int r = uv_write(&request, stream, buffer, 2, nullptr);
+        if(r){
+            uv_strerror(r);
+        }
+        uv_run(&serverLoop, UV_RUN_NOWAIT);
+        uv_close((uv_handle_t *)stream, uv_close_cb);
     }
     
     void receive_callback(uv_stream_t* server, int status){
@@ -83,6 +92,7 @@ namespace esdht {
         }
         ESDTcp *tcp = (ESDTcp *)server->data;
         uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
+        client->data = tcp;
         uv_tcp_init(&tcp->serverLoop, client);
         
         // accept
@@ -107,16 +117,16 @@ namespace esdht {
         if (nread <= 0) {
             return;
         }
-        
-        char *filename = buf->base;
-        fprintf(stderr, "fileName: %s", filename);
+        ESDTcp *tcp = (ESDTcp *)stream->data;
+        std::string msg = std::string(buf->base);
         delete buf->base;
-        uv_close((uv_handle_t *)stream, uv_close_cb);
+        tcp->receiveCallback(msg, stream);
     }
     
     void uv_close_cb(uv_handle_t* handle){
         free(handle);
     }
+    
     
     
 }

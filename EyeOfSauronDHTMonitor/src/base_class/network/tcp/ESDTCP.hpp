@@ -33,7 +33,7 @@ namespace esdht {
         struct sockaddr_in               recvAddr;
         
         struct sockaddr*                 responseAddr;
-        std::function<void(std::string)> receiveCallback = nullptr;
+        std::function<void(std::string msg, uv_stream_t* stream)> receiveCallback = nullptr;
         std::function<void(std::string)> receiveWithTimeOutCallback = nullptr;
         std::function<void(std::string)> receiveResponseCallback = nullptr;
         std::function<void(std::string)> receiveResponseWithTimeOutCallback = nullptr;
@@ -65,7 +65,7 @@ namespace esdht {
          * @brief 给定地址监听UDP请求
          * @param ipv4:ip地址 port:端口 revcb:接收请求回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
          */
-        virtual void receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag = 0);
+        virtual void receive(std::string ipv4, int port, std::function<void(std::string, uv_stream_t* stream)> revcb, int flag = 0);
         
         /**
          * @brief 停止receive
@@ -75,8 +75,8 @@ namespace esdht {
         /**
          * @brief 响应UDP请求
          * callback 回调。
-         */
-        virtual void response(std::string msg, std::function<void(int status)> callback) ;
+         */                                                                                       
+        virtual void response(std::string msg, uv_stream_t* stream, std::function<void (int state)> callback) ;
         
     };
     
