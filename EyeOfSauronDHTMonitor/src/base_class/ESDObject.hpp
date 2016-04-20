@@ -9,10 +9,14 @@
 #ifndef ESDObject_hpp
 #define ESDObject_hpp
 
-
-
+#define CREATE_ERROR_CLASS(CLASS_NAME)\
+class CLASS_NAME : public std::runtime_error {\
+    public:\
+        explicit CLASS_NAME(const std:: string &what):std::runtime_error(what){}\
+};
 
 namespace esdht{
+    
     class ESDAsync;
     /**
      * @brief 该类是ESD为前缀的类的基类

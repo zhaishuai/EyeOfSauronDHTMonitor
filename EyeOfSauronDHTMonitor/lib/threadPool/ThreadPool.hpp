@@ -89,7 +89,6 @@ namespace threadPool{
     protected:
         
         int currentThreads = minThreads;
-//        bool finishInit = false;
         std::unique_ptr<Timer> addThreadTimer;
         std::unique_ptr<Timer> removeThreadTimer;
         
@@ -104,6 +103,26 @@ namespace threadPool{
         std::unique_ptr<std::deque<std::function<void()>>> taskQueue;
         std::function<void ()> finishCallback;
         
+    };
+    
+    
+    struct MutextArray{
+        pthread_mutex_t *array;
+        unsigned long    size;
+    };
+    
+    struct TaskContainer{
+        std::deque<std::function<void ()>> *deque;
+        unsigned long    size;
+    };
+    
+    class WorkQueue{
+      
+    public:
+        WorkQueue(int product, int consumer);
+        ~WorkQueue();
+        TaskContainer taskContainer;
+        MutextArray   mutexArray;
     };
     
     
