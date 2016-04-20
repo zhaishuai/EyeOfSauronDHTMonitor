@@ -22,15 +22,19 @@ namespace test_esdtcp {
         
         
         threadPool::Thread thread;
-//        thread.startThread([]{
+        thread.startThread([]{
             esdht::ESDTcp tcp;
             tcp.receive("10.12.112.55", 6882, [&tcp](std::string msg, uv_stream_t *stream){
-                printf("%s\n", msg.c_str());
+                printf("I am Server:%s\n", msg.c_str());
                 tcp.response("ni hao woshi wang da chui", stream, nullptr);
             });
-//        });
-//        esdht::ESDTcp sender;
-//        sender.send("10.12.112.55", 6882, "ss", nullptr, nullptr);
+        });
+        
+        for(int i = 0 ; i < 1; i++){
+            esdht::ESDTcp sender;
+            sender.send("10.12.112.55", 6882, "ss", nullptr, nullptr);
+            usleep(1000*500);
+        }
 //         main1();
     }
     
