@@ -17,7 +17,7 @@ namespace esdht {
     
     ESDDns::ESDDns(){
         
-        loop = uv_default_loop();
+        loop = uv_loop_new();
         uv_loop_init(loop);
         hints.ai_family = PF_INET;
         hints.ai_socktype = SOCK_STREAM;
@@ -32,7 +32,7 @@ namespace esdht {
     ESDDns::~ESDDns(){
         
         stopLoop(loop);
-        
+
     }//~ESDDns()
     
     
