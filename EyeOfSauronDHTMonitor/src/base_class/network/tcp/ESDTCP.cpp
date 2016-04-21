@@ -38,7 +38,9 @@ namespace esdht {
         stopLoop(&clinetLoop);
         stopLoop(&serverLoop);
     }
-
+    /**
+     * 客户端程序建立连接
+     */
     void ESDTcp::connect(std::string ipv4, int port, std::function<void (uv_stream_t* stream)> concb){
         connectCallback = concb;
         uv_ip4_addr(ipv4.c_str(), port, &sendAddr);
@@ -48,7 +50,9 @@ namespace esdht {
         uv_tcp_connect(&connect, &clientSocket, (const struct sockaddr *)&sendAddr, on_connect);
         uv_run(&clinetLoop, UV_RUN_DEFAULT);
     }
-    
+    /**
+     * 客户端程序发送数据
+     */
     void ESDTcp::send(uv_stream_t *stream, std::string msg, std::function<void (std::string msg)> sendRevcb){
         this->sendReceiveCallback = sendRevcb;
         uv_write_t req;
@@ -60,13 +64,13 @@ namespace esdht {
         uv_run(&clinetLoop, UV_RUN_NOWAIT);
 
     }
-    
-    
-    
+    /**
+     *  客户端发送请求后接受服务端的响应
+     */
     void ESDTcp::stopReceiveResponse(uv_stream_t *stream){
         uv_read_stop(stream);
     }
-
+    
     void ESDTcp::receive(std::string ipv4, int port, std::function<void (std::string, uv_stream_t* stream)> revcb, int flag){
         this->receiveCallback = revcb;
         uv_ip4_addr(ipv4.c_str(), port, &recvAddr);
@@ -78,7 +82,8 @@ namespace esdht {
     }
     
     void ESDTcp::stopReceive(){
-    
+//        uv_shutdown_t req;
+//        uv_shutdown(&req, uv_stream_t* handle, uv_shutdown_cb cb)¶
     }
     
     void ESDTcp::response(std::string msg, uv_stream_t* stream, std::function<void (int state)> callback){
@@ -159,32 +164,24 @@ namespace esdht {
 
     }
     
+    /**
+     * send之后接收到的server的响应
+     */
     void on_client_read(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
         if(nread >= 0) {
-            //printf("read: %s\n", tcp->data);
-            
             ESDTcp *tcp = (ESDTcp *)stream->data;
             if(tcp->sendReceiveCallback){
                 tcp->sendReceiveCallback(buf->base);
             }
         }
         else {
-//            ESDTcp *tcp = (ESDTcp *)stream->data;
-//            uv_stop(&tcp->clinetLoop);
             uv_read_stop(stream);
             uv_close((uv_handle_t*)stream, nullptr);
-//            uv_stop(&tcp->clinetLoop);
-//            ESDTcp::stopLoop(&tcp->clinetLoop);
-//            uv_shutdown_t req;
-//            uv_shutdown(&req, stream, nullptr);
         }
-        
-        //cargo-culted
         free(buf->base);
     }
     
-    void on_write(uv_write_t* req, int status)
-    {
+    void on_write(uv_write_t* req, int status){
         if (status) {
             throw ESDTcpError(uv_strerror(status));
         }
