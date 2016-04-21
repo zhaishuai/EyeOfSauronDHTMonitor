@@ -41,12 +41,14 @@ namespace esdht{
         ESDObject &operator=(const ESDObject &) = delete;
     protected:
         ESDObject();
+        
+        
+    public:
+        
         /**
          * @brief 终止loop，并不会释放loop。如果要释放loop则在stopLoop后添加free(loop)语句。
          */
         static int stopLoop(uv_loop_t *loop);
-        
-    public:
         
         void addAsync(ESDAsync *async, uv_loop_t *loop, std::function<void (void *data)> func);
         

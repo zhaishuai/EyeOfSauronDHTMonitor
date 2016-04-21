@@ -58,6 +58,10 @@ namespace esdht {
          */
         virtual void send(uv_stream_t *stream, std::string msg, std::function<void (std::string msg)> sendRevcb);
         
+        virtual void runDefult(){
+            uv_run(&clinetLoop, UV_RUN_DEFAULT);
+        }
+        
         virtual void stopReceiveResponse(uv_stream_t *stream);
         
         /**

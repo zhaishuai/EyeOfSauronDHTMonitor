@@ -108,7 +108,7 @@ namespace test_esd_client {
                 
                 uv_run(client.loop, UV_RUN_NOWAIT);
             }
-            uv_run(client.loop, UV_RUN_DEFAULT);
+//            uv_run(client.loop, UV_RUN_DEFAULT);
         });
     }
     

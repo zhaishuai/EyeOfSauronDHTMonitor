@@ -61,6 +61,8 @@ namespace esdht {
 
     }
     
+    
+    
     void ESDTcp::stopReceiveResponse(uv_stream_t *stream){
         uv_read_stop(stream);
     }
@@ -149,6 +151,7 @@ namespace esdht {
         
         uv_stream_t* stream = connection->handle;
         stream->data = tcp;
+        uv_stream_set_blocking(stream, 0);
         uv_read_start(stream, alloc_buffer, on_client_read);
         if(tcp->connectCallback){
             tcp->connectCallback(stream);
@@ -166,8 +169,14 @@ namespace esdht {
             }
         }
         else {
-            //we got an EOF
+//            ESDTcp *tcp = (ESDTcp *)stream->data;
+//            uv_stop(&tcp->clinetLoop);
+            uv_read_stop(stream);
             uv_close((uv_handle_t*)stream, nullptr);
+//            uv_stop(&tcp->clinetLoop);
+//            ESDTcp::stopLoop(&tcp->clinetLoop);
+//            uv_shutdown_t req;
+//            uv_shutdown(&req, stream, nullptr);
         }
         
         //cargo-culted
@@ -178,7 +187,6 @@ namespace esdht {
     {
         if (status) {
             throw ESDTcpError(uv_strerror(status));
-            return;
         }
     }
     
