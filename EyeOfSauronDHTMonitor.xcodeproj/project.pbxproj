@@ -39,6 +39,8 @@
 		D91909CA1CB2165B008B2259 /* test_bencode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909C81CB2165B008B2259 /* test_bencode.cpp */; };
 		D91909D71CB2A0CA008B2259 /* test_esdudp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909D51CB2A0CA008B2259 /* test_esdudp.cpp */; };
 		D91909D81CB2A0CA008B2259 /* test_esdudp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91909D51CB2A0CA008B2259 /* test_esdudp.cpp */; };
+		D95416CB1CC8A64E0005FD1A /* http_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95416C91CC8A64E0005FD1A /* http_parser.cpp */; };
+		D95416CC1CC8A64E0005FD1A /* http_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95416C91CC8A64E0005FD1A /* http_parser.cpp */; };
 		D95D2A8C1CB7FCA000BD6C32 /* ESDKrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95D2A8A1CB7FCA000BD6C32 /* ESDKrpc.cpp */; };
 		D95D2A8D1CB7FCA000BD6C32 /* ESDKrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95D2A8A1CB7FCA000BD6C32 /* ESDKrpc.cpp */; };
 		D95D2B311CB8F1FC00BD6C32 /* sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95D2B2F1CB8F1FC00BD6C32 /* sha1.cpp */; };
@@ -127,6 +129,8 @@
 		D9246A2B1C5B15A8000ED12A /* uv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uv.h; sourceTree = "<group>"; };
 		D943689A1C57457600BD1DC7 /* testUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testUdp.cpp; sourceTree = "<group>"; };
 		D943689B1C57457600BD1DC7 /* testUdp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = testUdp.hpp; sourceTree = "<group>"; };
+		D95416C91CC8A64E0005FD1A /* http_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_parser.cpp; sourceTree = "<group>"; };
+		D95416CA1CC8A64E0005FD1A /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
 		D95D2A8A1CB7FCA000BD6C32 /* ESDKrpc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDKrpc.cpp; sourceTree = "<group>"; };
 		D95D2A8B1CB7FCA000BD6C32 /* ESDKrpc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDKrpc.hpp; sourceTree = "<group>"; };
 		D95D2B2F1CB8F1FC00BD6C32 /* sha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha1.cpp; sourceTree = "<group>"; };
@@ -309,6 +313,15 @@
 			path = threadPool;
 			sourceTree = "<group>";
 		};
+		D95416C81CC8A64E0005FD1A /* http_parser */ = {
+			isa = PBXGroup;
+			children = (
+				D95416C91CC8A64E0005FD1A /* http_parser.cpp */,
+				D95416CA1CC8A64E0005FD1A /* http_parser.h */,
+			);
+			path = http_parser;
+			sourceTree = "<group>";
+		};
 		D95D2A891CB7FAE600BD6C32 /* KRPC  */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +372,7 @@
 		D96739EA1C537920001BBBCE /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D95416C81CC8A64E0005FD1A /* http_parser */,
 				D95D2B2E1CB8F1F100BD6C32 /* sha1 */,
 				D919099C1CB215F3008B2259 /* bencode */,
 				D9539B051CAD5836007B42F2 /* threadPool */,
@@ -604,6 +618,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95416CC1CC8A64E0005FD1A /* http_parser.cpp in Sources */,
 				D91909CA1CB2165B008B2259 /* test_bencode.cpp in Sources */,
 				D91909B51CB215F3008B2259 /* BDictionary.cpp in Sources */,
 				D969609E1CB4A662009E067D /* ESDClient.cpp in Sources */,
@@ -649,6 +664,7 @@
 				D91909BC1CB215F3008B2259 /* BList.cpp in Sources */,
 				D985114D1CB351170045E896 /* ESDServer.cpp in Sources */,
 				D97E06DB1CC0EBD90097B5D3 /* test_thread_pool.cpp in Sources */,
+				D95416CB1CC8A64E0005FD1A /* http_parser.cpp in Sources */,
 				D907F5131CC5C1AF00D76CC1 /* ESDTCP.cpp in Sources */,
 				D9673A5E1C5486B4001BBBCE /* ESDDns.cpp in Sources */,
 				D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */,

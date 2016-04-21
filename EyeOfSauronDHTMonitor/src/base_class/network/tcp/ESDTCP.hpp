@@ -23,6 +23,8 @@ namespace esdht {
         uv_tcp_t clientSocket;
         uv_tcp_t serverSocket;
         
+        uv_stream_t *clientStream = NULL;
+        
     public:
         
         uv_loop_t clinetLoop;
@@ -39,27 +41,24 @@ namespace esdht {
         std::function<void(std::string)> receiveResponseWithTimeOutCallback = nullptr;
         std::function<void(int status)>  sendCallback = nullptr;
         std::function<void(int status)>  responseCallback = nullptr;
-        
+        std::function<void (uv_stream_t* stream)> connectCallback = nullptr;
+        std::function<void (std::string msg)> sendReceiveCallback = nullptr;
         
         ESDTcp();
         ESDTcp(uv_loop_t *loop);
         ~ESDTcp();
         
-        /**
-         * @brief 设置发送端口号
-         * @param port 端口号
-         */
-        virtual void setSendPort(int port);
+        void connect(std::string ipv4, int port, std::function<void (uv_stream_t* stream)> concb);
+        
+
         
         /**
          * @brief 向给定的地址发送UDP请求
-         * @param ipv4:ip地址 port:端口 sendcb:发送的回调 revcb:接收到响应的回调 timeout:超时时间 flag:udp的模式详情参见uv_udp_flags
+         * @param ipv4:ip地址 port:端口 stream TCP流式文件
          */
-        virtual void send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout = 5000, int flag = UV_UDP_REUSEADDR);
+        virtual void send(uv_stream_t *stream, std::string msg, std::function<void (std::string msg)> sendRevcb);
         
-        void licensingResponse(std::function<void (std::string response)> func);
-        
-        void sendAsync(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, int flag = UV_UDP_REUSEADDR);
+        virtual void stopReceiveResponse(uv_stream_t *stream);
         
         /**
          * @brief 给定地址监听UDP请求
