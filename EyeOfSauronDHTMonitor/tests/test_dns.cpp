@@ -25,7 +25,7 @@ namespace test_dns {
             ESDDns dns;
             
             for(int i = 0 ; i < 1; i++){
-                dns.getIpOfURL("router.bittorrent.com","80", [&i](int state, std::string result){
+                dns.getIpOfURL("router.bittorrent.com",80, [&i](std::string result, unsigned int port){
                     printf("i:%d   %s", i, result.c_str());
                 });
             }

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "uv.h"
-
+#include <regex>
 #include "ESDDns.hpp"
 
 

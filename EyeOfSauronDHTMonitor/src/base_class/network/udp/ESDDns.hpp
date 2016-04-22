@@ -32,9 +32,10 @@ namespace esdht {
         struct addrinfo  hints;
         uv_getaddrinfo_t resolver;
         
-    public:
         
-        std::function<void(int status, std::string address)> handleIPCallback;
+    public:
+        unsigned int     port;
+        std::function<void(std::string address, unsigned port)> handleIPCallback;
         
     // 成员函数
     //
@@ -53,7 +54,7 @@ namespace esdht {
         /**
          * @brief 获取给定地址的ip
          */
-        void getIpOfURL(std::string url,std::string port, std::function<void(int status, std::string address)> callback);
+        void getIpOfURL(std::string url,unsigned port, std::function<void(std::string address, unsigned port)> callback);
     };
     
 }

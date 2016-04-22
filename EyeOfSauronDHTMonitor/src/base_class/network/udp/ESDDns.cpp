@@ -43,8 +43,8 @@ namespace esdht {
         if (status < 0) {
             
             if(object->handleIPCallback != nullptr)
-                object->handleIPCallback(status, nullptr);
-            fprintf(stderr, "getaddrinfo callback error %s\n", uv_err_name(status));
+                object->handleIPCallback(nullptr, object->port);
+            throw ESDDnsError(std::string("getaddrinfo call error ") + uv_err_name(status));
             return;
             
         }
@@ -54,15 +54,15 @@ namespace esdht {
         uv_freeaddrinfo(res);
         
         if(object != NULL && object->handleIPCallback != nullptr)
-            object->handleIPCallback(status, std::string(addr));
+            object->handleIPCallback(std::string(addr), object->port);
         
     }//on_resolved
     
-    void ESDDns::getIpOfURL(std::string url,std::string port, std::function<void(int status, std::string address)> callback){
+    void ESDDns::getIpOfURL(std::string url, unsigned int port, std::function<void(std::string address, unsigned port)> callback){
         this->handleIPCallback = callback;
-        int r = uv_getaddrinfo(loop, &resolver, on_resolved, url.c_str(), port.c_str(), &hints);
+        this->port = port;
+        int r = uv_getaddrinfo(loop, &resolver, on_resolved, url.c_str(), std::to_string(port).c_str(), &hints);
         if (r) {
-            
             fprintf(stderr, "getaddrinfo call error %s\n", uv_err_name(r));
             throw ESDDnsError(std::string("getaddrinfo call error ") + uv_err_name(r));
         }

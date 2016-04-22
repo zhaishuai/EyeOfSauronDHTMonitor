@@ -45,8 +45,8 @@ namespace test_esd_client {
         });
         
         ESDDns dns;
-        dns.getIpOfURL(IP, "6881", [](int status, std::string address){
-            printf("ip:%s   status:%d\n", address.c_str(), status);
+        dns.getIpOfURL(IP, 6881, [](std::string address, unsigned int port){
+            printf("ip:%s   port:%d\n", address.c_str(), port);
             
             ESDClient client("aa", "abcdefghij0123456789");
 //            client.udp->licensingResponse([](std::string response){
@@ -67,8 +67,8 @@ namespace test_esd_client {
         std::deque<PeerInfo> queue;
         
         ESDDns dns;
-        dns.getIpOfURL(IP, "6881", [&queue](int status, std::string address){
-            printf("ip:%s   status:%d\n", address.c_str(), status);
+        dns.getIpOfURL(IP, 6881, [&queue](std::string address, unsigned int port){
+            printf("ip:%s   port:%d\n", address.c_str(), port);
             PeerInfo peerInfo{.ip = address,.port = 6881};
             queue.push_back(peerInfo);
             

@@ -14,8 +14,8 @@ namespace test_esdudp {
     
     void run_test_esdudp(){
         esdht::ESDDns dns;
-        dns.getIpOfURL("router.bitcomet.net", "554", [](int status, std::string address){
-            printf("ip:%s   status:%d\n", address.c_str(), status);
+        dns.getIpOfURL("router.bitcomet.net", 554, [](std::string address, unsigned int port){
+            printf("ip:%s   port:%d\n", address.c_str(), port);
             
 //            esdht::ESDDht dht("aa","abcdefghij0123456789");
 //            dht.ping(address, 6881);

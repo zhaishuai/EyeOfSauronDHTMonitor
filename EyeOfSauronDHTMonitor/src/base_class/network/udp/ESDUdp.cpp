@@ -74,14 +74,14 @@ namespace esdht {
     
 #pragma mark - 以下是客户端代码
     
-    void ESDUdp::setSendPort(int port){
+    void ESDUdp::setSendPort(unsigned int port){
         struct sockaddr_in temp;
         uv_ip4_addr("", port, &temp);
         uv_udp_bind(&sendSocket, (const struct sockaddr*)&temp, UV_UDP_REUSEADDR);
         
     }//setSendPort
     
-    void ESDUdp::sendAsync(std::string ipv4, int port, std::string msg, std::function<void (int)> sendcb, int flag){
+    void ESDUdp::sendAsync(std::string ipv4, unsigned int port, std::string msg, std::function<void (int)> sendcb, int flag){
         this->sendCallback = sendcb;
         uv_ip4_addr(ipv4.c_str(), port, &sendAddr);
         uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
@@ -103,7 +103,7 @@ namespace esdht {
         uv_run(loop, UV_RUN_NOWAIT);
     }
     
-    void ESDUdp::send(std::string ipv4, int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
+    void ESDUdp::send(std::string ipv4, unsigned int port, std::string msg, std::function<void(int status)> sendcb, std::function<void(std::string)> revcb, double timeout, int flag){
         
         this->sendCallback = sendcb;
         this->receiveResponseCallback = revcb;
@@ -203,7 +203,7 @@ namespace esdht {
 
     }//stopReceive
     
-    void ESDUdp::receive(std::string ipv4, int port, std::function<void(std::string)> revcb, int flag){
+    void ESDUdp::receive(std::string ipv4, unsigned int port, std::function<void(std::string)> revcb, int flag){
         
         this->receiveCallback = revcb;
         uv_udp_init(receiveLoop, &receiveSocket);
