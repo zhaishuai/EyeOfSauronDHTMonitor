@@ -20,6 +20,7 @@
 #include <uv.h>
 #include <vector>
 #include <sstream>
+#include <stdio.h>
 
 #include "ThreadPool.hpp"
 #include "base_class/ESDObject.hpp"

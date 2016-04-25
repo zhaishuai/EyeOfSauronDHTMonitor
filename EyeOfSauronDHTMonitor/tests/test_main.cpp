@@ -18,6 +18,7 @@
 #include "test_esd_client.hpp"
 #include "test_thread_pool.hpp"
 #include "test_esdtcp.hpp"
+#include "test_esdhttp.hpp"
 
 using namespace esdht;
 
@@ -38,6 +39,9 @@ int main(int argc, const char * argv[]) {
     
 //    test_esd_client::test_esd_client();
 //    test_thread_pool::test_thread_pool();
-    test_esdtcp::test_esdtcp();
+//    test_esdtcp::test_esdtcp();
+    
+    test_esdhttp::test_esdhttp();
+    
     return 0;
 }

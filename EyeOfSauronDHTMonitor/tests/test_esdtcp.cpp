@@ -18,9 +18,7 @@ namespace test_esdtcp {
     void main3();
     
     void test_esdtcp(){
-        
-        
-        
+
 //        threadPool::Thread thread;
 //        thread.startThread([]{
 //            esdht::ESDTcp tcp;
@@ -51,10 +49,7 @@ namespace test_esdtcp {
         } catch (ESDDnsError error){
             printf("%s\n", error.what());
         }
-        
-        
 
-//         main3();
     }
     
     
