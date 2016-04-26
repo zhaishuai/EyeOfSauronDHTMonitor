@@ -40,5 +40,8 @@ int main(int argc, const char * argv[]) {
     test_esd_client::test_esd_client();
 //    test_thread_pool::test_thread_pool();
 //    test_esdtcp::test_esdtcp();
+    
+//    test_esdhttp::test_esdhttp();
+    
     return 0;
 }

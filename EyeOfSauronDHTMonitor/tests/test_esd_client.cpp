@@ -47,8 +47,9 @@ namespace test_esd_client {
         ESDDns dns;
         dns.getIpOfURL(IP, 6881, [](std::string address, unsigned int port){
             printf("ip:%s   port:%d\n", address.c_str(), port);
-            
+        
             ESDClient client("aa", "abcdefghij0123456789");
+            client.udp->setSendPort(6881);
 //            client.udp->licensingResponse([](std::string response){
 //                printf("response: %s\n", response.c_str());
 //            });
@@ -68,7 +69,7 @@ namespace test_esd_client {
         
         threadPool::Thread thread;
         thread.startThread([]{
-            ESDServer server("0.0.0.0", 6881);
+            ESDServer server("0.0.0.0", 6882);
             server.startServer();
         });
         
@@ -80,7 +81,7 @@ namespace test_esd_client {
             queue.push_back(peerInfo);
             
             ESDClient client("abcdefghij0123456789","aa");
-            client.udp->setSendPort(6681);
+            client.udp->setSendPort(6882);
             client.udp->licensingResponse([&client, &queue](std::string pong){
                 
                 try {
@@ -92,9 +93,9 @@ namespace test_esd_client {
                     for(int i = 0 ; i < nodes.size()/26 && queue.size() < 1000 ; i++){
                         
                         info = client.krpc->getPeerInfoFromNodeStr(nodes.substr(i*26, 26));
-                        printf("info:%s   port:%d    ", info.ip.c_str(), info.port);
+//                        printf("info:%s   port:%d    ", info.ip.c_str(), info.port);
                         queue.push_back(info);
-                        printf("findNode!    queueSize:%ld\n", (long)queue.size());
+//                        printf("findNode!    queueSize:%ld\n", (long)queue.size());
                     }
                     
                 } catch(ESDKrpcError error){
@@ -110,7 +111,7 @@ namespace test_esd_client {
                     i = 0;
                 }
                 client.findNode(queue[i].ip, queue[i].port);
-                printf("send  i:%d   ip:%s    port:%d\n", i, queue[i].ip.c_str(), queue[i].port);
+//                printf("send  i:%d   ip:%s    port:%d\n", i, queue[i].ip.c_str(), queue[i].port);
 //                usleep(1000*100);
                 
                 uv_run(client.loop, UV_RUN_NOWAIT);
