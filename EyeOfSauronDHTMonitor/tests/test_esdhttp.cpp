@@ -14,11 +14,11 @@ namespace test_esdhttp {
     
     void test_esdhttp(){
     
-        char * source = (char *)"http://www.w3.org:9080/%abpub/WWW/TheProject.html";
+        char * source = (char *)"http://code.tutsplus.com:8080/tutorials/8-regular-expressions-you-should-know--net-6149";
         esdht::ESDHttpUtility u;
-        const char* regexString = u.HPATH.c_str();
+        const char* regexString = esdht::PORT.c_str();
         
-        size_t maxMatches = 100;
+        size_t maxMatches = strlen(source);
         size_t maxGroups = 1;
         
         regex_t regexCompiled;
