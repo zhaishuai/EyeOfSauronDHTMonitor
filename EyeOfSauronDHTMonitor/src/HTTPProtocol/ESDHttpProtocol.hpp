@@ -54,17 +54,25 @@ namespace esdht {
     
     CREATE_ERROR_CLASS(ESDHttpResponseError)
     
-    class ESDHttpResponse : public ESDObject{
+    class ESDHttp : public ESDObject{
     public:
         int                                status = 0;
-        std::string                        httpVersion;
+        std::string                        responseHttpVersion;
         std::string                        reasonPhrase;
-        std::map<std::string, std::string> header ;
+        std::map<std::string, std::string> responseHeader;
         std::string                        responseBody;
+        
+        std::string                        requestMethod;
+        std::string                        requestHttpVersion;
+        std::string                        requestURI;
+        std::map<std::string, std::string> requestHeader;
+        std::string                        requestBody;
+        
     public:
 
         void handleResponse(std::string &msg);
         
+        void handleRequest(std::string &msg);
         
         std::deque<std::string> &split(const std::string &s, char delim, std::deque<std::string> &elems) {
             std::stringstream ss(s);

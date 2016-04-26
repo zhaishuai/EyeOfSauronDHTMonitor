@@ -30,30 +30,30 @@ namespace test_esdtcp {
             });
         });
         
-        try {
-            ESDDns dns;
-            dns.getIpOfURL("www.w3.org", 80, [](std::string address, unsigned int port){
-                esdht::ESDTcp sender;
-                sender.connect(address, port, [&sender](uv_stream_t *stream){
-                    std::string httpContent;
-                    sender.send(stream, "GET /html/ HTTP/1.1\r\nHost: www.w3.org\r\nConnection: keep-alive\r\nCache-Control: max-age=0\r\n\r\n", [&sender, &stream, &httpContent](std::string msg){
-                        
-                        httpContent += msg;
-                        
-                    });
-                    sender.runDefult();
-                    sender.stopReceiveResponse(stream);
-                    ESDHttpResponse response;
-                    response.handleResponse(httpContent);
-                    fprintf(stderr, "%s", response.responseBody.c_str());
-                });
-            });
-            
-        } catch (ESDTcpError error) {
-            printf("%s\n", error.what());
-        } catch (ESDDnsError error){
-            printf("%s\n", error.what());
-        }
+//        try {
+//            ESDDns dns;
+//            dns.getIpOfURL("www.w3.org", 80, [](std::string address, unsigned int port){
+//                esdht::ESDTcp sender;
+//                sender.connect(address, port, [&sender](uv_stream_t *stream){
+//                    std::string httpContent;
+//                    sender.send(stream, "GET /html/ HTTP/1.1\r\nHost: www.w3.org\r\nConnection: keep-alive\r\nCache-Control: max-age=0\r\n\r\n", [&sender, &stream, &httpContent](std::string msg){
+//                        
+//                        httpContent += msg;
+//                        
+//                    });
+//                    sender.runDefult();
+//                    sender.stopReceiveResponse(stream);
+//                    ESDHttp response;
+//                    response.handleResponse(httpContent);
+//                    fprintf(stderr, "%s", response.responseBody.c_str());
+//                });
+//            });
+//            
+//        } catch (ESDTcpError error) {
+//            printf("%s\n", error.what());
+//        } catch (ESDDnsError error){
+//            printf("%s\n", error.what());
+//        }
         
     }
     

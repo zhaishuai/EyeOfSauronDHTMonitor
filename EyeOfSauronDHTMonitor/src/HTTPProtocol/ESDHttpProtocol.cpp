@@ -11,39 +11,72 @@
 
 namespace esdht {
     
-    enum State{RESPONSELINE, RESPONSEHEADER, RESPONSEBODY};
+    enum State{STARTLINE, HTTPHEADER, HTTPBODY};
     
-    void ESDHttpResponse::handleResponse(std::string &msg){
+    void ESDHttp::handleResponse(std::string &msg){
         std::istringstream stream(msg);
-        int index = RESPONSELINE;
+        int index = STARTLINE;
         for(std::string line; std::getline(stream, line) ; ){
-            if(index == RESPONSELINE){
+            if(index == STARTLINE){
                 std::deque<std::string> substrings = split(line, ' ');
                 if(substrings.size() == 3){
-                    httpVersion  = substrings[0];
+                    responseHttpVersion  = substrings[0];
                     status       = std::stoi(substrings[1]);
                     reasonPhrase = substrings[2];
                 }
-                index = RESPONSEHEADER;
+                index = HTTPHEADER;
                 
-            }else if(line != "\r" && index == RESPONSEHEADER){
+            }else if(line != "\r" && index == HTTPHEADER){
                 
                 auto pos = line.find_first_of(": ");
                 if(pos >= line.length())
                     continue;
                 string key   = line.substr(0, pos);
                 string value = line.substr(pos+2, line.length() - pos);
-                header.insert(std::pair<std::string, std::string>(key, value));
+                responseHeader.insert(std::pair<std::string, std::string>(key, value));
                 
-            }else if(line == "\r" && index == RESPONSEHEADER){
-                index = RESPONSEBODY;
-            }else if(index == RESPONSEBODY){
+            }else if(line == "\r" && index == HTTPHEADER){
+                index = HTTPBODY;
+            }else if(index == HTTPBODY){
                 responseBody += line + "\n";
             }
             
             
         }
         
+    }
+    
+    
+    void ESDHttp::handleRequest(std::string &msg){
+        std::istringstream stream(msg);
+        int index = STARTLINE;
+        for(std::string line; std::getline(stream, line) ; ){
+            if(index == STARTLINE){
+                std::deque<std::string> substrings = split(line, ' ');
+                if(substrings.size() == 3){
+                    requestMethod  = substrings[0];
+                    requestURI       = std::stoi(substrings[1]);
+                    requestHttpVersion = substrings[2];
+                }
+                index = HTTPHEADER;
+                
+            }else if(line != "\r" && index == HTTPHEADER){
+                
+                auto pos = line.find_first_of(": ");
+                if(pos >= line.length())
+                    continue;
+                string key   = line.substr(0, pos);
+                string value = line.substr(pos+2, line.length() - pos);
+                requestHeader.insert(std::pair<std::string, std::string>(key, value));
+                
+            }else if(line == "\r" && index == HTTPHEADER){
+                index = HTTPBODY;
+            }else if(index == HTTPBODY){
+                requestBody += line + "\n";
+            }
+            
+            
+        }
     }
     
 }
