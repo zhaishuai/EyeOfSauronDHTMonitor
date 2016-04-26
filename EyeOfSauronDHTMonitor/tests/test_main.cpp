@@ -18,6 +18,7 @@
 #include "test_esd_client.hpp"
 #include "test_thread_pool.hpp"
 #include "test_esdtcp.hpp"
+#include "test_esdhttp.hpp"
 
 using namespace esdht;
 
