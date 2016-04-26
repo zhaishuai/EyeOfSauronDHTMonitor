@@ -55,7 +55,7 @@ namespace esdht {
                 std::deque<std::string> substrings = split(line, ' ');
                 if(substrings.size() == 3){
                     requestMethod  = substrings[0];
-                    requestURI       = std::stoi(substrings[1]);
+                    requestURI       = substrings[1];
                     requestHttpVersion = substrings[2];
                 }
                 index = HTTPHEADER;

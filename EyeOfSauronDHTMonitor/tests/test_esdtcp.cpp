@@ -25,7 +25,11 @@ namespace test_esdtcp {
         thread.startThread([]{
             esdht::ESDTcp tcp;
             tcp.receive("10.12.112.55", 8809, [&tcp](std::string msg, uv_stream_t *stream){
-                printf("I am Server:%s\n", msg.c_str());
+                ESDHttp http;
+//                printf("I am Server:%s\n", msg.c_str());
+                http.handleRequest(msg);
+                fprintf(stderr, "%s", http.requestBody.c_str());
+                
                 tcp.response("ni hao woshi wang da chui", stream, nullptr);
             });
         });
