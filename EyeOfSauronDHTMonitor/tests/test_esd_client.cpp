@@ -10,7 +10,7 @@
 #include "ESDClient.hpp"
 #include "bencoding.h"
 #include "ESDDns.hpp"
-
+#include "ESDServer.hpp"
 using namespace bencoding;
 using namespace esdht;
 //"router.utorrent.com"
@@ -66,6 +66,13 @@ namespace test_esd_client {
     void test_esd_client_findNode(){
         std::deque<PeerInfo> queue;
         
+        threadPool::Thread thread;
+        thread.startThread([]{
+            ESDServer server("0.0.0.0", 6881);
+            server.startServer();
+        });
+        
+        
         ESDDns dns;
         dns.getIpOfURL(IP, 6881, [&queue](std::string address, unsigned int port){
             printf("ip:%s   port:%d\n", address.c_str(), port);
@@ -73,7 +80,7 @@ namespace test_esd_client {
             queue.push_back(peerInfo);
             
             ESDClient client("abcdefghij0123456789","aa");
-            
+            client.udp->setSendPort(6681);
             client.udp->licensingResponse([&client, &queue](std::string pong){
                 
                 try {
