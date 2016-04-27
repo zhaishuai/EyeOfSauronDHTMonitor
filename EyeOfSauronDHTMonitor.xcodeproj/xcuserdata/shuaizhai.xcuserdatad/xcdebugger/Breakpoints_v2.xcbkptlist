@@ -9,22 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EyeOfSauronDHTMonitor/src/DHTProtocol/DHTServer/ESDServer.cpp"
-            timestampString = "483376408.985321"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "ESDServer::startServer()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "EyeOfSauronDHTMonitor/src/base_class/network/tcp/ESDTCP.cpp"
             timestampString = "483443463.206228"
             startingColumnNumber = "9223372036854775807"
@@ -33,22 +17,6 @@
             endingLineNumber = "192"
             landmarkName = "on_write(uv_write_t* req, int status)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EyeOfSauronDHTMonitor/src/base_class/network/tcp/ESDTCP.cpp"
-            timestampString = "483443577.001114"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "ESDTcp::~ESDTcp()"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
