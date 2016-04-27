@@ -94,7 +94,7 @@ namespace esdht {
         if(r){
             throw ESDTcpError(uv_strerror(r));
         }
-        uv_run(&serverLoop, UV_RUN_DEFAULT);
+
         
     }
     
@@ -108,10 +108,10 @@ namespace esdht {
         uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
         client->data = tcp;
         uv_tcp_init(&tcp->serverLoop, client);
-        
-        // accept
+//
+//        // accept
         int result = uv_accept(server, (uv_stream_t*) client);
-        
+//
         if (result == 0) {
             // success
             uv_read_start((uv_stream_t*) client, alloc_buffer, on_server_read);
@@ -134,7 +134,13 @@ namespace esdht {
         ESDTcp *tcp = (ESDTcp *)stream->data;
         std::string msg = std::string(buf->base);
         free(buf->base);
+        
+        
         tcp->receiveCallback(msg, stream);
+        
+        // 没有调用response时，在此处释放stream；
+        //
+//        uv_close((uv_handle_t*) stream, uv_close_cb);
     }
     
     void uv_close_cb(uv_handle_t* handle){
@@ -187,10 +193,7 @@ namespace esdht {
             throw ESDTcpError(uv_strerror(status));
         }
         uv_stream_t* stream = (uv_stream_t *)req->data;
-        
-//        uv_stop(&tcp->serverLoop);
         uv_close((uv_handle_t *)stream, uv_close_cb);
-//        uv_run(&serverLoop, UV_RUN_DEFAULT);
         
     }
     

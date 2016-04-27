@@ -68,6 +68,8 @@
 		D9852BB21CCDB582003FAD7B /* ESDHttpUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9852BAF1CCDB582003FAD7B /* ESDHttpUtility.cpp */; };
 		D9852BB51CCDB5A1003FAD7B /* test_esdhttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9852BB31CCDB5A1003FAD7B /* test_esdhttp.cpp */; };
 		D9852BB61CCDB5A1003FAD7B /* test_esdhttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9852BB31CCDB5A1003FAD7B /* test_esdhttp.cpp */; };
+		D9BD36611CD11BAA00D26705 /* ESDHttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9BD365F1CD11BAA00D26705 /* ESDHttp.cpp */; };
+		D9BD36621CD11BAA00D26705 /* ESDHttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9BD365F1CD11BAA00D26705 /* ESDHttp.cpp */; };
 		D9F89C4C1CAE1F57003A3465 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */; };
 		D9F89C4D1CAE1F57003A3465 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */; };
 /* End PBXBuildFile section */
@@ -201,6 +203,8 @@
 		D9852BB01CCDB582003FAD7B /* ESDHttpUtility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDHttpUtility.hpp; sourceTree = "<group>"; };
 		D9852BB31CCDB5A1003FAD7B /* test_esdhttp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_esdhttp.cpp; sourceTree = "<group>"; };
 		D9852BB41CCDB5A1003FAD7B /* test_esdhttp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_esdhttp.hpp; sourceTree = "<group>"; };
+		D9BD365F1CD11BAA00D26705 /* ESDHttp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ESDHttp.cpp; sourceTree = "<group>"; };
+		D9BD36601CD11BAA00D26705 /* ESDHttp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ESDHttp.hpp; sourceTree = "<group>"; };
 		D9F89C4A1CAE1F57003A3465 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
 		D9F89C4B1CAE1F57003A3465 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -577,6 +581,8 @@
 				D9852BAC1CCDB413003FAD7B /* ESDHttpProtocol.hpp */,
 				D9852BAF1CCDB582003FAD7B /* ESDHttpUtility.cpp */,
 				D9852BB01CCDB582003FAD7B /* ESDHttpUtility.hpp */,
+				D9BD365F1CD11BAA00D26705 /* ESDHttp.cpp */,
+				D9BD36601CD11BAA00D26705 /* ESDHttp.hpp */,
 			);
 			path = HTTPProtocol;
 			sourceTree = "<group>";
@@ -684,6 +690,7 @@
 				D907F5171CC5C1CE00D76CC1 /* test_esdtcp.cpp in Sources */,
 				D91909C31CB215F3008B2259 /* Encoder.cpp in Sources */,
 				D907F5141CC5C1B400D76CC1 /* ESDTCP.cpp in Sources */,
+				D9BD36621CD11BAA00D26705 /* ESDHttp.cpp in Sources */,
 				D917A1111C5DFE3300010EB2 /* ESDUdp.cpp in Sources */,
 				D917A1101C5DFE3100010EB2 /* ESDDns.cpp in Sources */,
 				D91909C51CB215F3008B2259 /* PrettyPrinter.cpp in Sources */,
@@ -708,6 +715,7 @@
 				D95D2B311CB8F1FC00BD6C32 /* sha1.cpp in Sources */,
 				D9852BB51CCDB5A1003FAD7B /* test_esdhttp.cpp in Sources */,
 				D91909B61CB215F3008B2259 /* BInteger.cpp in Sources */,
+				D9BD36611CD11BAA00D26705 /* ESDHttp.cpp in Sources */,
 				D91909BC1CB215F3008B2259 /* BList.cpp in Sources */,
 				D985114D1CB351170045E896 /* ESDServer.cpp in Sources */,
 				D9852BAD1CCDB413003FAD7B /* ESDHttpProtocol.cpp in Sources */,

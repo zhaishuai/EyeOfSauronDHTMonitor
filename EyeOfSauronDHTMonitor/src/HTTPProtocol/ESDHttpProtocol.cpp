@@ -161,6 +161,29 @@ namespace esdht {
         }
     }
     
+    std::deque<std::string>&ESDHttp::split(const std::string &s, char delim, std::deque<std::string> &elems) {
+        std::stringstream ss(s);
+        std::string item;
+        while (std::getline(ss, item, delim)) {
+            elems.push_back(item);
+        }
+        return elems;
+    }
+    
+    std::deque<std::string> ESDHttp::split(const std::string &s, char delim) {
+        std::deque<std::string> elems;
+        split(s, delim, elems);
+        return elems;
+    }
+    
+    bool ESDHttp::checkKey(std::string key, std::map<std::string, std::string> *map){
+        if ( map->find(key) == map->end() ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     std::string ESDHttp::readFile(std::string path){
         string data = "";
         string line;

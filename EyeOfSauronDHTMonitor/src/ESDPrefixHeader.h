@@ -21,6 +21,7 @@
 #include <vector>
 #include <sstream>
 #include <stdio.h>
+#include <map>
 
 #include "ThreadPool.hpp"
 #include "base_class/ESDObject.hpp"

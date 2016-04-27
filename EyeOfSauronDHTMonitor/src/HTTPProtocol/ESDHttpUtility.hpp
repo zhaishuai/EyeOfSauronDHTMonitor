@@ -56,7 +56,7 @@ namespace esdht {
     
     
     
-    class ESDHttpUtility : public ESDObject{
+    class ESDHttpUtility{
     public:
         
         

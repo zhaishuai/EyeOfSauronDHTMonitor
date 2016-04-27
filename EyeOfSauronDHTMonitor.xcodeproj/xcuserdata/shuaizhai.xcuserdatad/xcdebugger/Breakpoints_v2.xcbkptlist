@@ -9,13 +9,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EyeOfSauronDHTMonitor/src/base_class/network/tcp/ESDTCP.cpp"
-            timestampString = "483443463.206228"
+            filePath = "EyeOfSauronDHTMonitor/src/DHTProtocol/DHTServer/ESDServer.cpp"
+            timestampString = "483376408.985321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "on_write(uv_write_t* req, int status)"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "ESDServer::startServer()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EyeOfSauronDHTMonitor/tests/test_esd_client.cpp"
+            timestampString = "483380884.891432"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "test_esd_client_findNode()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EyeOfSauronDHTMonitor/tests/test_esd_client.cpp"
+            timestampString = "483380885.930758"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "test_esd_client_findNode()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

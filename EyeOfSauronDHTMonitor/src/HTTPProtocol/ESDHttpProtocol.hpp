@@ -10,7 +10,7 @@
 #define ESDHttpProtocol_hpp
 
 #include <stdio.h>
-#include <map>
+
 
 // response-header
 //
@@ -54,11 +54,11 @@ namespace esdht {
     
     CREATE_ERROR_CLASS(ESDHttpResponseError)
     
-    class ESDHttp : public ESDObject{
+    class ESDHttp{
     public:
-        std::string rootPath = "/Users/shuaizhai/Documents/MyProject/EyeOfSauronDHTMonitor/EyeOfSauronDHTMonitor/tests";
-        
+        std::string rootPath = "/Users/shuaizhai/Desktop/EyeOfSauronDHTMonitor/EyeOfSauronDHTMonitor/tests";
         int                                status = 0;
+        
         std::string                        responseHttpVersion;
         std::string                        reasonPhrase;
         std::map<std::string, std::string> responseHeader;
@@ -72,8 +72,8 @@ namespace esdht {
         std::string                        requestURL;
         std::map<std::string, std::string> requestParam;
         std::map<std::string, std::string> requestForm;
-        
-    public:
+
+
 
         void handleResponse(std::string &msg);
         
@@ -83,30 +83,11 @@ namespace esdht {
         
         std::string read404File(std::string path);
         
-        
-        
-        std::deque<std::string> &split(const std::string &s, char delim, std::deque<std::string> &elems) {
-            std::stringstream ss(s);
-            std::string item;
-            while (std::getline(ss, item, delim)) {
-                elems.push_back(item);
-            }
-            return elems;
-        }
+        std::deque<std::string> &split(const std::string &s, char delim, std::deque<std::string> &elems);
 
-        std::deque<std::string> split(const std::string &s, char delim) {
-            std::deque<std::string> elems;
-            split(s, delim, elems);
-            return elems;
-        }
+        std::deque<std::string> split(const std::string &s, char delim);
         
-        bool checkKey(std::string key, std::map<std::string, std::string> *map){
-            if ( map->find(key) == map->end() ) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+        bool checkKey(std::string key, std::map<std::string, std::string> *map);
 
     };
     
