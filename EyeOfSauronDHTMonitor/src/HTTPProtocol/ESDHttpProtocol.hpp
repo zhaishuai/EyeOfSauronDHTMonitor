@@ -56,6 +56,8 @@ namespace esdht {
     
     class ESDHttp : public ESDObject{
     public:
+        std::string rootPath = "/Users/shuaizhai/Documents/MyProject/EyeOfSauronDHTMonitor/EyeOfSauronDHTMonitor/tests";
+        
         int                                status = 0;
         std::string                        responseHttpVersion;
         std::string                        reasonPhrase;
@@ -67,12 +69,21 @@ namespace esdht {
         std::string                        requestURI;
         std::map<std::string, std::string> requestHeader;
         std::string                        requestBody;
+        std::string                        requestURL;
+        std::map<std::string, std::string> requestParam;
+        std::map<std::string, std::string> requestForm;
         
     public:
 
         void handleResponse(std::string &msg);
         
         void handleRequest(std::string &msg);
+        
+        std::string readFile(std::string path);
+        
+        std::string read404File(std::string path);
+        
+        
         
         std::deque<std::string> &split(const std::string &s, char delim, std::deque<std::string> &elems) {
             std::stringstream ss(s);

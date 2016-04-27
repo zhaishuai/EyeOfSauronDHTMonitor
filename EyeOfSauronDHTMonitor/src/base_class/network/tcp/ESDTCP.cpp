@@ -89,12 +89,13 @@ namespace esdht {
     void ESDTcp::response(std::string msg, uv_stream_t* stream, std::function<void (int state)> callback){
         uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
         uv_write_t request;
-        int r = uv_write(&request, stream, &buffer, 1, nullptr);
+        request.data = stream;
+        int r = uv_write(&request, stream, &buffer, 1, on_write);
         if(r){
             throw ESDTcpError(uv_strerror(r));
         }
-        uv_run(&serverLoop, UV_RUN_NOWAIT);
-        uv_close((uv_handle_t *)stream, uv_close_cb);
+        uv_run(&serverLoop, UV_RUN_DEFAULT);
+        
     }
     
     void receive_callback(uv_stream_t* server, int status){
@@ -132,7 +133,7 @@ namespace esdht {
         }
         ESDTcp *tcp = (ESDTcp *)stream->data;
         std::string msg = std::string(buf->base);
-        delete buf->base;
+        free(buf->base);
         tcp->receiveCallback(msg, stream);
     }
     
@@ -185,6 +186,12 @@ namespace esdht {
         if (status) {
             throw ESDTcpError(uv_strerror(status));
         }
+        uv_stream_t* stream = (uv_stream_t *)req->data;
+        
+//        uv_stop(&tcp->serverLoop);
+        uv_close((uv_handle_t *)stream, uv_close_cb);
+//        uv_run(&serverLoop, UV_RUN_DEFAULT);
+        
     }
     
 }

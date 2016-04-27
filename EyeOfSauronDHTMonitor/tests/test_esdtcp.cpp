@@ -15,24 +15,28 @@
 #include "ESDHttpProtocol.hpp"
 
 
+
 namespace test_esdtcp {
     using namespace esdht;
-    void main3();
+
+    
     
     void test_esdtcp(){
         
+        ESDHttp http;
+        
         threadPool::Thread thread;
-        thread.startThread([]{
+//        thread.startThread([]{
             esdht::ESDTcp tcp;
             tcp.receive("10.12.112.55", 8809, [&tcp](std::string msg, uv_stream_t *stream){
                 ESDHttp http;
 //                printf("I am Server:%s\n", msg.c_str());
                 http.handleRequest(msg);
-                fprintf(stderr, "%s", http.requestBody.c_str());
-                
-                tcp.response("ni hao woshi wang da chui", stream, nullptr);
+//                fprintf(stderr, "%s", http.requestURL.c_str());
+                std::string data = http.readFile(http.rootPath + http.requestURL);
+                tcp.response(data, stream, nullptr);
             });
-        });
+//        });
         
 //        try {
 //            ESDDns dns;
