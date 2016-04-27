@@ -43,6 +43,7 @@ namespace esdht {
         void handleFindNodeResponse(const std::string response, std::string &id , std::string &nodes);
         PeerInfo getPeerInfoFromNodeStr(std::string nodeStr);
         
+        void handleGetPeers(const std::string response, std::string &token);
         
         const std::string generateNodeID(int length);
         

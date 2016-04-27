@@ -103,6 +103,12 @@ namespace esdht {
         return info;
     }
     
+    void ESDKrpc::handleGetPeers(const std::string response, std::string &token){
+    
+        
+    
+    }
+    
     std::string ESDKrpc::sha1ToHex (const char *sha1){
         
         char out1[48];
