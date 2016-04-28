@@ -88,13 +88,12 @@ namespace esdht {
     
     void ESDTcp::response(std::string msg, uv_stream_t* stream, std::function<void (int state)> callback){
         uv_buf_t buffer = uv_buf_init((char *)msg.c_str(), (unsigned int)msg.length());
-        uv_write_t request;
-        request.data = stream;
-        int r = uv_write(&request, stream, &buffer, 1, on_write);
+        uv_write_t *request = new uv_write_t;
+        request->data = stream;
+        int r = uv_write(request, stream, &buffer, 1, on_write);
         if(r){
             throw ESDTcpError(uv_strerror(r));
         }
-
         
     }
     
@@ -108,10 +107,10 @@ namespace esdht {
         uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
         client->data = tcp;
         uv_tcp_init(&tcp->serverLoop, client);
-//
-//        // accept
+        
+        // accept
         int result = uv_accept(server, (uv_stream_t*) client);
-//
+
         if (result == 0) {
             // success
             uv_read_start((uv_stream_t*) client, alloc_buffer, on_server_read);
@@ -128,7 +127,7 @@ namespace esdht {
     }
     
     void on_server_read(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
-        if (nread <= 0) {
+        if (nread < 0) {
             return;
         }
         ESDTcp *tcp = (ESDTcp *)stream->data;
@@ -137,10 +136,7 @@ namespace esdht {
         
         
         tcp->receiveCallback(msg, stream);
-        
-        // 没有调用response时，在此处释放stream；
-        //
-//        uv_close((uv_handle_t*) stream, uv_close_cb);
+
     }
     
     void uv_close_cb(uv_handle_t* handle){
@@ -189,12 +185,15 @@ namespace esdht {
     }
     
     void on_write(uv_write_t* req, int status){
-        if (status) {
+        if (status!=0) {
             throw ESDTcpError(uv_strerror(status));
         }
         uv_stream_t* stream = (uv_stream_t *)req->data;
-        uv_close((uv_handle_t *)stream, uv_close_cb);
-        
+//        ESDTcp *tcp = (ESDTcp *)stream->data;
+        if(uv_is_active((uv_handle_t *)stream))
+            uv_close((uv_handle_t *)stream, uv_close_cb);
+//        if(uv_is_active((uv_handle_t *)req))
+//            uv_close((uv_handle_t *)req, uv_close_cb);
     }
     
 }

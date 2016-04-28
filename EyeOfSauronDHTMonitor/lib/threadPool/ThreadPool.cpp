@@ -167,21 +167,21 @@ namespace threadPool{
                 // 判断线程池中的任务是否被全部完成
                 //
                 if(idleQueue->size() == currentThreads && taskQueue->size() == 0 ){
-                    addThreadTimer->stop();
-                    taskQueue->shrink_to_fit();
+//                    addThreadTimer->stop();
+//                    taskQueue->shrink_to_fit();
                     // 线程池中所有线程结束任务后开启移除大于minThreads部分线程。
                     //
-                    removeThreadTimer->start([this]{
-                        
-                        if(currentThreads > minThreads){
-                            pthread_mutex_lock(&threadQueueMutex);
-                            idleQueue->pop_back();
-                            currentThreads --;
-                            pthread_mutex_unlock(&threadQueueMutex);
-                        }else{
-                            removeThreadTimer->stop();
-                        }
-                    });
+//                    removeThreadTimer->start([this]{
+//                        
+//                        if(currentThreads > minThreads){
+//                            pthread_mutex_lock(&threadQueueMutex);
+//                            idleQueue->pop_back();
+//                            currentThreads --;
+//                            pthread_mutex_unlock(&threadQueueMutex);
+//                        }else{
+//                            removeThreadTimer->stop();
+//                        }
+//                    });
                     
                     // 回调，线程池已完成全部任务
                     //
@@ -210,7 +210,7 @@ namespace threadPool{
     }
     
     void ThreadPool::run(std::function<void()> func){
-        removeThreadTimer->stop();
+//        removeThreadTimer->stop();
         pthread_mutex_lock(&threadQueueMutex);
         std::shared_ptr<Thread> thread = nullptr;
         if(idleQueue->size()){
@@ -225,15 +225,15 @@ namespace threadPool{
         taskQueue->push_back(func);
         // 判断是否要添加新的线程
         //
-        if(taskQueue->size()&&currentThreads < maxThreads){
-            addThreadTimer->start([this]{
-                addThreadIntoPool();
-                if(!(taskQueue->size()&&currentThreads < maxThreads)){
-                    addThreadTimer->stop();
-                    
-                }
-            });
-        }
+//        if(taskQueue->size()&&currentThreads < maxThreads){
+//            addThreadTimer->start([this]{
+//                addThreadIntoPool();
+//                if(!(taskQueue->size()&&currentThreads < maxThreads)){
+//                    addThreadTimer->stop();
+//                    
+//                }
+//            });
+//        }
         
         pthread_mutex_unlock(&taskQueueMutex);
         
