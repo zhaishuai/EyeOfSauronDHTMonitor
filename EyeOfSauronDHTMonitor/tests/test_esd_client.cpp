@@ -67,23 +67,23 @@ namespace test_esd_client {
     void test_esd_client_findNode(){
         std::deque<PeerInfo> queue;
         
-        threadPool::Thread thread;
-        thread.startThread([]{
-            ESDServer server("0.0.0.0", 6882);
-            server.startServer();
-        });
-        
+//        threadPool::Thread thread;
+//        thread.startThread([]{
+//            ESDServer server("0.0.0.0", 6881);
+//            server.startServer();
+//        });
+//        
         
         ESDDns dns;
         dns.getIpOfURL(IP, 6881, [&queue](std::string address, unsigned int port){
             printf("ip:%s   port:%d\n", address.c_str(), port);
-            PeerInfo peerInfo{.ip = address,.port = 6881};
+            PeerInfo peerInfo{.ip = address,.port = port};
             queue.push_back(peerInfo);
             
             ESDClient client("abcdefghij0123456789","aa");
-            client.udp->setSendPort(6882);
+//            client.udp->setSendPort(6883);
             client.udp->licensingResponse([&client, &queue](std::string pong){
-                
+//                printf("++++++:%s\n\n\n", pong.c_str());
                 try {
                     std::string id = "";
                     std::string nodes = "";

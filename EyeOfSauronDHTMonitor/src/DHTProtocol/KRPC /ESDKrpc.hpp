@@ -19,9 +19,9 @@ namespace esdht {
     using namespace bencoding;
     
     struct PeerInfo{
-        std::string ip;
-        std::string nodeID;
-        int         port;
+        std::string  ip;
+        std::string  nodeID;
+        unsigned int port;
     };
     
     class ESDKrpcError: public std::runtime_error {
@@ -50,6 +50,9 @@ namespace esdht {
         std::string sha1ToHex (const char *sha1);
         
         void checkKeyExist(std::shared_ptr<BDictionary> dict, std::string key);
+        
+        bool checkKeyExisting(std::shared_ptr<BDictionary> dict, std::string key);
+        
         void bencodeIsErrorPackets(std::shared_ptr<BDictionary> dict);
     };
     

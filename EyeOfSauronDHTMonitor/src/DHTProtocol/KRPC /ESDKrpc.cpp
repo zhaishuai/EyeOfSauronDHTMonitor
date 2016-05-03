@@ -79,12 +79,29 @@ namespace esdht {
         //在此处判断bencode是不是错误状态。
         //
         bencodeIsErrorPackets(dict);
-        checkKeyExist(dict, "r");
-        auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
-        checkKeyExist(sDictionary, "nodes");
-        nodes = (*sDictionary)[BString::create("nodes")]->as<BString>()->value();
-        checkKeyExist(sDictionary, "id");
-        id = (*sDictionary)[BString::create("id")]->as<BString>()->value();
+        if(checkKeyExisting(dict, "r")){
+            auto sDictionary = (*dict)[BString::create("r")]->as<BDictionary>();
+            checkKeyExist(sDictionary, "nodes");
+            nodes = (*sDictionary)[BString::create("nodes")]->as<BString>()->value();
+            checkKeyExist(sDictionary, "id");
+            id = (*sDictionary)[BString::create("id")]->as<BString>()->value();
+        }else if(checkKeyExisting(dict, "q")){
+            std::string queryType = (*dict)[BString::create("q")]->as<BString>()->value();
+            if(queryType == "get_peers"){
+            
+            }else if(queryType == "ping"){
+            
+            }else if(queryType == "find_node"){
+            
+            }else if(queryType == "announce_peer"){
+                
+            }
+            printf("++++++:%s\n", queryType.c_str());
+            
+        }
+        
+        
+        
     }
     
     PeerInfo ESDKrpc::getPeerInfoFromNodeStr(std::string nodeStr){
@@ -144,6 +161,17 @@ namespace esdht {
         if(dict->find(BString::create(key)) == dict->end()){
             throw ESDKrpcError("Bencode error\n");
         }
+    }
+    
+    bool ESDKrpc::checkKeyExisting(std::shared_ptr<BDictionary> dict, std::string key){
+        if(dict == nullptr){
+            throw ESDKrpcError("Bencode error\n");
+            return false;
+        }
+        if(dict->find(BString::create(key)) == dict->end()){
+            return false;
+        }
+        return true;
     }
     
     void ESDKrpc::bencodeIsErrorPackets(std::shared_ptr<BDictionary> dict){
